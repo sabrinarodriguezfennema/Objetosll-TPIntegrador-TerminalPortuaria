@@ -1,5 +1,5 @@
 package containers;
 
-public class ContainerTanque {
+public class ContainerTanque extends Container {
 
 }

@@ -1,5 +1,5 @@
 package containers;
 
-public class ContainerReefer {
+public class ContainerReefer extends Container {
 
 }
