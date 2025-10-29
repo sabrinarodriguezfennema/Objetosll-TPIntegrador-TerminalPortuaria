@@ -1,8 +1,9 @@
 package rutasMaritimas;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,28 +12,31 @@ import containers.Container;
 
 public class BuqueTest {
 	
-	Buque buque;
+	Buque buque; 
 	Container c1;
+	Container c2;
 	
 	@BeforeEach
 	void setUp() {
 		
 		buque = new Buque("nico");
 		c1 = mock(Container.class);
+		c2 = mock(Container.class);
 		
 	}
 	
 	@Test
-	void agregandoContainers() {
+	void agregandoContainersYpreguntarPorEl() {
 		buque.addContainer(c1);
+		buque.addContainer(c2);
 		
-		assertTrue(buque.getContainers().contains(c1));
-		
+		assertEquals(List.of(c1, c2), buque.getContainers());
 	}
 	
 	@Test
 	void obtenerNombre() {
 	      
+		//when(buque.getNombre()).thenReturn("nico");
 		assertEquals("nico", buque.getNombre());
 	}
 	

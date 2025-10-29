@@ -2,13 +2,13 @@ package rutasMaritimas;
 
 public class Tramo {
 	
-	int duracion;
-	int precio;
-	int inicio;
-	int destino;
+	private int duracion;
+	private int precio;
+	private Terminal origen;
+	private Terminal destino;
 	
-	public Tramo(int inicio, int destino, int duracion, int precio) {
-		this.inicio = inicio;
+	public Tramo(Terminal origen, Terminal destino, int duracion, int precio) {
+		this.origen = origen;
 		this.destino = destino;
 		this.duracion = duracion;
 		this.precio = precio;
@@ -20,6 +20,14 @@ public class Tramo {
 	
 	public int getPrecio() {
 		return precio;
+	}
+	
+	public Terminal getOrigen() {
+		return origen;		
+	}
+	
+	public Terminal getDestino() {
+		return destino;		
 	}
 
 }

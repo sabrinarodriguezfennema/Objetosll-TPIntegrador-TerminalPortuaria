@@ -1,39 +1,49 @@
 package rutasMaritimas;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Naviera {
 	
-	List<Viaje> viajes = new ArrayList<>();
-	List<Circuito> circuitos = new ArrayList<>();
-	List<Buque> buques = new ArrayList<>();
+	private List<Viaje> viajes = new ArrayList<>();
+	private List<Circuito> circuitos = new ArrayList<>();
+	private List<Buque> buques = new ArrayList<>();
 	
 	public Naviera() {}
+	
+	public void agregarCircuito(Circuito c) {
+		circuitos.add(c);
+	}
+
+	public void agregarViaje(Viaje v) {
+		viajes.add(v);
+	}
+	
+	public void agregarBuque(Buque b) {
+		buques.add(b);
+	}
 	
 	public List<Circuito> getCircuitos() {
 		return circuitos;
 	}
-	
+	 
 	public List<Buque> getBuques() {
-		return buques;
+		return buques; 
 	}
 	
 	public List<Viaje> getViajes() {
 		return viajes;
 	}
 	
-	public List<Date> getFechaDeViajes() {
+	public List<LocalDate> getFechaDeViajes() {
 		
-		List<Date> fechasViajes = new ArrayList<>();
+		List<LocalDate> fechasViajes = new ArrayList<>();
 		
 		for (Viaje viaje: viajes) {
 			fechasViajes.add(viaje.getFechaInicio());
 		}
 		return fechasViajes;
-		
 	}
-	
-
 }

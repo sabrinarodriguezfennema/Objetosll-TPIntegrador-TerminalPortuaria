@@ -25,7 +25,4 @@ public class Buque {
 	public List<Container> getContainers() {
 		return containers;
 	}
-	
-	
-
 }

@@ -1,23 +1,24 @@
 package rutasMaritimas;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Viaje {
 	
-	Date fechaInicio;
-	Buque buque;
-	Circuito circuito;
+	private LocalDate fechaInicio;
+	private Buque buque;
+	private Circuito circuito;
 	
-	public Viaje(Date fechaInicio, Buque buque) {
+	public Viaje(LocalDate  fechaInicio, Buque buque,Circuito circuito) {
 		this.fechaInicio = fechaInicio;
 		this.buque = buque;
+		this.circuito = circuito;
 	}
 	
 	public Buque getBuque() {
 		return buque;
 	}
 	
-	public Date getFechaInicio() {
+	public LocalDate getFechaInicio() {
 		return fechaInicio;
 	}
 	
