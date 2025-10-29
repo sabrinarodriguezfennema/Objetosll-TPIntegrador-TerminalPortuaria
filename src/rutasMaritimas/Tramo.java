@@ -1,20 +1,22 @@
 package rutasMaritimas;
 
+import java.time.Duration;
+
 public class Tramo {
 	
-	private int duracion;
+	private Duration duracion;
 	private int precio;
 	private Terminal origen;
 	private Terminal destino;
 	
-	public Tramo(Terminal origen, Terminal destino, int duracion, int precio) {
+	public Tramo(Terminal origen, Terminal destino, Duration duracion, int precio) {
 		this.origen = origen;
 		this.destino = destino;
 		this.duracion = duracion;
 		this.precio = precio;
 	}
 	
-	public int getDuracion() {
+	public Duration getDuracion() {
 		return duracion;
 	}
 	

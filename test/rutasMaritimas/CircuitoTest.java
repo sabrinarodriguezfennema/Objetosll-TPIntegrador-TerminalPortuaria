@@ -3,6 +3,7 @@ package rutasMaritimas;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+import java.time.Duration;
 import java.util.Set;
 
 import org.junit.jupiter.api.*; 
@@ -48,11 +49,11 @@ public class CircuitoTest {
 	@Test
     void obtenerDuracionTotal() {
 		
-		when(t1.getDuracion()).thenReturn(200);
-		when(t2.getDuracion()).thenReturn(100);
-		when(t3.getDuracion()).thenReturn(300);
+		when(t1.getDuracion()).thenReturn(Duration.ofMinutes(200));
+		when(t2.getDuracion()).thenReturn(Duration.ofMinutes(100));
+		when(t3.getDuracion()).thenReturn(Duration.ofMinutes(300));
 		
-		assertEquals(600, circuito.duracionTotal());
+		assertEquals(Duration.ofMinutes(600), circuito.duracionTotal());
 	}
 	
 	@Test
@@ -66,9 +67,9 @@ public class CircuitoTest {
 	@Test
 	void siElTramoEstaObtieneSuDuracion() {
 		
-		when(t1.getDuracion()).thenReturn(150);
+		when(t1.getDuracion()).thenReturn(Duration.ofMinutes(150));
 		
-		assertEquals(150,circuito.duracionDe(t1));
+		assertEquals(Duration.ofMinutes(150),circuito.duracionDe(t1));
 	}
 	
 	@Test

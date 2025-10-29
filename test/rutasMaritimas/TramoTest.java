@@ -2,12 +2,14 @@ package rutasMaritimas;
 
 import static org.junit.Assert.*;
 
+import java.time.Duration;
+
 import org.junit.jupiter.api.*;
 
 public class TramoTest {
 	
 	Tramo tramo;
-	int duracion;
+	Duration duracion;
 	int precio;
 	Terminal origen;
 	Terminal destino;

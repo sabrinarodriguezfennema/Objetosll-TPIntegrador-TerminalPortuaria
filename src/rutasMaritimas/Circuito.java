@@ -1,6 +1,7 @@
 package rutasMaritimas;
 
 
+import java.time.Duration;
 import java.util.HashSet;
 
 import java.util.Set;
@@ -28,16 +29,16 @@ public class Circuito {
 		return total;
 	}
 	
-	public int duracionTotal() {
-		int total = 0;
+	public Duration duracionTotal() {
+		Duration total = Duration.ZERO;
 		
-		for (Tramo tramo: tramos) {
-			total += tramo.getDuracion();
+		for (Tramo t: tramos) {
+			total = total.plus(t.getDuracion());
 		}
 		return total;
 	}
 	
-	public int duracionDe(Tramo t) {
+	public Duration duracionDe(Tramo t) {
 		validarTramoPerteneciente(t);
         return t.getDuracion();
 	}
