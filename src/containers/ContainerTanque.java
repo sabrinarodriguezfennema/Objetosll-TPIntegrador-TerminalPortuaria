@@ -1,5 +1,15 @@
 package containers;
 
+import java.util.List;
+
+import servicios.Servicio;
+
 public class ContainerTanque extends Container {
 
+	public ContainerTanque(int altura, int ancho, int largo, String idAlfabetico, 
+			int idNumerico, BillOfLading bl, Consignee consignee, List<Servicio> servicios ) {
+		super(altura, ancho, largo, idAlfabetico, idNumerico, bl, consignee,servicios);
+	}
+	
+	
 }
