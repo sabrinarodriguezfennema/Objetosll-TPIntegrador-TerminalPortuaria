@@ -14,9 +14,4 @@ public class ServicioPesado implements Servicio {
 	public int getPrecio(Container c) {
 		return costoFijo;
 	}
-	
-	public int getCostoFijo() {
-		return costoFijo;
-	}
-
 }

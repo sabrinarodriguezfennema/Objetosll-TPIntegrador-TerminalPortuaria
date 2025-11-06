@@ -3,6 +3,7 @@ package containers;
 import java.util.List;
 
 import servicios.Servicio;
+import servicios.ServicioDesconsolidado;
 
 public class ContainerDry extends Container {
 
@@ -15,8 +16,7 @@ public class ContainerDry extends Container {
 		return bl.tieneMasDeUnImportador();
 	}
 	
-	@Override
-	public void agregarServicio(Servicio s) {
+	public void agregarServicioEspecial(ServicioDesconsolidado s) {
 		if (!this.requiereServicioEspecial()) {
 			throw new IllegalArgumentException("Solo tiene un importador");
 		}

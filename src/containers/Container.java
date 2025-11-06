@@ -5,7 +5,7 @@ import java.util.List;
 
 import servicios.Servicio;
 
-public abstract class Container { 
+public class Container { 
    
 	private int altura;
 	private int ancho;
@@ -40,6 +40,10 @@ public abstract class Container {
 		return consignee;
 	}
 	
+	public BillOfLading getBL() {
+		return bl;
+	}
+	
 	public int getAltura() {
 		return altura;
 	}
@@ -58,6 +62,10 @@ public abstract class Container {
 	
 	public void agregarServicio(Servicio s) {
 		servicios.add(s);
+	}
+	
+	public List<Servicio> getServicios() {
+		return servicios;
 	}
 	
 	public int totalDeLosServicios() {

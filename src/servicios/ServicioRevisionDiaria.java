@@ -4,14 +4,18 @@ import containers.Container;
 
 public class ServicioRevisionDiaria implements Servicio {
 	
-	public ServicioRevisionDiaria() {
+	private int precioFijo; 
+	private int diasEnLaTerminal;  // TODAVIA FALTA CALCULAR LA CANTIDAD DE DIAS
+	
+	public ServicioRevisionDiaria(int precioFijo, int diasEnLaTerminal ) {
+		this.precioFijo = precioFijo;
+		this.diasEnLaTerminal = diasEnLaTerminal;
 		
 	}
 
 	@Override
 	public int getPrecio(Container c) {
-		// TODO Auto-generated method stub
-		return 0;
+		return precioFijo * diasEnLaTerminal;
 	}
 
 }
