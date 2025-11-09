@@ -1,8 +1,11 @@
-package viajes.filtro;
+package paraMock;
 
 import java.util.Date;
 
+
 import interfaces.Circuito;
+
+import interfaces.Terminal;
 
 public interface RutaMaritima {
 	
