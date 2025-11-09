@@ -10,7 +10,7 @@ public class ContainerReefer extends Container {
 
 	public ContainerReefer(int altura, int ancho, int largo, String idAlfabetico, 
 			int idNumerico, BillOfLading bl, Consignee consignee, List<Servicio> servicios, int kwPorHora) {
-		super(altura, ancho, largo, idAlfabetico, idNumerico, bl, consignee, servicios);
+		super(altura, ancho, largo, idAlfabetico, idNumerico, bl, consignee, servicios, "Reefer");
 		this.kwPorHora = kwPorHora;
 	}
 	

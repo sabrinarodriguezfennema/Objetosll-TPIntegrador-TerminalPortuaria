@@ -26,7 +26,12 @@ public class ContainerTest {
 		consignee = mock(Consignee.class);
 		s1 = mock(Servicio.class);
 		s2 = mock(Servicio.class);
-		c = new Container(10, 5, 30, "ABCD", 1234567, bl, consignee, servicios);
+		c = new Container(10, 5, 30, "ABCD", 1234567, bl, consignee, servicios, "clasico");
+	}
+	
+	@Test
+	void obtenerTipo() {
+		assertEquals("clasico", c.tipo());
 	}
 	
 	@Test 

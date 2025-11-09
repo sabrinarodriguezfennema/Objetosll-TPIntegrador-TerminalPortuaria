@@ -28,6 +28,11 @@ public class ConteinerDryTest {
 	}
 	
 	@Test
+	void obtenerTipo() {
+		assertEquals("Dry", c.tipo());
+	}
+	
+	@Test
 	void puedeAgregarServicioEspecial() {
 		
 		when(bl.tieneMasDeUnImportador()).thenReturn(true);

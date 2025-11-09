@@ -16,6 +16,11 @@ public class ConteinerReeferTest {
 	}
 	
 	@Test
+	void obtenerTipo() {
+		assertEquals("Reefer", c.tipo());
+	}
+	
+	@Test
 	void obtenerKWPorHora() { 
 		assertEquals(50,c.getkwPorHora());
 	}

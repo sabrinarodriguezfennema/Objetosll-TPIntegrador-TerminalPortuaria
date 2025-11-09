@@ -15,9 +15,10 @@ public class Container {
 	protected BillOfLading bl;
 	private Consignee consignee;
 	protected List<Servicio> servicios = new ArrayList<>();
+	private String tipo;
 	
 	public Container(int altura, int ancho, int largo, String idAlfabetico, 
-			int idNumerico, BillOfLading bl, Consignee consignee, List<Servicio> servicios) {
+			int idNumerico, BillOfLading bl, Consignee consignee, List<Servicio> servicios, String tipo) {
 		this.altura = altura;
 		this.ancho = ancho;
 		this.largo = largo;
@@ -26,6 +27,11 @@ public class Container {
 		this.bl = bl;
 		this.consignee = consignee;
 		this.servicios = servicios;
+		this.tipo = tipo;
+	}
+	
+	public String tipo() {
+		return tipo;
 	}
 	
 	public int volumen() {

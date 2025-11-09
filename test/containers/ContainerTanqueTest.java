@@ -25,6 +25,11 @@ public class ContainerTanqueTest {
 	}
 	
 	@Test
+	void obtenerTipo() {
+		assertEquals("Tanque", c.tipo());
+	}
+	
+	@Test
 	void verificarListaConServicioRevision() {
 		c.agregarServicio(s);
 		assertEquals(List.of(s), c.getServicios());

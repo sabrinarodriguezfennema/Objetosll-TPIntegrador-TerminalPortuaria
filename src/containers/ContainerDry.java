@@ -9,7 +9,7 @@ public class ContainerDry extends Container {
 
 	public ContainerDry(int altura, int ancho, int largo, String idAlfabetico, 
 			int idNumerico, BillOfLading bl, Consignee consignee, List<Servicio> servicios) {
-		super(altura, ancho, largo, idAlfabetico, idNumerico, bl,consignee, servicios);
+		super(altura, ancho, largo, idAlfabetico, idNumerico, bl,consignee, servicios, "Dry");
 	}
 	
 	public boolean requiereServicioEspecial() {
