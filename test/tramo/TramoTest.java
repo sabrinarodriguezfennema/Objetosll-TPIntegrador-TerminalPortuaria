@@ -1,10 +1,12 @@
-package rutasMaritimas;
+package tramo;
 
 import static org.junit.Assert.*;
 
 import java.time.Duration;
 
 import org.junit.jupiter.api.*;
+
+import tramo.Tramo;
 
 public class TramoTest {
 	

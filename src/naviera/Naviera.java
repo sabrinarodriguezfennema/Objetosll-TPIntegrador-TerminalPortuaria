@@ -1,9 +1,13 @@
-package rutasMaritimas;
+package naviera;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import buque.Buque;
+import circuito.Circuito;
+import viaje.Viaje;
 
 public class Naviera {
 	

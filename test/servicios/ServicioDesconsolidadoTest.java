@@ -9,21 +9,18 @@ import containers.Container;
 
 public class ServicioDesconsolidadoTest {
 	
-	Servicio s;
+	ServicioDesconsolidado s;
 	Container c;
 	
 	@BeforeEach 
 	void setUp() { 
 		c = mock(Container.class);
-		s = mock(ServicioDesconsolidado.class);
+		s = new ServicioDesconsolidado(25);
 	}
 	
 	@Test
 	void obtenerPrecio() {
 		
-		when(s.getPrecio(c)).thenReturn(25);
 		assertEquals(25, s.getPrecio(c));
-		verify(s, times(1)).getPrecio(c);
 	}
-
 }

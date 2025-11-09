@@ -1,6 +1,11 @@
-package rutasMaritimas;
+package naviera;
 
 import org.junit.jupiter.api.*;
+
+import buque.Buque;
+import circuito.Circuito;
+import naviera.Naviera;
+import viaje.Viaje;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;

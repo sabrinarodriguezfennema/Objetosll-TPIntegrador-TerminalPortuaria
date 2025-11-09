@@ -1,4 +1,4 @@
-package rutasMaritimas;
+package tramo;
 
 import java.time.Duration;
 

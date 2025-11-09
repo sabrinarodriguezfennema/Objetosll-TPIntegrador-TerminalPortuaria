@@ -11,18 +11,12 @@ public class ConteinerReeferTest {
 	
 	@BeforeEach
 	void setUp() {
-		c = mock(ContainerReefer.class);
+		c = new ContainerReefer(0,0,0,null,0,null,null,null,50); 
+		
 	}
 	
 	@Test
 	void obtenerKWPorHora() { 
-		
-		when(c.getkwPorHora()).thenReturn(50); 
 		assertEquals(50,c.getkwPorHora());
-		verify(c, times(1)).getkwPorHora();
 	}
-	
-	
-	
-
 }

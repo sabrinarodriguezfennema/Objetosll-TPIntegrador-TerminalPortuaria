@@ -1,4 +1,4 @@
-package rutasMaritimas;
+package tramo;
 
 public interface Terminal {
 

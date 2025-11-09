@@ -7,3 +7,4 @@ public interface BillOfLading {
 	public int pesoTotal();
 
 }
+

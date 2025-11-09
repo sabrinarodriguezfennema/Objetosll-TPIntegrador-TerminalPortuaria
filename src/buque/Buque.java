@@ -1,4 +1,4 @@
-package rutasMaritimas;
+package buque;
 
 import java.util.ArrayList;
 import java.util.List;
