@@ -44,13 +44,18 @@ public class EmpresaTransportista {
 	}
 
 	public String asignarCamionPara(Container container) {
-		// TODO Auto-generated method stub
-		return null;
+		return patentesCamiones.stream()
+	            .findAny() 
+	            .orElseThrow(() -> new IllegalStateException("No hay camiones disponibles"));
 	}
+
+
 
 	public String asignarChoferPara(Container container) {
-		// TODO Auto-generated method stub
-		return null;
+		return dniChoferes.stream()
+	            .findAny() 
+	            .orElseThrow(() -> new IllegalStateException("No hay choferes disponibles"));
 	}
-
 }
+
+

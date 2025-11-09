@@ -4,7 +4,7 @@ package ordenes;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import interfaces.Consignee;
+import interfaces.IConsignee;
 import interfaces.Factura;
 import interfaces.IOrdenDeImportacion;
 import interfaces.Container;
@@ -13,13 +13,13 @@ import terminal.TerminalGestionada;
 
 public class OrdenDeImportacion extends Orden implements IOrdenDeImportacion{
 	
-	private Consignee cliente;
+	private IConsignee cliente;
 	private int horasTolerancia;
 	private LocalDateTime fechaYHoraDeLlegada;
 	private Almacenamiento almacenamiento;
 	
 
-	public OrdenDeImportacion(Consignee cliente, Container datosDeCarga, String patenteCamion, String dniChofer, LocalDateTime fechaYHoraDeLlegada) {
+	public OrdenDeImportacion(IConsignee cliente, Container datosDeCarga, String patenteCamion, String dniChofer, LocalDateTime fechaYHoraDeLlegada) {
 		super(datosDeCarga, patenteCamion, dniChofer);
 		this.cliente = cliente;
 		this.horasTolerancia = 24;
@@ -47,7 +47,7 @@ public class OrdenDeImportacion extends Orden implements IOrdenDeImportacion{
 		terminalGestionada.registrar(this);	
 	}
 
-	public Consignee getConsignee() {
+	public IConsignee getConsignee() {
 		return cliente;
 	}
 

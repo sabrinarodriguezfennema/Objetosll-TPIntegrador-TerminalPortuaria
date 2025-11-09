@@ -8,4 +8,7 @@ public interface Buque {
 
 	public Set<Container> getContainers();
 
+	public String getNombre();
+
+
 }

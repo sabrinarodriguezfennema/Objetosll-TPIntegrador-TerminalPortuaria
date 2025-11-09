@@ -17,10 +17,10 @@ import org.mockito.*;
 
 import clases.MotorDeBusqueda;
 import clientes.*;
-import interfaces.Consignee;
-import interfaces.Shipper;
+import interfaces.IConsignee;
+import interfaces.IShipper;
 import interfaces.*;
-import interfaces.Cliente;
+import interfaces.ICliente;
 import ordenes.OrdenDeExportacion;
 import ordenes.OrdenDeImportacion;
 
@@ -31,12 +31,12 @@ public class TerminalGestionadaTest {
 	private Naviera mockNaviera;
 	private Container mockContainer;
 	private EmpresaTransportista mockEmpresaTransportista;
-	private Cliente mockCliente;
+	private ICliente mockCliente;
 	private IOrdenDeExportacion mockOrdenExportacion;
 	private OrdenDeImportacion mockOrdenImportacion;
 	private BuqueViaje mockBuqueViaje;
-	private Shipper mockShipper;
-	private Consignee mockConsignee;
+	private IShipper mockShipper;
+	private IConsignee mockConsignee;
 	private Terminal mockTerminalDestino;
 	private RutaMaritima mockRutaMaritima;
 	private Servicio mockServicio;
@@ -50,12 +50,12 @@ public class TerminalGestionadaTest {
 		mockNaviera = mock(Naviera.class);
 		mockContainer = mock(Container.class);
 		mockEmpresaTransportista = mock(EmpresaTransportista.class);
-		mockCliente = mock(Cliente.class);
+		mockCliente = mock(ICliente.class);
 		mockOrdenExportacion = mock(IOrdenDeExportacion.class);
 		mockOrdenImportacion = mock(OrdenDeImportacion.class);
 		mockBuqueViaje = mock(BuqueViaje.class);
-		mockShipper = mock(Shipper.class);
-		mockConsignee = mock(Consignee.class);
+		mockShipper = mock(IShipper.class);
+		mockConsignee = mock(IConsignee.class);
 		mockTerminalDestino = mock(Terminal.class);
 		mockRutaMaritima = mock(RutaMaritima.class);
 		mockServicio = mock(Servicio.class);

@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface Consignee extends Cliente {
+public interface IConsignee extends ICliente {
 
 	void recibirMail(String string);
 

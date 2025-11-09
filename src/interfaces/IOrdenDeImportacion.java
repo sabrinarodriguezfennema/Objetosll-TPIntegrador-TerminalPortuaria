@@ -2,6 +2,8 @@ package interfaces;
 
 public interface IOrdenDeImportacion extends Orden{
 
-	public Consignee getConsignee();
+	public IConsignee getConsignee();
+
+	public Container getDatosDeCarga();
 
 }

@@ -3,7 +3,7 @@ package terminal;
 import java.time.LocalDateTime;
 
 import interfaces.BuqueViaje;
-import interfaces.Consignee;
+import interfaces.IConsignee;
 import interfaces.Container;
 import ordenes.OrdenDeExportacion;
 import interfaces.EmpresaTransportista;

@@ -12,14 +12,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 
 import interfaces.Container;
-import interfaces.Shipper;
+import interfaces.IShipper;
 import ordenes.OrdenDeExportacion;
 import terminal.Terminal;
 import terminal.TerminalGestionada;
 
 class OrdenDeExportacionTest {
 
-	private Shipper mockShipper;
+	private IShipper mockShipper;
 	private Container mockContainer;
 	private String patenteCamion;
 	private String dniChofer;
@@ -33,7 +33,7 @@ class OrdenDeExportacionTest {
 	void setUp() {
 
 		//setUp
-		mockShipper = mock(Shipper.class);
+		mockShipper = mock(IShipper.class);
 		mockContainer = mock(Container.class);
 		mockTerminalGestionada = mock(TerminalGestionada.class);
 		mockTerminalDestino = mock(Terminal.class);
@@ -49,11 +49,40 @@ class OrdenDeExportacionTest {
 	@Test
 	void testGetShipper() {
 		// Ejecución
-		Shipper resultado = orden.getShipper();
+		IShipper resultado = orden.getShipper();
 
 		// Verificación
 		assertEquals(mockShipper, resultado);
 	}
+	
+	 @Test
+	    void testGetDatosDeCarga() {
+	        Container resultado = orden.getDatosDeCarga();
+	        assertEquals(mockContainer, resultado);
+	    }
+	 
+	 @Test
+	    void testGetDNIChofer() {
+	        String chofer = orden.getChofer();
+	        assertEquals("40555999", chofer);
+	    }
+	 
+	 @Test
+	    void testGetPatenteCamion() {
+	        String camion = orden.getCamion();
+	        assertEquals("ABC123", camion);
+	    }
+	 
+	
+	@Test
+	void testGetTerminal() {
+		// Ejecución
+		Terminal terminal = orden.getTerminalDestino();
+
+		// Verificación
+		assertEquals(mockTerminalDestino, terminal);
+	}
+
 
 	@Test
 	void testVerificarQueLeAsigneElTurnoAlShipper() {
@@ -125,5 +154,7 @@ class OrdenDeExportacionTest {
 		verify(mockTerminalGestionada).registrar(orden);
 		assertEquals(turno, orden.turno());
 	}
+	
+	
 
 }

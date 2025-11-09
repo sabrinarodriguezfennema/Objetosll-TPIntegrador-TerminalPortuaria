@@ -2,16 +2,26 @@ package clientes;
 
 import java.time.LocalDateTime;
 
-public class Shipper extends Cliente{
+import interfaces.IShipper;
 
-	public void fechaDeExportacion(LocalDateTime turno) {
-		
+public class Shipper extends Cliente implements IShipper{
+	
+	private LocalDateTime turno;
+	
+	public Shipper(String nombre, String email) {
+		super(nombre, email);
 	}
 
 	@Override
-	public String getEmail() {
-		return null;
+	public void fechaDeExportacion(LocalDateTime turno) {
+		this.turno = turno;
 	}
+
+	@Override
+	public LocalDateTime getFechaDeExportacion() {
+		return turno;
+	}
+	
 
 
 }

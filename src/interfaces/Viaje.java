@@ -8,4 +8,7 @@ public interface Viaje {
 
 	public Circuito getCircuito();
 
+	public Buque getBuque();
+
+
 }

@@ -5,19 +5,19 @@ import java.time.LocalDateTime;
 
 import interfaces.Container;
 import interfaces.IOrdenDeExportacion;
-import interfaces.Shipper;
+import interfaces.IShipper;
 import terminal.Terminal;
 import terminal.TerminalGestionada;
 
 public class OrdenDeExportacion extends Orden implements IOrdenDeExportacion {
 	
-	private Shipper cliente;
+	private IShipper cliente;
 	private LocalDate fechaSalida;
 	private LocalDate fechaLlegada;
 	private LocalDateTime turno;
 	private Terminal terminalDestino;
 
-	public OrdenDeExportacion(Shipper cliente, Container datosDeCarga, String patenteCamion, String dniChofer, LocalDate fechaSalida, LocalDate fechaLlegada, Terminal terminalDestino) {
+	public OrdenDeExportacion(IShipper cliente, Container datosDeCarga, String patenteCamion, String dniChofer, LocalDate fechaSalida, LocalDate fechaLlegada, Terminal terminalDestino) {
 		super(datosDeCarga, patenteCamion, dniChofer);
 		this.cliente = cliente;
 		this.fechaSalida = fechaSalida;
@@ -25,7 +25,7 @@ public class OrdenDeExportacion extends Orden implements IOrdenDeExportacion {
 		this.terminalDestino = terminalDestino;
 	}
 	
-	public Shipper getShipper() {
+	public IShipper getShipper() {
 		return cliente;
 	}
 	
@@ -50,6 +50,11 @@ public class OrdenDeExportacion extends Orden implements IOrdenDeExportacion {
 	@Override
 	public void registrarEn(TerminalGestionada terminalGestionada) {
 		terminalGestionada.registrar(this);	
+	}
+
+	@Override
+	public Terminal getTerminalDestino() {
+		return terminalDestino;
 	}
 
 

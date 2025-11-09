@@ -1,6 +1,9 @@
 package interfaces;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import terminal.Terminal;
 
 
 public interface IOrdenDeExportacion extends Orden{
@@ -11,6 +14,14 @@ public interface IOrdenDeExportacion extends Orden{
 
 	public LocalDateTime turno();
 
-	public Shipper getShipper();
+	public IShipper getShipper();
+
+	public LocalDate getFechaSalida();
+	
+	public LocalDate getFechaLlegada();
+
+	public Terminal getTerminalDestino();
+
+	public Container getDatosDeCarga();
 
 }

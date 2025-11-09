@@ -2,6 +2,8 @@ package interfaces;
 
 public interface Container {
 
-	String getId();
+	public String getId();
+
+	public String getTipo();
 
 }

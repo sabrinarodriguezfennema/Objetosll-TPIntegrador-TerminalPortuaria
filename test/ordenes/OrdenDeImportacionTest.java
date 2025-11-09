@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 
 import interfaces.Container;
-import interfaces.Consignee;
+import interfaces.IConsignee;
 import interfaces.Factura;
 import ordenes.OrdenDeImportacion;
 import terminal.TerminalGestionada;
@@ -19,7 +19,7 @@ import terminal.TerminalGestionada;
 class OrdenDeImportacionTest {
 	
 	private TerminalGestionada mockTerminalGestionada;
-	private Consignee mockCliente;
+	private IConsignee mockCliente;
 	private Container mockContainer;
 	private String patenteCamion;
 	private String dniChofer;
@@ -32,7 +32,7 @@ class OrdenDeImportacionTest {
 	void setUp() {
 		
 		mockTerminalGestionada = mock(TerminalGestionada.class);
-		mockCliente = mock(Consignee.class);
+		mockCliente = mock(IConsignee.class);
 		mockContainer = mock(Container.class);
 		mockFactura = mock(Factura.class);
 		
@@ -45,7 +45,23 @@ class OrdenDeImportacionTest {
 		orden = new OrdenDeImportacion(mockCliente, mockContainer, patenteCamion, dniChofer, llegada);
 	}
 	
-	
+	@Test
+    void testGetDatosDeCarga() {
+        Container resultado = orden.getDatosDeCarga();
+        assertEquals(mockContainer, resultado);
+    }
+ 
+ @Test
+    void testGetDNIChofer() {
+        String chofer = orden.getChofer();
+        assertEquals("12345678", chofer);
+    }
+ 
+ @Test
+    void testGetPatenteCamion() {
+        String camion = orden.getCamion();
+        assertEquals("ABC123", camion);
+    }
 	
 	@Test
 	void testRetiroContainerConExcedente() {
@@ -107,7 +123,7 @@ class OrdenDeImportacionTest {
 	@Test
 	void testGetConsignee_deberiaRetornarElClienteCorrecto() {
 		// Ejecución
-		Consignee resultado = orden.getConsignee();
+		IConsignee resultado = orden.getConsignee();
 		
 		// Verificación
 		assertEquals(mockCliente, resultado);

@@ -1,11 +1,13 @@
 package clientes;
 
-public class Consignee extends Cliente{
+import interfaces.IConsignee;
 
+public class Consignee extends Cliente implements IConsignee{
 
-	@Override
-	public String getEmail() {
-		return null;
+	public Consignee(String nombre, String email) {
+		super(nombre, email);
 	}
+
+
 
 }

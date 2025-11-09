@@ -12,15 +12,15 @@ import java.util.Set;
 
 import clases.MotorDeBusqueda;
 import interfaces.Viaje;
-import interfaces.Cliente;
-import interfaces.Shipper;
+import interfaces.ICliente;
+import interfaces.IShipper;
 import interfaces.Buque;
 import interfaces.BuqueViaje;
 import interfaces.Container;
 import interfaces.Naviera;
 import interfaces.RutaMaritima;
 import interfaces.Servicio;
-import interfaces.Consignee;
+import interfaces.IConsignee;
 import interfaces.Orden;
 import ordenes.OrdenDeExportacion;
 import ordenes.OrdenDeImportacion;
@@ -37,7 +37,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	private Set<EmpresaTransportista> empresasTransportistas;
 	private Set<String> camionesRegistrados;
 	private Set<String> choferesRegistrados;
-	private Set<Cliente> clientesRegistrados;
+	private Set<ICliente> clientesRegistrados;
 	private Set<IOrdenDeImportacion> ordenesImportacion;
 	private Set<IOrdenDeExportacion> ordenesExportacion;
 	private Map<String, IOrdenDeExportacion> ordenesActivasPorPatente;
@@ -86,7 +86,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		this.empresasTransportistas.add(empresa);
 	}
 
-	private void registrarCliente(Cliente cliente) {
+	private void registrarCliente(ICliente cliente) {
 		this.clientesRegistrados.add(cliente);
 	}
 
@@ -137,7 +137,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	public void avisoDeSalida(BuqueViaje bv) {
 
 		for (IOrdenDeExportacion orden : ordenesExportacion) {
-			Shipper shipper = orden.getShipper();
+			IShipper shipper = orden.getShipper();
 			shipper.recibirMail("Su carga está próxima a salir");
 		}
 	}
@@ -146,7 +146,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	public void avisoDeLlegada(BuqueViaje bv) {
 
 		for (IOrdenDeImportacion orden : ordenesImportacion) {
-			Consignee consignee = orden.getConsignee();
+			IConsignee consignee = orden.getConsignee();
 			consignee.recibirMail("Su carga está próxima a llegar");
 		}
 	}
@@ -162,7 +162,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	}
 
 	@Override
-	public void exportar(Container c, Terminal t, RutaMaritima rm, List<Servicio> servicios, Shipper exportador,
+	public void exportar(Container c, Terminal t, RutaMaritima rm, List<Servicio> servicios, IShipper exportador,
 			EmpresaTransportista empresa) {
 		LocalDate salida = rm.fechaSalida();
 		LocalDate llegada = rm.fechaLlegada();
@@ -180,7 +180,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	}
 
 	@Override
-	public void datosParaElRetiro(Consignee importador, EmpresaTransportista empresa, Container c) {
+	public void datosParaElRetiro(IConsignee importador, EmpresaTransportista empresa, Container c) {
 
 		Buque buque = navierasRegistradas.stream().flatMap(naviera -> naviera.getBuques().stream())
 				.filter(b -> b.getContainers().contains(c)).findFirst()
