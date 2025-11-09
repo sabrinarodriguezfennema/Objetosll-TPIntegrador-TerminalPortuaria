@@ -1,4 +1,7 @@
-package viajes.filtro;
+package filtro;
+
+import interfaces.Terminal;
+import paraMock.RutaMaritima;
 
 public class PuertoIgualA extends FiltroSimple {
 

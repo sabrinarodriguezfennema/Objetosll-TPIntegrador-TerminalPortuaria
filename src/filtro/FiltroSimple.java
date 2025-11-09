@@ -1,6 +1,8 @@
-package viajes.filtro;
+package filtro;
 
 import java.util.function.BooleanSupplier;
+
+import paraMock.RutaMaritima;
 
 public abstract class FiltroSimple extends Filtro{
 
