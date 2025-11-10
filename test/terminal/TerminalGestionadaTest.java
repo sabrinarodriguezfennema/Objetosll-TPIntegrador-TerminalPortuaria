@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
+import buqueViaje.Coordenadas;
 import clases.MotorDeBusqueda;
 import clientes.*;
 import interfaces.IConsignee;
@@ -43,7 +44,7 @@ public class TerminalGestionadaTest {
 	private Buque mockBuque;
 	private Viaje mockViaje;
 	private Circuito mockCircuito;
-	private EmailService mockEmailService;
+	private Coordenadas coordenadas;
 
 	@BeforeEach
 	void setUp() {
@@ -62,14 +63,15 @@ public class TerminalGestionadaTest {
 		mockBuque = mock(Buque.class);
 		mockViaje = mock(Viaje.class);
 		mockCircuito = mock(Circuito.class);
+		coordenadas = new Coordenadas(1,1);
 
-		terminal = new TerminalGestionada("Terminal Gestionada", "Buenos Aires");
+		terminal = new TerminalGestionada("Terminal Gestionada", coordenadas);
 	}
 
 	@Test
 	void testConstructor() {
 		assertEquals("Terminal Gestionada", terminal.getNombre());
-		assertEquals("Buenos Aires", terminal.getUbicacion());
+		assertEquals(coordenadas, terminal.getCoordenadas());
 	}
 
 	@Test
@@ -78,8 +80,8 @@ public class TerminalGestionadaTest {
 	}
 	
 	@Test
-    void testGetUbicacion() {
-        assertEquals("Buenos Aires", terminal.getUbicacion());
+    void testGetCoordenadas() {
+        assertEquals(coordenadas, terminal.getCoordenadas());
     }
 	
 	@Test

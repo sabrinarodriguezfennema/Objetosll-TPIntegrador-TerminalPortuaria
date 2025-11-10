@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import buqueViaje.Coordenadas;
 import clases.MotorDeBusqueda;
 import interfaces.Viaje;
 import interfaces.ICliente;
@@ -30,8 +31,6 @@ import interfaces.IOrdenDeImportacion;
 
 public class TerminalGestionada extends Terminal implements GestionLogistica, GestionEnvio {
 
-	private String nombre;
-	private String ubicacion;
 	private Set<Naviera> navierasRegistradas;
 	private Set<Container> containers;
 	private Set<EmpresaTransportista> empresasTransportistas;
@@ -44,7 +43,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	private Map<String, Orden> ordenPorContainer;
 
 
-	public TerminalGestionada(String nombre, String ubicacion) {
+	public TerminalGestionada(String nombre, Coordenadas ubicacion) {
 
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;
@@ -207,7 +206,9 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		return nombre;
 	}
 
-	public String getUbicacion() {
+	@Override
+	public Coordenadas getCoordenadas() {
+		
 		return ubicacion;
 	}
 
