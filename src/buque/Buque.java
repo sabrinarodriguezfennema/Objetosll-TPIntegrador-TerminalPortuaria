@@ -28,6 +28,6 @@ public class Buque {
 	}
 	
 	public void eliminarContainers() {
-		containers.clear();	
+		containers.clear();
 	}
 }
