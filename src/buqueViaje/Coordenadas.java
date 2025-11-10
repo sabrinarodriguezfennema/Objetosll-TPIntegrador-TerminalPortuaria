@@ -1,23 +1,23 @@
 package buqueViaje;
 
 public class Coordenadas {
-	double coordenadaX;
-	double coordenadaY;
+	double latitud;
+	double longitud;
 	
-	public Coordenadas(double x, double y) {
-		this.coordenadaX = x;
-		this.coordenadaY = y;
+	public Coordenadas(double latitud, double longitud) {
+		this.latitud = latitud;
+		this.longitud = longitud;
 	}
 	
 	public double distanciaA(Coordenadas cs) {
-		return Math.abs(coordenadaX - cs.getX()) + Math.abs(coordenadaY - cs.getY());
+		return Math.abs(latitud - cs.getLatitud()) + Math.abs(longitud - cs.getLongitud());
 	}
 
-	public double getX() {
-		return coordenadaX;
+	public double getLatitud() {
+		return latitud;
 	}
 	
-	public double getY() {
-		return coordenadaY;
+	public double getLongitud() {
+		return longitud;
 	}
 }

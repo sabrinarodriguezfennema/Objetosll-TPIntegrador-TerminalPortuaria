@@ -115,7 +115,7 @@ class TestFaseBuqueViaje {
 		void testDepartingNoCambiaDeFaseSiEstáA0KmDeLaTerminal() {
 			when(buqueViaje.getCoordenadas()).thenReturn(new Coordenadas(0, 0));
 			
-			FaseBuqueViaje faseBuqueViaje = new Departing();
+			FaseBuqueViaje faseBuqueViaje = new Departing(buqueViaje);
 			
 			faseBuqueViaje.coordenadasActualizadas(buqueViaje);
 			
@@ -126,7 +126,7 @@ class TestFaseBuqueViaje {
 		void testDepartingCambiaDeFaseSiEstáAMásDe0KmDeLaTerminal() {
 			when(buqueViaje.getCoordenadas()).thenReturn(new Coordenadas(1, 0));
 			
-			FaseBuqueViaje faseBuqueViaje = new Departing();
+			FaseBuqueViaje faseBuqueViaje = new Departing(buqueViaje);
 			
 			faseBuqueViaje.coordenadasActualizadas(buqueViaje);
 			

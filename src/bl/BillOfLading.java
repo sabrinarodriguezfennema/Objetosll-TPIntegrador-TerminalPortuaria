@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface BillOfLading {
 	
-	public abstract List<String> tipoDeProducto();
+	public List<String> tipoDeProducto();
 	
-	public abstract double peso();
+	public double peso();
 }

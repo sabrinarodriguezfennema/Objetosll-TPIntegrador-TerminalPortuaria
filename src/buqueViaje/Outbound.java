@@ -2,9 +2,7 @@ package buqueViaje;
 
 public class Outbound extends FaseBuqueViaje {
 	
-	public Outbound(BuqueViaje bv) {
-		
-	}
+	public Outbound(BuqueViaje bv) {}
 	
 	@Override
 	public void coordenadasActualizadas(BuqueViaje bv) {

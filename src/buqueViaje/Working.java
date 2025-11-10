@@ -7,7 +7,7 @@ public class Working extends FaseBuqueViaje {
 	
 	@Override
 	public void depart(BuqueViaje bv) {
-		bv.setFase(new Departing());
+		bv.setFase(new Departing(bv));
 	}
 	
 }

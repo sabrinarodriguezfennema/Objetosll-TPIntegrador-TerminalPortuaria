@@ -2,7 +2,7 @@ package buqueViaje;
 
 public class Arrived extends FaseBuqueViaje {
 	
-	Arrived(BuqueViaje bv){
+	public Arrived(BuqueViaje bv){
 		bv.getNotificable().avisoDeLlegada(bv);
 	}
 	

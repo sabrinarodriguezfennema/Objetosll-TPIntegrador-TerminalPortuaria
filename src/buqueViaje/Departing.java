@@ -2,6 +2,8 @@ package buqueViaje;
 
 public class Departing extends FaseBuqueViaje {
 	
+	public Departing(BuqueViaje bv) {}
+	
 	@Override
 	public void coordenadasActualizadas(BuqueViaje bv) {
 		Coordenadas coordenadasBuqueViaje = bv.getCoordenadas();

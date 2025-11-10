@@ -2,6 +2,6 @@ package filtro;
 
 import paraMock.RutaMaritima;
 
-public abstract class Filtro {
+public interface Filtro {
 	public abstract boolean cumple(RutaMaritima rm);
 }

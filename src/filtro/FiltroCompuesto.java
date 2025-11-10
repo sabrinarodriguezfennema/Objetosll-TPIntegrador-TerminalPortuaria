@@ -2,7 +2,7 @@ package filtro;
 
 import paraMock.RutaMaritima;
 
-public abstract class FiltroCompuesto extends Filtro {
+public abstract class FiltroCompuesto implements Filtro {
 	
 	Filtro filtro1;
 	Filtro filtro2;
