@@ -19,10 +19,10 @@ public class ServicioElectrico implements Servicio {
 	}
 
 	@Override
-	public int getPrecio(Container c) {
+	public double getPrecio(Container c) {
 	        ContainerReefer rc = (ContainerReefer) c; // ya que solo el containerReefer usa el servicioElectrico
 
-	        return (int) (rc.getkwPorHora() * this.tiempoEnTerminalEnHoras() * precioPorKw);
+	        return (rc.getkwPorHora() * this.tiempoEnTerminalEnHoras() * precioPorKw);
 	}
 	
 	public LocalDateTime getDiaIngreso() {

@@ -13,7 +13,7 @@ public class ServicioLavado implements Servicio {
 	}
 
 	@Override
-	public int getPrecio(Container c) {
+	public double getPrecio(Container c) {
 		return c.volumen() > 70 ? montoSupera70m3 : montoDebajo70m3;
 	}
 	

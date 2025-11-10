@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 import clases.MotorDeBusqueda;
+import interfaces.IFactura;
 import interfaces.Viaje;
 import interfaces.ICliente;
 import interfaces.IShipper;
@@ -21,7 +22,7 @@ import interfaces.Naviera;
 import interfaces.RutaMaritima;
 import interfaces.Servicio;
 import interfaces.IConsignee;
-import interfaces.Orden;
+import interfaces.IOrden;
 import ordenes.OrdenDeExportacion;
 import ordenes.OrdenDeImportacion;
 import interfaces.EmpresaTransportista;
@@ -41,23 +42,26 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	private Set<IOrdenDeImportacion> ordenesImportacion;
 	private Set<IOrdenDeExportacion> ordenesExportacion;
 	private Map<String, IOrdenDeExportacion> ordenesActivasPorPatente;
-	private Map<String, Orden> ordenPorContainer;
+	private Map<String, IOrden> ordenPorContainer;
+	private Set<IFactura> facturas;
+	private Map<Container, Viaje> containersPorViaje;
 
 
 	public TerminalGestionada(String nombre, String ubicacion) {
 
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;
-		this.navierasRegistradas = new HashSet<>();
-		this.containers = new HashSet<>();
-		this.ordenesImportacion = new HashSet<>();
-		this.ordenesExportacion = new HashSet<>();
-		this.empresasTransportistas = new HashSet<>();
-		this.camionesRegistrados = new HashSet<>();
-		this.choferesRegistrados = new HashSet<>();
-		this.clientesRegistrados = new HashSet<>();
-		this.ordenesActivasPorPatente = new HashMap<>();
-		this.ordenPorContainer = new HashMap<>();
+		this.navierasRegistradas = new HashSet<Naviera>();
+		this.containers = new HashSet<Container>();
+		this.ordenesImportacion = new HashSet<IOrdenDeImportacion>();
+		this.ordenesExportacion = new HashSet<IOrdenDeExportacion>();
+		this.empresasTransportistas = new HashSet<EmpresaTransportista>();
+		this.camionesRegistrados = new HashSet<String>();
+		this.choferesRegistrados = new HashSet<String>();
+		this.clientesRegistrados = new HashSet<ICliente>();
+		this.ordenesActivasPorPatente = new HashMap<String, IOrdenDeExportacion>();
+		this.ordenPorContainer = new HashMap<String, IOrden>();
+		this.containersPorViaje = new HashMap<Viaje, List<String>>();
 
 	}
 
@@ -65,7 +69,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		navierasRegistradas.add(naviera);
 	}
 
-	private void registrarOrden(Orden orden) {
+	private void registrarOrden(IOrden orden) {
 		orden.registrarEn(this);
 	}
 
@@ -187,6 +191,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 				.orElseThrow(() -> new RuntimeException("Contenedor no encontrado en ningún buque registrado"));
 
 		Viaje viajeDelContenedor = buque.getViaje();
+		containersPorViaje.put(c, viajeDelContenedor);
 
 		LocalDateTime fechaYHoraLlegada = viajeDelContenedor.fechaSalida() 
 				.atStartOfDay() 
@@ -209,6 +214,21 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 
 	public String getUbicacion() {
 		return ubicacion;
+	}
+
+	protected Integer cantidadDeFacturas() {
+		return facturas.size();
+	}
+
+	public void retiroDeContainer(String patente, String dni, String idContainer, LocalDate fechaDeRetiro, double montoPorDiaExcedente) {
+		if(verificarCargaRetiro(patente, dni)) {
+			IOrden orden = ordenPorContainer.get(idContainer);
+			Container container = orden.getDatosDeCarga();
+			containers.remove(container);
+			IFactura factura = orden.generarFactura(fechaDeRetiro, montoPorDiaExcedente, containersPorViaje.get(container));
+			facturas.add(factura);
+			orden.getCliente().recibirFactura(factura);
+		}
 	}
 
 }

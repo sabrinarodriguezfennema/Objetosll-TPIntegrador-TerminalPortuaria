@@ -2,28 +2,33 @@ package ordenes;
 
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import interfaces.IConsignee;
-import interfaces.Factura;
+import interfaces.IFactura;
+import facturacion.Factura;
 import interfaces.IOrdenDeImportacion;
+import interfaces.Viaje;
 import interfaces.Container;
-import servicios.Almacenamiento;
+import servicios.Servicio;
+import servicios.ServicioAlmacenamientoExcedente;
 import terminal.TerminalGestionada;
 
 public class OrdenDeImportacion extends Orden implements IOrdenDeImportacion{
 	
-	private IConsignee cliente;
-	private int horasTolerancia;
+	private int diasTolerancia;
 	private LocalDateTime fechaYHoraDeLlegada;
-	private Almacenamiento almacenamiento;
+	private Set<Servicio> servicios;
 	
 
 	public OrdenDeImportacion(IConsignee cliente, Container datosDeCarga, String patenteCamion, String dniChofer, LocalDateTime fechaYHoraDeLlegada) {
-		super(datosDeCarga, patenteCamion, dniChofer);
-		this.cliente = cliente;
-		this.horasTolerancia = 24;
+		super(datosDeCarga, patenteCamion, dniChofer, cliente);
+		this.diasTolerancia = 1;
 		this.fechaYHoraDeLlegada = fechaYHoraDeLlegada;
+		this.servicios = new HashSet<Servicio>(); 
 	}
 	
 	public boolean verificarAutorizacion(String patenteCamion, String dniChofer) {
@@ -31,15 +36,20 @@ public class OrdenDeImportacion extends Orden implements IOrdenDeImportacion{
 		return this.dniChofer == dniChofer && this.patenteCamion == patenteCamion;
 	}
 	
-	public void retiroContainer(LocalDateTime fechaDeRetiro, double montoPorHoraExcedente, Factura factura) {
+	@Override
+	public IFactura generarFactura(LocalDate fechaDeRetiro, double montoPorDiaExcedente, Viaje viaje) {
 	    
-	    int horasExcedentes = (int) Duration.between(this.fechaYHoraDeLlegada, fechaDeRetiro).toHours();
+	    int díasExcedentes = (int) Duration.between(this.fechaYHoraDeLlegada, fechaDeRetiro).toDays();
 
-	    if (horasExcedentes > this.horasTolerancia) {
-	    	int horasDeMas = horasExcedentes - this.horasTolerancia;
-	    	almacenamiento = new Almacenamiento(horasDeMas, montoPorHoraExcedente);
-	    	factura.setServicioDeAlmacenamiento(almacenamiento);
+	    if (díasExcedentes > this.diasTolerancia) {
+	    	int díasDeMas = díasExcedentes - this.diasTolerancia;
+	    	servicios.add(new ServicioAlmacenamientoExcedente(montoPorDiaExcedente, díasDeMas));
 	    }
+	    return new Factura(servicios);
+	}
+	
+	public void agregarServicio(Servicio s) {
+		servicios.add(s);
 	}
 	
 	@Override
@@ -47,8 +57,5 @@ public class OrdenDeImportacion extends Orden implements IOrdenDeImportacion{
 		terminalGestionada.registrar(this);	
 	}
 
-	public IConsignee getConsignee() {
-		return cliente;
-	}
 
 }

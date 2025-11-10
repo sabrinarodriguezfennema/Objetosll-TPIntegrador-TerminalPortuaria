@@ -4,24 +4,24 @@ import containers.Container;
 
 public class ServicioAlmacenamientoExcedente implements Servicio {
 	
-	private int costoPorExcedente;
+	private double costoPorExcedente;
 	private int diasExcedidos; // TODAVIA FALTA CALCULAR COMO SABER LOS DIAS EXCEDIDOS
 	
-	public ServicioAlmacenamientoExcedente(int costoPorExcedente,int diasExcedidos) {
+	public ServicioAlmacenamientoExcedente(double costoPorExcedente,int diasExcedidos) {
 		this.costoPorExcedente = costoPorExcedente;
 		this.diasExcedidos = diasExcedidos;
 	}
 
 	@Override
-	public int getPrecio(Container c) {
+	public double getPrecio(Container c) {
 		return costoPorExcedente * diasExcedidos;
 	}
 	
-	public int getCostoPorExcedente() {
+	public double getCostoPorExcedente() {
 		return costoPorExcedente;
 	}
 	
-	public int getDiasExcedidos() {
+	public double getDiasExcedidos() {
 		return diasExcedidos; // IMPLEMENTAR MEJOR 
 	}
 }

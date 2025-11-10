@@ -12,7 +12,7 @@ public class ServicioDesconsolidado implements Servicio {
 	}
 
 	@Override
-	public int getPrecio(Container c) {
+	public double getPrecio(Container c) {
 		// TODO Auto-generated method stub
 		return precioFijo;
 	}

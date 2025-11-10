@@ -11,7 +11,7 @@ public class ServicioPesado implements Servicio {
 	}
 
 	@Override
-	public int getPrecio(Container c) {
+	public double getPrecio(Container c) {
 		return costoFijo;
 	}
 }

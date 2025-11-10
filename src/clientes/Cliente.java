@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import interfaces.ICliente;
+import interfaces.IFactura;
 
 public abstract class Cliente implements ICliente{
 	
     private String nombre;
     private String email;
     private List<String> mailsRecibidos;
+	private List<IFactura> facturas;
     
     public Cliente(String nombre, String email) {
 
@@ -32,5 +34,9 @@ public abstract class Cliente implements ICliente{
     
     public List<String> getMailsRecibidos() {
         return new ArrayList<>(mailsRecibidos);
+    }
+    
+    public void recibirFactura(IFactura factura) {
+    	facturas.add(factura);
     }
 }
