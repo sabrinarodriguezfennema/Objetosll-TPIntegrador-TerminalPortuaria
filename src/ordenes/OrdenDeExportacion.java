@@ -4,33 +4,30 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import interfaces.Container;
+import interfaces.IFactura;
 import interfaces.IOrdenDeExportacion;
 import interfaces.IShipper;
+import interfaces.Viaje;
 import terminal.Terminal;
 import terminal.TerminalGestionada;
 
 public class OrdenDeExportacion extends Orden implements IOrdenDeExportacion {
 	
-	private IShipper cliente;
 	private LocalDate fechaSalida;
 	private LocalDate fechaLlegada;
 	private LocalDateTime turno;
 	private Terminal terminalDestino;
 
 	public OrdenDeExportacion(IShipper cliente, Container datosDeCarga, String patenteCamion, String dniChofer, LocalDate fechaSalida, LocalDate fechaLlegada, Terminal terminalDestino) {
-		super(datosDeCarga, patenteCamion, dniChofer);
-		this.cliente = cliente;
+		super(datosDeCarga, patenteCamion, dniChofer, cliente);
 		this.fechaSalida = fechaSalida;
 		this.fechaLlegada = fechaLlegada;
 		this.terminalDestino = terminalDestino;
 	}
 	
-	public IShipper getShipper() {
-		return cliente;
-	}
-	
+
 	public void asignarTurno (LocalDateTime turno) {
-		cliente.fechaDeExportacion(turno);
+		((IShipper) cliente).fechaDeExportacion(turno);
 		this.turno = turno;
 	}
 
@@ -55,6 +52,19 @@ public class OrdenDeExportacion extends Orden implements IOrdenDeExportacion {
 	@Override
 	public Terminal getTerminalDestino() {
 		return terminalDestino;
+	}
+
+	@Override
+	public IFactura generarFactura(LocalDateTime fecha, double montoPorDíaExcedente, Viaje viaje) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public IShipper getShipper() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

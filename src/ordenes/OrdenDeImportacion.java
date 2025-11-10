@@ -37,7 +37,7 @@ public class OrdenDeImportacion extends Orden implements IOrdenDeImportacion{
 	}
 	
 	@Override
-	public IFactura generarFactura(LocalDate fechaDeRetiro, double montoPorDiaExcedente, Viaje viaje) {
+	public IFactura generarFactura(LocalDateTime  fechaDeRetiro, double montoPorDiaExcedente, Viaje viaje) {
 	    
 	    int díasExcedentes = (int) Duration.between(this.fechaYHoraDeLlegada, fechaDeRetiro).toDays();
 

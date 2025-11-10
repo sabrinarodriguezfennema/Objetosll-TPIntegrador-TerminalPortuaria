@@ -87,13 +87,13 @@ public class ContainerTest {
 	@Test
 	void precioDeTodosLosServicios() {
 		
-		when(s1.getPrecio(c)).thenReturn(100);
-		when(s2.getPrecio(c)).thenReturn(200);
+		when(s1.getPrecio(c)).thenReturn(100.00);
+		when(s2.getPrecio(c)).thenReturn(200.00);
 		
 		c.agregarServicio(s1);
 		c.agregarServicio(s2);
 		
-		assertEquals(300, c.totalDeLosServicios());
+		assertEquals(300.00, c.totalDeLosServicios());
 	}
 	
 	

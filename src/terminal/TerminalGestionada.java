@@ -17,7 +17,7 @@ import interfaces.Viaje;
 import interfaces.ICliente;
 import interfaces.IShipper;
 import interfaces.Buque;
-import interfaces.BuqueViaje;
+import interfaces.IBuqueViaje;
 import interfaces.Container;
 import interfaces.Naviera;
 import interfaces.RutaMaritima;
@@ -60,7 +60,8 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		this.clientesRegistrados = new HashSet<ICliente>();
 		this.ordenesActivasPorPatente = new HashMap<String, IOrdenDeExportacion>();
 		this.ordenPorContainer = new HashMap<String, IOrden>();
-		this.containersPorViaje = new HashMap<Viaje, List<String>>();
+		this.containersPorViaje = new HashMap<Container, Viaje>();
+		this.facturas = new HashSet<IFactura>();
 
 	}
 
@@ -137,21 +138,33 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	}
 
 	@Override
-	public void avisoDeSalida(BuqueViaje bv) {
-
-		for (IOrdenDeExportacion orden : ordenesExportacion) {
-			IShipper shipper = orden.getShipper();
-			shipper.recibirMail("Su carga está próxima a salir");
+	public void avisoDeSalida(IBuqueViaje bv) {
+		//avisarle a los shipper 
+		//for (IOrdenDeExportacion orden : ordenesExportacion) {
+		//	IShipper shipper = orden.getShipper();
+		//	shipper.recibirMail("Su carga ya ha salido de la terminal");
 		}
-	}
-
+	
+	
 	@Override
-	public void avisoDeLlegada(BuqueViaje bv) {
-
-		for (IOrdenDeImportacion orden : ordenesImportacion) {
-			IConsignee consignee = orden.getConsignee();
-			consignee.recibirMail("Su carga está próxima a llegar");
+	public void inminenteArribo(IBuqueViaje bv) {
+		//
+		//for (IOrdenDeImportacion orden : ordenesImportacion) {
+		//	IShipper shipper =(Shipper) orden.getCliente();
+		//	shipper.recibirMail("Su carga esta llegando a la terminal");
 		}
+	
+	@Override
+	public void avisoDeLlegada(IBuqueViaje bv) {
+		
+		bv.inicioDeTrabajo();
+		
+		//pedirle a buqeuviaje el viaje, al viaje el buque y al buque los containers y agregarlos a mi lista
+		
+		//agregaarle al buque lso containers de su viaje
+		bv.depart();
+
+		
 	}
 
 	@Override
@@ -185,11 +198,20 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	@Override
 	public void datosParaElRetiro(IConsignee importador, EmpresaTransportista empresa, Container c) {
 
-		Buque buque = navierasRegistradas.stream().flatMap(naviera -> naviera.getBuques().stream())
-				.filter(b -> b.getContainers().contains(c)).findFirst()
+		Buque buque = navierasRegistradas.stream().
+				flatMap(naviera -> naviera.getBuques().stream())
+				.filter(b -> b.getContainers().contains(c))
+				.findFirst()
 				.orElseThrow(() -> new RuntimeException("Contenedor no encontrado en ningún buque registrado"));
-
-		Viaje viajeDelContenedor = buque.getViaje();
+		
+		Viaje viajeDelContenedor = navierasRegistradas.stream()
+			    .flatMap(naviera -> naviera.getViajes().stream())
+			    .filter(viaje -> viaje.getBuque().equals(buque) && 
+			                     viaje.getBuque().getContainers().contains(c))
+			    .findFirst()
+			    .orElseThrow(() -> new RuntimeException("Viaje no encontrado"));
+				
+		
 		containersPorViaje.put(c, viajeDelContenedor);
 
 		LocalDateTime fechaYHoraLlegada = viajeDelContenedor.fechaSalida() 
@@ -221,7 +243,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		return facturas.size();
 	}
 
-	public void retiroDeContainer(String patente, String dni, String idContainer, LocalDate fechaDeRetiro, double montoPorDiaExcedente) {
+	public void retiroDeContainer(String patente, String dni, String idContainer, LocalDateTime  fechaDeRetiro, double montoPorDiaExcedente) {
 		if(verificarCargaRetiro(patente, dni)) {
 			IOrden orden = ordenPorContainer.get(idContainer);
 			Container container = orden.getDatosDeCarga();

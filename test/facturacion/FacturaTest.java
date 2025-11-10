@@ -15,7 +15,7 @@ public class FacturaTest {
 	void setUp() {
 		
 		desglose = mock(Desglose.class);		
-		factura = new Factura(desglose);		
+//		factura = new Factura(desglose);		
 	}
 	
 	@Test 

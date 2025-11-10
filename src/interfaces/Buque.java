@@ -7,7 +7,7 @@ public interface Buque {
 
 	public Viaje getViaje();
 
-	public List<Container> getContainers();
+	public Set<Container> getContainers();
 
 	public String getNombre();
 

@@ -11,6 +11,6 @@ public interface Naviera {
 
 	public Set<Viaje> getViajes();
 
-	public List<Buque> getBuques();
+	public Set<Buque> getBuques();
 
 }

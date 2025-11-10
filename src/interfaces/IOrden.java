@@ -1,6 +1,7 @@
 package interfaces;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import terminal.TerminalGestionada;
 
@@ -14,8 +15,8 @@ public interface IOrden {
 	
 	public Container getDatosDeCarga();
 
-	public IFactura generarFactura(LocalDate fecha, double montoPorDíaExcedente, Viaje viaje);
-
 	public ICliente getCliente();
+	
+	public IFactura generarFactura(LocalDateTime fecha, double montoPorDíaExcedente, Viaje viaje);
 
 }
