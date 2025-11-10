@@ -7,34 +7,34 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import buqueViaje.Arrived;
-import buqueViaje.BuqueViaje;
-import buqueViaje.Coordenadas;
-import buqueViaje.Departing;
-import buqueViaje.FaseBuqueViaje;
-import buqueViaje.Inbound;
-import buqueViaje.Outbound;
-import buqueViaje.Working;
 import paraMock.TerminalGestionada;
+import interfaces.Notificable;
+import interfaces.Localizable;
 
 class TestFaseBuqueViaje {
+	BuqueViaje buqueViaje;
+	Notificable unNotificable;
+	Localizable unDestino; 
 
 	@BeforeEach
 	void setUp() throws Exception {
+		buqueViaje    = mock(BuqueViaje.class);
+		unNotificable = mock(Notificable.class);
+		unDestino     = mock(Localizable.class);
+		
+		when(buqueViaje.getNotificable()).thenReturn(unNotificable); 
+		
+		when(buqueViaje.getDestino()).thenReturn(unDestino);
+		when(unDestino.getCoordenadas()).thenReturn(new Coordenadas(0, 0));
 	}
 
 	//Outbound
 	
 	@Test
 	void testOutboundNoCambiaDeFaseSiEstáAMásDe50KmDeLaTerminal() {
-		BuqueViaje buqueViaje = mock(BuqueViaje.class);
 		when(buqueViaje.getCoordenadas()).thenReturn(new Coordenadas(50, 0));
 		
-		TerminalGestionada mockTerminal = mock(TerminalGestionada.class); 
-		when(buqueViaje.getTerminal()).thenReturn(mockTerminal);
-		when(mockTerminal.getCoordenadas()).thenReturn(new Coordenadas(0, 0));
-		
-		FaseBuqueViaje faseBuqueViaje = new Outbound();
+		FaseBuqueViaje faseBuqueViaje = new Outbound(buqueViaje);
 		
 		faseBuqueViaje.coordenadasActualizadas(buqueViaje);
 		
@@ -43,31 +43,21 @@ class TestFaseBuqueViaje {
 	
 	@Test
 	void testOutboundCambiaDeFaseSiEstáAMenosDe50KmDeLaTerminal() {
-		BuqueViaje buqueViaje = mock(BuqueViaje.class); 
 		when(buqueViaje.getCoordenadas()).thenReturn(new Coordenadas(40, 0));
 		
-		TerminalGestionada mockTerminal = mock(TerminalGestionada.class); 
-		when(buqueViaje.getTerminal()).thenReturn(mockTerminal);
-		when(mockTerminal.getCoordenadas()).thenReturn(new Coordenadas(0, 0));
-		
-		FaseBuqueViaje faseBuqueViaje = new Outbound();
+		FaseBuqueViaje faseBuqueViaje = new Outbound(buqueViaje);
 		
 		faseBuqueViaje.coordenadasActualizadas(buqueViaje);
 		
 		verify(buqueViaje).setFase(any());
-		verify(mockTerminal).inminenteArribo(buqueViaje);
+		verify(unNotificable).inminenteArribo(buqueViaje);
 	}
 	
 	//Inbound
 	
 	@Test
 	void testInboundNoCambiaDeFaseSiEstáEntre50y0kmDeLaTerminal() {
-		BuqueViaje buqueViaje = mock(BuqueViaje.class);
 		when(buqueViaje.getCoordenadas()).thenReturn(new Coordenadas(30, 0));
-		
-		TerminalGestionada mockTerminal = mock(TerminalGestionada.class); 
-		when(buqueViaje.getTerminal()).thenReturn(mockTerminal);
-		when(mockTerminal.getCoordenadas()).thenReturn(new Coordenadas(0, 0));
 		
 		FaseBuqueViaje faseBuqueViaje = new Inbound(buqueViaje);
 		
@@ -78,12 +68,7 @@ class TestFaseBuqueViaje {
 	
 	@Test
 	void testInboundCambiaDeFaseSiEstáAMásDe50kmDeLaTerminal() {
-		BuqueViaje buqueViaje = mock(BuqueViaje.class);
 		when(buqueViaje.getCoordenadas()).thenReturn(new Coordenadas(53, 0));
-		
-		TerminalGestionada mockTerminal = mock(TerminalGestionada.class); 
-		when(buqueViaje.getTerminal()).thenReturn(mockTerminal);
-		when(mockTerminal.getCoordenadas()).thenReturn(new Coordenadas(0, 0));
 		
 		FaseBuqueViaje faseBuqueViaje = new Inbound(buqueViaje);
 		
@@ -94,29 +79,19 @@ class TestFaseBuqueViaje {
 	
 	@Test
 	void testInboundCambiaDeFaseSiEstáA0kmDeLaTerminal() {
-		BuqueViaje buqueViaje = mock(BuqueViaje.class);
 		when(buqueViaje.getCoordenadas()).thenReturn(new Coordenadas(0, 0));
-		
-		TerminalGestionada mockTerminal = mock(TerminalGestionada.class); 
-		when(buqueViaje.getTerminal()).thenReturn(mockTerminal);
-		when(mockTerminal.getCoordenadas()).thenReturn(new Coordenadas(0, 0));
 		
 		FaseBuqueViaje faseBuqueViaje = new Inbound(buqueViaje);
 		
 		faseBuqueViaje.coordenadasActualizadas(buqueViaje);
 		
 		verify(buqueViaje).setFase(any());
-		verify(mockTerminal).avisoDeLlegada(buqueViaje);
+		verify(unNotificable).avisoDeLlegada(buqueViaje);
 	}
 	
 	//Arrived
 	@Test
-	void testArrivedCambiaDeFaseSiSeLeIndicaIniciarSuTrabajo() {
-		BuqueViaje buqueViaje = mock(BuqueViaje.class);
-		
-		TerminalGestionada mockTerminal = mock(TerminalGestionada.class); 
-		when(buqueViaje.getTerminal()).thenReturn(mockTerminal);
-		
+	void testArrivedCambiaDeFaseSiSeLeIndicaIniciarSuTrabajo() {		
 		FaseBuqueViaje faseBuqueViaje = new Arrived(buqueViaje);
 		
 		faseBuqueViaje.inicioDeTrabajo(buqueViaje);
@@ -126,12 +101,7 @@ class TestFaseBuqueViaje {
 	
 	//Working
 		@Test
-		void testWorkingCambiaDeFaseSiSeLeIndicaPartir() {
-			BuqueViaje buqueViaje = mock(BuqueViaje.class);
-			
-			TerminalGestionada mockTerminal = mock(TerminalGestionada.class); 
-			when(buqueViaje.getTerminal()).thenReturn(mockTerminal);
-			
+		void testWorkingCambiaDeFaseSiSeLeIndicaPartir() {			
 			FaseBuqueViaje faseBuqueViaje = new Working(buqueViaje);
 			
 			faseBuqueViaje.depart(buqueViaje);
@@ -143,12 +113,7 @@ class TestFaseBuqueViaje {
 		
 		@Test
 		void testDepartingNoCambiaDeFaseSiEstáA0KmDeLaTerminal() {
-			BuqueViaje buqueViaje = mock(BuqueViaje.class);
 			when(buqueViaje.getCoordenadas()).thenReturn(new Coordenadas(0, 0));
-			
-			TerminalGestionada mockTerminal = mock(TerminalGestionada.class); 
-			when(buqueViaje.getTerminal()).thenReturn(mockTerminal);
-			when(mockTerminal.getCoordenadas()).thenReturn(new Coordenadas(0, 0));
 			
 			FaseBuqueViaje faseBuqueViaje = new Departing();
 			
@@ -159,41 +124,30 @@ class TestFaseBuqueViaje {
 		
 		@Test
 		void testDepartingCambiaDeFaseSiEstáAMásDe0KmDeLaTerminal() {
-			BuqueViaje buqueViaje = mock(BuqueViaje.class);
 			when(buqueViaje.getCoordenadas()).thenReturn(new Coordenadas(1, 0));
-			
-			TerminalGestionada mockTerminal = mock(TerminalGestionada.class); 
-			when(buqueViaje.getTerminal()).thenReturn(mockTerminal);
-			when(mockTerminal.getCoordenadas()).thenReturn(new Coordenadas(0, 0));
 			
 			FaseBuqueViaje faseBuqueViaje = new Departing();
 			
 			faseBuqueViaje.coordenadasActualizadas(buqueViaje);
 			
 			verify(buqueViaje).setFase(any());
-			verify(mockTerminal).avisoDeSalida(buqueViaje);
+			verify(unNotificable).avisoDeSalida(buqueViaje);
 		}
 		
 		//Otros
 		
 		@Test
-		void testSiAUnaFaseDistintaDeArrivedSeLeOrdenaInicioTrabajoNoSeHaceNada() { //O tira un error, o todas pasan a working
-			BuqueViaje buqueViaje = mock(BuqueViaje.class);
+		void testSiAUnaFaseDistintaDeArrivedSeLeOrdenaInicioTrabajoNoSeHaceNada() { //TODO O tira un error, o todas pasan a working
 			FaseBuqueViaje faseBuqueViaje = new Working(buqueViaje);
-			TerminalGestionada mockTerminal = mock(TerminalGestionada.class); 
-			when(buqueViaje.getTerminal()).thenReturn(mockTerminal);
 			
 			faseBuqueViaje.inicioDeTrabajo(buqueViaje);
 			
 			verify(buqueViaje, never()).setFase(any());
-			verifyNoInteractions(mockTerminal);
+			verifyNoInteractions(unNotificable);
 		}
 		
 		@Test
 		void testSiAUnaFaseDistintaDeWorkingSeLeOrdenaDepartNoSeHaceNada() { //O tira un error, o todas pasan a departing
-			BuqueViaje buqueViaje = mock(BuqueViaje.class);
-			TerminalGestionada mockTerminal = mock(TerminalGestionada.class); 
-			when(buqueViaje.getTerminal()).thenReturn(mockTerminal);
 			FaseBuqueViaje faseBuqueViaje = new Arrived(buqueViaje);
 			
 			faseBuqueViaje.depart(buqueViaje);

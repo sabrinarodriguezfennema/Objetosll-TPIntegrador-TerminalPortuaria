@@ -2,9 +2,10 @@ package paraMock;
 
 import buqueViaje.Coordenadas;
 import interfaces.IBuqueViaje;
+import interfaces.Notificable;
 import interfaces.Terminal;
 
-public interface TerminalGestionada extends Terminal{
+public interface TerminalGestionada extends Terminal, Notificable{
 	
 	public Coordenadas getCoordenadas();
 

@@ -5,11 +5,11 @@ public class Departing extends FaseBuqueViaje {
 	@Override
 	public void coordenadasActualizadas(BuqueViaje bv) {
 		Coordenadas coordenadasBuqueViaje = bv.getCoordenadas();
-		Coordenadas coordenadasTerminal = bv.getTerminal().getCoordenadas();
+		Coordenadas coordenadasDestino = bv.getDestino().getCoordenadas();
 		
-		if(coordenadasBuqueViaje.distanciaA(coordenadasTerminal) > 0) {
-			bv.getTerminal().avisoDeSalida(bv);
-			bv.setFase(new Outbound());
+		if(coordenadasBuqueViaje.distanciaA(coordenadasDestino) > 0) {
+			bv.getNotificable().avisoDeSalida(bv);
+			bv.setFase(new Outbound(bv));
 		}
 	}
 }

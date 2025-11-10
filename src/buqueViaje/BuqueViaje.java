@@ -1,20 +1,30 @@
 package buqueViaje;
 
 import interfaces.IBuqueViaje;
+import interfaces.Localizable;
+import interfaces.Notificable;
 import paraMock.TerminalGestionada;
 import paraMock.Viaje;
 
 public class BuqueViaje implements IBuqueViaje{
 	
-	private TerminalGestionada terminal;
 	private Viaje viaje;
 	private FaseBuqueViaje faseBuqueViaje;
 	private Coordenadas coordenadas;
+	private Localizable destino;
+	private Notificable aNotificar;
 
-	public BuqueViaje(Viaje unViaje, TerminalGestionada unaTerminal) {
+//	public BuqueViaje(Viaje unViaje, TerminalGestionada unaTerminal) {
+//		this.viaje = unViaje;
+//		this.terminal = unaTerminal;
+//		this.faseBuqueViaje = new Outbound();
+//	}
+	
+	public BuqueViaje(Viaje unViaje, Localizable unDestino, Notificable unNotificable) {
 		this.viaje = unViaje;
-		this.terminal = unaTerminal;
-		this.faseBuqueViaje = new Outbound();
+		this.destino = unDestino;
+		this.aNotificar = unNotificable;
+		this.faseBuqueViaje = new Outbound(this);
 	}
 
 	@Override
@@ -24,9 +34,12 @@ public class BuqueViaje implements IBuqueViaje{
 
 	}
 
-	@Override
-	public TerminalGestionada getTerminal() {
-		return this.terminal;
+	public Localizable getDestino() {
+		return this.destino;
+	}
+	
+	public Notificable getNotificable() {
+		return this.aNotificar;
 	}
 
 	@Override
