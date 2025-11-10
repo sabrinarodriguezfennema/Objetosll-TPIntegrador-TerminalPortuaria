@@ -16,4 +16,8 @@ public class Factura implements IFactura{
 	public int montoTotal() {
 		return desglose.montoTotal();
 	}
+	
+	public Desglose getDesglose() {
+		return desglose;
+	}
 }
