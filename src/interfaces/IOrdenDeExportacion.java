@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import terminal.Terminal;
 
 
-public interface IOrdenDeExportacion extends Orden{
+public interface IOrdenDeExportacion extends IOrden{
 
 	public String getCamion();
 

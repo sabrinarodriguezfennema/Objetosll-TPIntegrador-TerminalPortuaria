@@ -4,7 +4,7 @@ import java.util.function.BooleanSupplier;
 
 import paraMock.RutaMaritima;
 
-public abstract class FiltroSimple extends Filtro{
+public abstract class FiltroSimple implements Filtro{
 
 	public abstract boolean cumple(RutaMaritima unaRutaMaritima);
 

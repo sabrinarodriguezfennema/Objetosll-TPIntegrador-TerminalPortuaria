@@ -12,7 +12,7 @@ import org.mockito.InOrder;
 
 import interfaces.Container;
 import interfaces.IConsignee;
-import interfaces.Factura;
+import interfaces.IFactura;
 import ordenes.OrdenDeImportacion;
 import terminal.TerminalGestionada;
 
@@ -23,7 +23,7 @@ class OrdenDeImportacionTest {
 	private Container mockContainer;
 	private String patenteCamion;
 	private String dniChofer;
-	private Factura mockFactura;
+	private IFactura mockFactura;
 	private OrdenDeImportacion orden;
 	private LocalDateTime llegada;
 	private LocalDateTime retiro;
@@ -34,7 +34,7 @@ class OrdenDeImportacionTest {
 		mockTerminalGestionada = mock(TerminalGestionada.class);
 		mockCliente = mock(IConsignee.class);
 		mockContainer = mock(Container.class);
-		mockFactura = mock(Factura.class);
+		mockFactura = mock(IFactura.class);
 		
 		patenteCamion = "ABC123";
 		dniChofer = "12345678";

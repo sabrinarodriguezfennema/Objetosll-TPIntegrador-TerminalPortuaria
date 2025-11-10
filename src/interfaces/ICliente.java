@@ -11,4 +11,6 @@ public interface ICliente {
 	public String getEmail();
 
 	public List<String> getMailsRecibidos();
+
+	public void recibirFactura(IFactura factura);
 }

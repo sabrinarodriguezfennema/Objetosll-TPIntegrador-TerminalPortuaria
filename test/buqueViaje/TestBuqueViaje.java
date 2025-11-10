@@ -6,32 +6,36 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import buqueViaje.Arrived;
-import buqueViaje.BuqueViaje;
-import buqueViaje.Coordenadas;
-import buqueViaje.FaseBuqueViaje;
-import buqueViaje.Working;
-import interfaces.Terminal;
-import paraMock.TerminalGestionada;
+import interfaces.Localizable;
+import interfaces.Notificable;
 import paraMock.Viaje;
 
-class testBuqueViaje {
+class TestBuqueViaje {
 	Viaje unViaje;
-	TerminalGestionada unaTerminal;
 	BuqueViaje unBuqueViaje;
+	Notificable unNotificable;
+	Localizable unDestino;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		unViaje = mock(Viaje.class);
-		unaTerminal = mock(TerminalGestionada.class);
-		unBuqueViaje = new BuqueViaje(unViaje, unaTerminal);
+		unNotificable = mock(Notificable.class);
+		unDestino = mock(Localizable.class);
+		unBuqueViaje = new BuqueViaje(unViaje, unDestino, unNotificable);
 	}
 
 	@Test
-	void testUnBuqueViajeConoceSuTerminal() {
-		Terminal resultado = unBuqueViaje.getTerminal();
+	void testUnBuqueViajeConoceSuNotificable() {
+		Notificable resultado = unBuqueViaje.getNotificable();
 		
-		assertEquals(unaTerminal, resultado);
+		assertEquals(unNotificable, resultado);
+	}
+	
+	@Test
+	void testUnBuqueViajeConoceSuDestino() {
+		Localizable resultado = unBuqueViaje.getDestino();
+		
+		assertEquals(unDestino, resultado);
 	}
 	
 	@Test

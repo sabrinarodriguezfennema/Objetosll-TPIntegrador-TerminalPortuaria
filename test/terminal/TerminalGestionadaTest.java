@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -18,10 +19,7 @@ import org.mockito.*;
 import buqueViaje.Coordenadas;
 import clases.MotorDeBusqueda;
 import clientes.*;
-import interfaces.IConsignee;
-import interfaces.IShipper;
 import interfaces.*;
-import interfaces.ICliente;
 import ordenes.OrdenDeExportacion;
 import ordenes.OrdenDeImportacion;
 
@@ -362,5 +360,26 @@ public class TerminalGestionadaTest {
         verify(mockNaviera2, times(1)).getViajes();
         verify(mockNaviera3, times(1)).getViajes();
     }
+	
+	@Test
+	void testRetiroDeContainer() {
+		String patente = "ABC123";
+        String dni = "12345678";
+        when(mockContainer.getId()).thenReturn("asd");
+        String idContainer = mockContainer.getId();
+        List<Buque> listaConBuque = new ArrayList<Buque>();
+        listaConBuque.add(mockBuque);
+		when(mockNaviera.getBuques()).thenReturn(listaConBuque);
+		List<Container> listaConContainer = new ArrayList<Container>();
+		listaConContainer.add(mockContainer);
+		when(mockBuque.getContainers()).thenReturn(listaConContainer);
+        
+        terminal.registrarCamion(patente);
+        terminal.registrarChofer(dni);
+        terminal.datosParaElRetiro(mockConsignee, mockEmpresaTransportista, mockContainer);
+        
+		terminal.retiroDeContainer(patente, dni, idContainer);
+		assertEquals(terminal.cantidadDeFacturas(), 1);
+	}
 
 }

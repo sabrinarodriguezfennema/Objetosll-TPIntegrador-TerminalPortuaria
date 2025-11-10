@@ -3,18 +3,18 @@ package buqueViaje;
 public class Inbound extends FaseBuqueViaje {
 	
 	public Inbound(BuqueViaje bv){
-		bv.getTerminal().inminenteArribo(bv);
+		bv.getNotificable().inminenteArribo(bv);
 	}
 	
 	@Override
 	public void coordenadasActualizadas(BuqueViaje bv){
 		Coordenadas coordenadasBuqueViaje = bv.getCoordenadas();
-		Coordenadas coordenadasTerminal = bv.getTerminal().getCoordenadas();
+		Coordenadas coordenadasDestino = bv.getDestino().getCoordenadas();
 		
-		if(coordenadasBuqueViaje.distanciaA(coordenadasTerminal) >= 50) {
-			bv.setFase(new Outbound());
+		if(coordenadasBuqueViaje.distanciaA(coordenadasDestino) >= 50) {
+			bv.setFase(new Outbound(bv));
 		}
-		if(coordenadasBuqueViaje.distanciaA(coordenadasTerminal) == 0) {
+		if(coordenadasBuqueViaje.distanciaA(coordenadasDestino) == 0) {
 			bv.setFase(new Arrived(bv));
 		}
 	}
