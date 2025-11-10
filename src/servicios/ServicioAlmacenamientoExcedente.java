@@ -21,7 +21,7 @@ public class ServicioAlmacenamientoExcedente implements Servicio {
 		return costoPorExcedente;
 	}
 	
-	public double getDiasExcedidos() {
+	public int getDiasExcedidos() {
 		return diasExcedidos; // IMPLEMENTAR MEJOR 
 	}
 }

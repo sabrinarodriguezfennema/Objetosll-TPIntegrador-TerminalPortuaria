@@ -51,7 +51,7 @@ public class ContainerTest {
 	
 	@Test
 	void obtenerIdentificador() {
-		assertEquals("ABCD1234567", c.getIdentificador());
+		assertEquals("ABCD1234567", c.getId());
 	}
 	
 	@Test
@@ -87,8 +87,8 @@ public class ContainerTest {
 	@Test
 	void precioDeTodosLosServicios() {
 		
-		when(s1.getPrecio(c)).thenReturn(100);
-		when(s2.getPrecio(c)).thenReturn(200);
+		when(s1.getPrecio(c)).thenReturn((double) 100);
+;		when(s2.getPrecio(c)).thenReturn((double) 200);
 		
 		c.agregarServicio(s1);
 		c.agregarServicio(s2);

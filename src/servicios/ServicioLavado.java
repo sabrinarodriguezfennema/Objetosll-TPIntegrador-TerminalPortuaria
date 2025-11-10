@@ -4,8 +4,8 @@ import containers.Container;
 
 public class ServicioLavado implements Servicio {
 	
-	private int montoSupera70m3;
-	private int montoDebajo70m3;
+	private double montoSupera70m3;
+	private double montoDebajo70m3;
 	
 	public ServicioLavado(int montoSupera70m3,int montoDebajo70m3 ) {
 		this.montoSupera70m3 = montoSupera70m3;
@@ -17,11 +17,11 @@ public class ServicioLavado implements Servicio {
 		return c.volumen() > 70 ? montoSupera70m3 : montoDebajo70m3;
 	}
 	
-	public int getMontoSupera70() {
+	public double getMontoSupera70() {
 		return montoSupera70m3;
 	}
 	
-	public int getMontoDebajo70() {
+	public double getMontoDebajo70() {
 		return montoDebajo70m3;
 	}
 

@@ -38,7 +38,7 @@ public class Container {
         return ancho * largo * altura;
     }
 	
-	public String getIdentificador() {
+	public String getId() {
 		return idAlfabetico + idNumerico;
 	}
 	

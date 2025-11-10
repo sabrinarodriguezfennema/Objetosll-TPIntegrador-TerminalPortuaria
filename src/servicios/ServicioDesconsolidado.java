@@ -4,7 +4,7 @@ import containers.Container;
 
 public class ServicioDesconsolidado implements Servicio {
 	
-	private int precioFijo;
+	private double precioFijo;
 	
 	public ServicioDesconsolidado(int precioFijo) {
 		this.precioFijo = precioFijo;
@@ -13,7 +13,6 @@ public class ServicioDesconsolidado implements Servicio {
 
 	@Override
 	public double getPrecio(Container c) {
-		// TODO Auto-generated method stub
 		return precioFijo;
 	}
 

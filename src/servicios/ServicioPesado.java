@@ -4,7 +4,7 @@ import containers.Container;
 
 public class ServicioPesado implements Servicio {
 	
-	private int costoFijo;
+	private double costoFijo;
 	
 	public ServicioPesado(int costoFijo) {
 		this.costoFijo = costoFijo;

@@ -8,7 +8,7 @@ import containers.ContainerReefer;
 
 public class ServicioElectrico implements Servicio {
 	
-	private int precioPorKw;
+	private double precioPorKw;
 	private LocalDateTime diaIngreso;
 	private LocalDateTime diaEgreso;
 	

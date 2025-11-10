@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import buque.Buque;
 import containers.Container;
+import reportes.Reporte;
 
 public class BuqueTest {
 	
