@@ -33,12 +33,12 @@ public class ServicioElectricoTest {
 	void obtenerPrecioTotal() { // obtener precio total por los dias que el contenedor aplico el servicio
 		
 		when(c1.getkwPorHora()).thenReturn(10);
-		assertEquals(14400, servicio.getPrecio(c1));
+		assertEquals(14400, servicio.getPrecio(c1), 1);
 		
 		// container con otro precio
 		
 		when(c2.getkwPorHora()).thenReturn(20);
-		assertEquals(28800, servicio.getPrecio(c2));
+		assertEquals(28800, servicio.getPrecio(c2), 1);
 	}
 	@Test
 	void obtenerDiaEgreso() {

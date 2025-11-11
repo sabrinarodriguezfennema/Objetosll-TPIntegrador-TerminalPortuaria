@@ -3,7 +3,7 @@ package clases;
 import java.time.LocalDate;
 
 import interfaces.Circuito;
-import interfaces.Viaje;
+import interfaces.IViaje;
 import terminal.Terminal;
 
 public class RutaMaritima implements interfaces.RutaMaritima{

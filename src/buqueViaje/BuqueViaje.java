@@ -1,14 +1,13 @@
 package buqueViaje;
 
 import interfaces.IBuqueViaje;
+import interfaces.IViaje;
 import interfaces.Localizable;
 import interfaces.Notificable;
-import paraMock.TerminalGestionada;
-import paraMock.Viaje;
 
 public class BuqueViaje implements IBuqueViaje{
 	
-	private Viaje viaje;
+	private IViaje viaje;
 	private FaseBuqueViaje faseBuqueViaje;
 	private Coordenadas coordenadas;
 	private Localizable destino;
@@ -20,7 +19,7 @@ public class BuqueViaje implements IBuqueViaje{
 //		this.faseBuqueViaje = new Outbound();
 //	}
 	
-	public BuqueViaje(Viaje unViaje, Localizable unDestino, Notificable unNotificable) {
+	public BuqueViaje(IViaje unViaje, Localizable unDestino, Notificable unNotificable) {
 		this.viaje = unViaje;
 		this.destino = unDestino;
 		this.aNotificar = unNotificable;
@@ -62,6 +61,11 @@ public class BuqueViaje implements IBuqueViaje{
 	public void depart() {
 		this.faseBuqueViaje.depart(this);
 
+	}
+
+	@Override
+	public IViaje getViaje() {
+		return viaje;
 	}
 
 }

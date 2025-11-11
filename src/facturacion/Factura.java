@@ -10,7 +10,7 @@ public class Factura implements IFactura{
 	private Desglose desglose;
 	
 	public Factura(Set<Servicio> servicios) {
-		desglose = new Desglose();
+		
 	}
 	
 	public int montoTotal() {

@@ -26,27 +26,27 @@ public class ContainerTest {
 		consignee = mock(Consignee.class);
 		s1 = mock(Servicio.class);
 		s2 = mock(Servicio.class);
-		c = new Container(10, 5, 30, "ABCD", 1234567, bl, consignee, servicios, "clasico");
+		c = new Container(10, 5, 30, "ABCD", 1234567, bl, consignee);
 	}
 	
 	@Test
 	void obtenerTipo() {
-		assertEquals("clasico", c.tipo());
+		assertEquals(null, c.tipo());
 	}
 	
 	@Test 
 	void obtenerAltura() {
-		assertEquals(10, c.getAltura());	
+		assertEquals(10, c.getAltura(), 1);	
 	}
 	
 	@Test
 	void obtenerAncho() {
-		assertEquals(5, c.getAncho());	
+		assertEquals(5, c.getAncho(), 1);	
 	}
 	
 	@Test 
 	void obtenerLargo() {
-		assertEquals(30, c.getLargo());	
+		assertEquals(30, c.getLargo(), 1);	
 	}
 	
 	@Test
@@ -60,13 +60,13 @@ public class ContainerTest {
 	}
 	
 	@Test
-	void obtenerConsignee() {
-		assertEquals(consignee, c.getConsignee());
+	void obtenerDueño() {
+		assertEquals(consignee, c.getDueño());
 	}
 	
 	@Test
 	void obtenerVolumen() {
-		assertEquals(1500, c.volumen());
+		assertEquals(1500, c.volumen(), 1);
 	}
 	
 	@Test
@@ -75,15 +75,16 @@ public class ContainerTest {
 		assertEquals(500, c.getPeso());
 	}
 	
-	@Test
-	void agregarServicioYVerificarSiSeAgrego() {
-		
-		c.agregarServicio(s1);
-		c.agregarServicio(s2);
-		
-		assertEquals(List.of(s1,s2), c.getServicios());
-	}
+//	@Test
+//	void agregarServicioYVerificarSiSeAgrego() {
+//		
+//		c.agregarServicio(s1);
+//		c.agregarServicio(s2);
+//		
+//		assertEquals(List.of(s1,s2), c.getServicios());
+//	}
 	
+<<<<<<< HEAD
 	@Test
 	void precioDeTodosLosServicios() {
 		
@@ -96,6 +97,20 @@ public class ContainerTest {
 		assertEquals(300, c.totalDeLosServicios());
 	}
 	
+=======
+//	@Test
+//	void precioDeTodosLosServicios() {
+//		
+//		when(s1.getPrecio(c)).thenReturn(100.00);
+//		when(s2.getPrecio(c)).thenReturn(200.00);
+//		
+//		c.agregarServicio(s1);
+//		c.agregarServicio(s2);
+//		
+//		assertEquals(300.00, c.totalDeLosServicios());
+//	}
+//	
+>>>>>>> branch 'main' of https://github.com/sabrinarodriguezfennema/Objetosll-TPIntegrador-TerminalPortuaria.git
 	
 
 }

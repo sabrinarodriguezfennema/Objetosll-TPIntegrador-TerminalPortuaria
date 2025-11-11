@@ -16,8 +16,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
+import buqueViaje.Coordenadas;
 import clases.MotorDeBusqueda;
 import clientes.*;
+import excepciones.OperacionNoDisponibleException;
 import interfaces.*;
 import ordenes.OrdenDeExportacion;
 import ordenes.OrdenDeImportacion;
@@ -32,16 +34,16 @@ public class TerminalGestionadaTest {
 	private ICliente mockCliente;
 	private IOrdenDeExportacion mockOrdenExportacion;
 	private OrdenDeImportacion mockOrdenImportacion;
-	private BuqueViaje mockBuqueViaje;
+	private IBuqueViaje mockBuqueViaje;
 	private IShipper mockShipper;
 	private IConsignee mockConsignee;
 	private Terminal mockTerminalDestino;
 	private RutaMaritima mockRutaMaritima;
 	private Servicio mockServicio;
-	private Buque mockBuque;
-	private Viaje mockViaje;
+	private IBuque mockBuque;
+	private IViaje mockViaje;
 	private Circuito mockCircuito;
-	private EmailService mockEmailService;
+	private Coordenadas coordenadas;
 
 	@BeforeEach
 	void setUp() {
@@ -51,23 +53,24 @@ public class TerminalGestionadaTest {
 		mockCliente = mock(ICliente.class);
 		mockOrdenExportacion = mock(IOrdenDeExportacion.class);
 		mockOrdenImportacion = mock(OrdenDeImportacion.class);
-		mockBuqueViaje = mock(BuqueViaje.class);
+		mockBuqueViaje = mock(IBuqueViaje.class);
 		mockShipper = mock(IShipper.class);
 		mockConsignee = mock(IConsignee.class);
 		mockTerminalDestino = mock(Terminal.class);
 		mockRutaMaritima = mock(RutaMaritima.class);
 		mockServicio = mock(Servicio.class);
-		mockBuque = mock(Buque.class);
-		mockViaje = mock(Viaje.class);
+		mockBuque = mock(IBuque.class);
+		mockViaje = mock(IViaje.class);
 		mockCircuito = mock(Circuito.class);
+		coordenadas = new Coordenadas(1,1);
 
-		terminal = new TerminalGestionada("Terminal Gestionada", "Buenos Aires");
+		terminal = new TerminalGestionada("Terminal Gestionada", coordenadas);
 	}
 
 	@Test
 	void testConstructor() {
 		assertEquals("Terminal Gestionada", terminal.getNombre());
-		assertEquals("Buenos Aires", terminal.getUbicacion());
+		assertEquals(coordenadas, terminal.getCoordenadas());
 	}
 
 	@Test
@@ -76,8 +79,8 @@ public class TerminalGestionadaTest {
 	}
 	
 	@Test
-    void testGetUbicacion() {
-        assertEquals("Buenos Aires", terminal.getUbicacion());
+    void testGetCoordenadas() {
+        assertEquals(coordenadas, terminal.getCoordenadas());
     }
 	
 	@Test
@@ -217,22 +220,24 @@ public class TerminalGestionadaTest {
 		terminal.registrar(mockOrdenExportacion);
 		terminal.avisoDeSalida(mockBuqueViaje);
 
-		verify(mockShipper, times(1)).recibirMail("Su carga está próxima a salir");
+		verify(mockShipper, times(1)).recibirMail("Su carga ya ha salido de la terminal");
 	}
 
 	@Test
-	void testAvisoDeLlegadaAlConsignee() {
+	void testInminenteArriboAlConsignee() throws OperacionNoDisponibleException{
 
-		when(mockOrdenImportacion.getConsignee()).thenReturn(mockConsignee);
+		when(mockOrdenImportacion.getCliente()).thenReturn(mockConsignee);
+		when(mockBuqueViaje.getViaje()).thenReturn(mockViaje);
+		terminal.datosParaElRetiro(mockConsignee, mockEmpresaTransportista, mockContainer);
 
 		terminal.registrar(mockOrdenImportacion);
-		terminal.avisoDeLlegada(mockBuqueViaje);
+		terminal.inminenteArribo(mockBuqueViaje);
 
 		verify(mockConsignee, times(1)).recibirMail("Su carga está próxima a llegar");
 	}
 
 	@Test
-	void testExportar() {
+	void testExportar() throws OperacionNoDisponibleException{
 		String patente = "ABC123";
 		String dni = "12345678";
 		LocalDate salida = LocalDate.now();
@@ -256,7 +261,7 @@ public class TerminalGestionadaTest {
 	}
 
 	@Test
-	void testDatosParaElRetiro() {
+	void testDatosParaElRetiro() throws OperacionNoDisponibleException{
 		String patente = "XYZ789";
 		String dni = "87654321";
 		String containerId = "C2";
@@ -266,15 +271,19 @@ public class TerminalGestionadaTest {
 		Set<Container> contenedores = new HashSet<>();
 		contenedores.add(mockContainer);
 
-		Set<Buque> buques = new HashSet<>();
+		Set<IBuque> buques = new HashSet<>();
 		buques.add(mockBuque);
+		
+		Set<IViaje> viajes = new HashSet<IViaje>();
+		viajes.add(mockViaje);
 
 		when(mockContainer.getId()).thenReturn(containerId);
 		when(mockEmpresaTransportista.asignarCamionPara(mockContainer)).thenReturn(patente);
 		when(mockEmpresaTransportista.asignarChoferPara(mockContainer)).thenReturn(dni);
 		when(mockNaviera.getBuques()).thenReturn(buques);
+		when(mockNaviera.getViajes()).thenReturn(viajes);
 		when(mockBuque.getContainers()).thenReturn(contenedores);
-		when(mockBuque.getViaje()).thenReturn(mockViaje);
+		when(mockViaje.getBuque()).thenReturn(mockBuque); 
 		when(mockViaje.fechaSalida()).thenReturn(fechaSalida);
 		when(mockViaje.getCircuito()).thenReturn(mockCircuito);
 		when(mockCircuito.duracionTotal()).thenReturn(duracion);
@@ -290,8 +299,8 @@ public class TerminalGestionadaTest {
 	@Test
 	void testDatosParaElRetiroContenedorNoEncontrado() {
 		String containerId = "C3";
-		Set<Container> contenedoresVacio = new HashSet<>();
-		Set<Buque> buques = new HashSet<>();
+		Set<Container> contenedoresVacio = new HashSet<Container>();
+		Set<IBuque> buques = new HashSet<IBuque>();
 		buques.add(mockBuque);
 
 		when(mockContainer.getId()).thenReturn(containerId);
@@ -330,17 +339,17 @@ public class TerminalGestionadaTest {
         Naviera mockNaviera2 = mock(Naviera.class);
         Naviera mockNaviera3 = mock(Naviera.class);
         
-        Viaje mockViaje1 = mock(Viaje.class);
-        Viaje mockViaje2 = mock(Viaje.class);
-        Viaje mockViaje3 = mock(Viaje.class);
+        IViaje mockViaje1 = mock(IViaje.class);
+        IViaje mockViaje2 = mock(IViaje.class);
+        IViaje mockViaje3 = mock(IViaje.class);
         
-        Set<Viaje> viajes1 = new HashSet<>();
+        Set<IViaje> viajes1 = new HashSet<>();
         viajes1.add(mockViaje1);
         
-        Set<Viaje> viajes2 = new HashSet<>();
+        Set<IViaje> viajes2 = new HashSet<>();
         viajes2.add(mockViaje2);
         
-        Set<Viaje> viajes3 = new HashSet<>();
+        Set<IViaje> viajes3 = new HashSet<>();
         viajes3.add(mockViaje3);
         
         when(mockNaviera.getViajes()).thenReturn(viajes1);
@@ -360,23 +369,46 @@ public class TerminalGestionadaTest {
     }
 	
 	@Test
-	void testRetiroDeContainer() {
+	void testRetiroDeContainer() throws OperacionNoDisponibleException{
+		
+		LocalDate fecha = LocalDate.now();
+		LocalDateTime fechaRetiro = LocalDateTime.now();
 		String patente = "ABC123";
         String dni = "12345678";
-        when(mockContainer.getId()).thenReturn("asd");
-        String idContainer = mockContainer.getId();
-        List<Buque> listaConBuque = new ArrayList<Buque>();
-        listaConBuque.add(mockBuque);
-		when(mockNaviera.getBuques()).thenReturn(listaConBuque);
-		List<Container> listaConContainer = new ArrayList<Container>();
+        String idContainer = "C1";
+       	double excedente = 100.00;
+       	Duration duracionViaje = Duration.ofDays(5);
+       	
+       	when(mockContainer.getId()).thenReturn(idContainer);
+       	
+       	Set<Container> listaConContainer = new HashSet<Container>();
 		listaConContainer.add(mockContainer);
 		when(mockBuque.getContainers()).thenReturn(listaConContainer);
-        
+		when(mockCircuito.duracionTotal()).thenReturn(duracionViaje);
+		
+		when(mockViaje.getBuque()).thenReturn(mockBuque);
+	    when(mockViaje.fechaSalida()).thenReturn(fecha);
+	    when(mockViaje.getCircuito()).thenReturn(mockCircuito);
+		
+	    when(mockEmpresaTransportista.asignarCamionPara(mockContainer)).thenReturn(patente);
+		when(mockEmpresaTransportista.asignarChoferPara(mockContainer)).thenReturn(dni);
+	    
+	    Set<IBuque> listaBuques = new HashSet<IBuque>();
+	    listaBuques.add(mockBuque);
+	    Set<IViaje> listaViajes = new HashSet<IViaje>();
+	    listaViajes.add(mockViaje);
+	    
+	    when(mockNaviera.getBuques()).thenReturn(listaBuques);
+	    when(mockNaviera.getViajes()).thenReturn(listaViajes);
+	    
+		terminal.registrarNaviera(mockNaviera);
         terminal.registrarCamion(patente);
         terminal.registrarChofer(dni);
+        
         terminal.datosParaElRetiro(mockConsignee, mockEmpresaTransportista, mockContainer);
         
-		terminal.retiroDeContainer(patente, dni, idContainer);
+		terminal.retiroDeContainer(patente, dni, idContainer, fechaRetiro, excedente);
+		
 		assertEquals(terminal.cantidadDeFacturas(), 1);
 	}
 

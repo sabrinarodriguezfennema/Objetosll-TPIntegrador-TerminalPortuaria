@@ -32,17 +32,17 @@ public class ServicioLavadoTest {
 	@Test
 	void precioSuperando70() {
 		
-		when(c.volumen()).thenReturn(90); 
+		when(c.volumen()).thenReturn(90d); 
 		
-		assertEquals(200, s.getPrecio(c));
+		assertEquals(200, s.getPrecio(c), 1);
 	}
 	
 	@Test
 	void precioDebajo70() {
 		
-		when(c.volumen()).thenReturn(50); 
+		when(c.volumen()).thenReturn(50d); 
 		
-		assertEquals(100, s.getPrecio(c));
+		assertEquals(100, s.getPrecio(c), 1);
 	}
 	
 

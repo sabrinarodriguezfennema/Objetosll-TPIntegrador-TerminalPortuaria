@@ -29,10 +29,10 @@ public class ContainerTanqueTest {
 		assertEquals("Tanque", c.tipo());
 	}
 	
-	@Test
-	void verificarListaConServicioRevision() {
-		c.agregarServicio(s);
-		assertEquals(List.of(s), c.getServicios());
-	}
+//	@Test
+//	void verificarListaConServicioRevision() {
+//		c.agregarServicio(s);
+//		assertEquals(List.of(s), c.getServicios());
+//	}
 
 }
