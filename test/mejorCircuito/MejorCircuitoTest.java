@@ -11,20 +11,20 @@ import java.util.List;
 
 
 import interfaces.Circuito;
-import interfaces.RutaMaritima;
+import interfaces.IRutaMaritima;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class MejorCircuitoTest {
 
-	private RutaMaritima ruta1;
-	private RutaMaritima ruta2;
-	private RutaMaritima ruta3;
+	private IRutaMaritima ruta1;
+	private IRutaMaritima ruta2;
+	private IRutaMaritima ruta3;
 	private Circuito circuito1;
 	private Circuito circuito2;
 	private Circuito circuito3;
-	private List<RutaMaritima> rutas;
+	private List<IRutaMaritima> rutas;
 
 	@BeforeEach
 	void setUp() {
@@ -33,9 +33,9 @@ class MejorCircuitoTest {
 		LocalDate fecha2 = LocalDate.of(2025, 11, 15);
 		LocalDate fecha3 = LocalDate.of(2025, 11, 10);
 		
-		ruta1 = mock(RutaMaritima.class);
-		ruta2 = mock(RutaMaritima.class);
-		ruta3 = mock(RutaMaritima.class);
+		ruta1 = mock(IRutaMaritima.class);
+		ruta2 = mock(IRutaMaritima.class);
+		ruta3 = mock(IRutaMaritima.class);
 		
 		circuito1 = mock(Circuito.class);
 		circuito2 = mock(Circuito.class);
@@ -69,14 +69,14 @@ class MejorCircuitoTest {
 	@Test
     void testMenorPrecio() {
         MejorCircuito criterio = new MenorPrecio();
-        RutaMaritima resultado = criterio.mejorEntre(rutas);
+        IRutaMaritima resultado = criterio.mejorEntre(rutas);
         assertEquals(ruta2, resultado);
     }
 	
 	@Test
     void testMenorTiempo() {
 		MejorCircuito criterio = new MenorTiempo();
-	    RutaMaritima resultado = criterio.mejorEntre(rutas);
+	    IRutaMaritima resultado = criterio.mejorEntre(rutas);
 	    assertEquals(ruta2, resultado); 
 	}
     
@@ -84,14 +84,14 @@ class MejorCircuitoTest {
 	@Test
     void testMenorCantidadDeTerminales() {
         MejorCircuito criterio = new MenorCantidadDeTerminales();
-        RutaMaritima resultado = criterio.mejorEntre(rutas);
+        IRutaMaritima resultado = criterio.mejorEntre(rutas);
         assertEquals(ruta2, resultado);
     }
 	
 	@Test
 	void testFechaMasProxima() {
         MejorCircuito criterio = new FechaMasProxima();
-        RutaMaritima resultado = criterio.mejorEntre(rutas);
+        IRutaMaritima resultado = criterio.mejorEntre(rutas);
         assertEquals(ruta3, resultado);
     }
 

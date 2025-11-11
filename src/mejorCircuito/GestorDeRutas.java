@@ -2,7 +2,7 @@ package mejorCircuito;
 
 import java.util.List;
 
-import interfaces.RutaMaritima;
+import interfaces.IRutaMaritima;
 
 public class GestorDeRutas {
 	
@@ -16,7 +16,7 @@ public class GestorDeRutas {
         this.criterio = nuevoCriterio;
     }
 
-    public RutaMaritima planificar(List<RutaMaritima> rutas) {
+    public IRutaMaritima planificar(List<IRutaMaritima> rutas) {
         return criterio.mejorEntre(rutas);
     }
 }

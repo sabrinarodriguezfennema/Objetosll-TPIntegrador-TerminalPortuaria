@@ -9,22 +9,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import interfaces.RutaMaritima;
+import interfaces.IRutaMaritima;
 
 class GestorDeRutasTest {
 
 	private MejorCircuito criterioMock;
 	private GestorDeRutas gestor;
-	private RutaMaritima ruta1;
-	private RutaMaritima ruta2;
+	private IRutaMaritima ruta1;
+	private IRutaMaritima ruta2;
 
 	@BeforeEach
 	void setUp() {
 
-		ruta1 = mock(RutaMaritima.class);
-		ruta2 = mock(RutaMaritima.class);
+		ruta1 = mock(IRutaMaritima.class);
+		ruta2 = mock(IRutaMaritima.class);
 
-		List<RutaMaritima> rutas = Arrays.asList(ruta1, ruta2);
+		List<IRutaMaritima> rutas = Arrays.asList(ruta1, ruta2);
 
 		criterioMock = mock(MejorCircuito.class);
 
@@ -35,9 +35,9 @@ class GestorDeRutasTest {
 
 	@Test
 	void testPlanificarUsaCriterio() {
-		List<RutaMaritima> rutas = Arrays.asList(ruta1, ruta2);
+		List<IRutaMaritima> rutas = Arrays.asList(ruta1, ruta2);
 
-		RutaMaritima mejor = gestor.planificar(rutas);
+		IRutaMaritima mejor = gestor.planificar(rutas);
 
 		verify(criterioMock, times(1)).mejorEntre(rutas);
 
@@ -46,14 +46,14 @@ class GestorDeRutasTest {
 
 	@Test
 	void testCambioDeCriterio() {
-		List<RutaMaritima> rutas = Arrays.asList(ruta1, ruta2);
+		List<IRutaMaritima> rutas = Arrays.asList(ruta1, ruta2);
 
 		MejorCircuito otroCriterio = mock(MejorCircuito.class);
 		when(otroCriterio.mejorEntre(rutas)).thenReturn(ruta1);
 
 		gestor.setCriterio(otroCriterio);
 
-		RutaMaritima mejor = gestor.planificar(rutas);
+		IRutaMaritima mejor = gestor.planificar(rutas);
 
 		verify(otroCriterio, times(1)).mejorEntre(rutas);
 		assertEquals(ruta1, mejor);

@@ -1,12 +1,12 @@
 package mejorCircuito;
 
-import interfaces.RutaMaritima;
+import interfaces.IRutaMaritima;
 
 
 public class FechaMasProxima extends MejorCircuito {
 
 	@Override
-	protected boolean condicionDeMejor(RutaMaritima current, RutaMaritima mejor) {
+	protected boolean condicionDeMejor(IRutaMaritima current, IRutaMaritima mejor) {
         return current.fechaSalida().isBefore(mejor.fechaSalida());
 	}
 

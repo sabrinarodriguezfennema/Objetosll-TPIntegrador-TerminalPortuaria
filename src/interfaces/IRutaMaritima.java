@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import terminal.Terminal;
 
-public interface RutaMaritima {
+public interface IRutaMaritima {
 
 	public LocalDate fechaSalida();
 
@@ -15,6 +15,8 @@ public interface RutaMaritima {
 	public Circuito getCircuito();
 
 	public String getNombre();
+
+	public IViaje getViaje();
 
 
 }

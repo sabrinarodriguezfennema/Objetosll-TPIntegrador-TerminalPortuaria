@@ -21,13 +21,12 @@ import interfaces.IBuque;
 import interfaces.IBuqueViaje;
 import interfaces.Container;
 import interfaces.Naviera;
-import interfaces.RutaMaritima;
+import interfaces.IRutaMaritima;
 import interfaces.Servicio;
 import interfaces.IConsignee;
 import interfaces.IOrden;
 import ordenes.OrdenDeExportacion;
 import ordenes.OrdenDeImportacion;
-import viaje.Viaje;
 import interfaces.EmpresaTransportista;
 import interfaces.IOrdenDeExportacion;
 import interfaces.IOrdenDeImportacion;
@@ -147,25 +146,27 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	public void avisoDeSalida(IBuqueViaje bv) {
 		//avisarle a los shippers que hayan exportado su container en ese bv
 		IViaje viajeDelBuqueViaje = bv.getViaje();
-		IShipper shipper;
+		ICliente shipper;
 		for (IOrdenDeExportacion orden : ordenesExportacion) {
 			if(containersPorViaje.get(orden.getDatosDeCarga()) == viajeDelBuqueViaje) {
-				shipper = orden.getShipper();
+				shipper = orden.getCliente();
 				shipper.recibirMail("Su carga ya ha salido de la terminal");
 			}
 		}
-		sePuedenRealizarPagos = false;//Pasa a outbound, donde no se pueden realizar pagos hasta departing
+		this.setSePuedenRealizarPagos(false);//Pasa a outbound, donde no se pueden realizar pagos hasta departing
 	}
 	
 	
+	
+
 	@Override
 	public void inminenteArribo(IBuqueViaje bv) {
-		sePuedenInformarImportacionesYExportaciones = false; //Pasa a Arrived, donde no se pueden informar Importaciones ni Exportaciones
+		this.setSePuedenInformarImportacionesYExportaciones(false); //Pasa a Arrived, donde no se pueden informar Importaciones ni Exportaciones
 		
 		IViaje viajeDelBuqueViaje = bv.getViaje();
 		ICliente consignee;
 		for (IOrdenDeImportacion orden : ordenesImportacion) {
-			if(containersPorViaje.get(orden.getDatosDeCarga()) == viajeDelBuqueViaje) {
+			if(viajeDelBuqueViaje.equals(containersPorViaje.get(orden.getDatosDeCarga()))) {
 				consignee = orden.getCliente();
 				consignee.recibirMail("Su carga esta llegando a la terminal");
 			}
@@ -174,7 +175,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	
 	@Override
 	public void avisoDeLlegada(IBuqueViaje bv) {
-		sePuedenInformarImportacionesYExportaciones = true; //deja de estar en Arrived, donde ya se pueden informar Importaciones y Exportaciones
+		this.setSePuedenInformarImportacionesYExportaciones(true); //deja de estar en Arrived, donde ya se pueden informar Importaciones y Exportaciones
 		
 		bv.inicioDeTrabajo();
 		IViaje viajeDelBuqueViaje = bv.getViaje();
@@ -198,12 +199,12 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 			}
 		}
 		bv.depart();
-		sePuedenRealizarPagos = true; //Pasa a Departing, donde si se pueden realizar pagos
+		setSePuedenRealizarPagos(true); //Pasa a Departing, donde si se pueden realizar pagos
 	}
 	
 	//registrarPago(factura) error
 	public void registrarPago(IFactura factura) throws OperacionNoDisponibleException{
-		if(!this.sePuedenRealizarPagos) {
+		if(!sePuedenRealizarPagos) {
 			throw new OperacionNoDisponibleException("No se pueden realizar pagos en este momento");
 		}
 	}
@@ -219,7 +220,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	}
 
 	@Override
-	public void exportar(Container c, Terminal t, RutaMaritima rm, List<Servicio> servicios, IShipper exportador,
+	public void exportar(Container c, Terminal t, IRutaMaritima rm, List<Servicio> servicios, IShipper exportador,
 			EmpresaTransportista empresa) throws OperacionNoDisponibleException{ 
 		if(!sePuedenInformarImportacionesYExportaciones) {
 			throw new OperacionNoDisponibleException("No se pueden informar importaciones o exportaciones en este momento");
@@ -238,6 +239,9 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		registrarEmpresaTransportista(empresa);
 		registrarCliente(exportador);
 		ordenPorContainer.put(c.getId(), orden);
+		
+		IViaje viaje = rm.getViaje();
+		containersPorViaje.put(c, viaje);
 	}
 
 	@Override
@@ -300,6 +304,14 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 			facturas.add(factura);
 			orden.getCliente().recibirFactura(factura);
 		}
+	}
+
+	protected void setSePuedenInformarImportacionesYExportaciones(boolean b) {
+		sePuedenInformarImportacionesYExportaciones = b;
+	}
+	
+	protected void setSePuedenRealizarPagos(boolean b) {
+		sePuedenRealizarPagos = b;
 	}
 
 }

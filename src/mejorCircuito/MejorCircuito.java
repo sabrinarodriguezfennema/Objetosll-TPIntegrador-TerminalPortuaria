@@ -2,15 +2,15 @@ package mejorCircuito;
 
 import java.util.List;
 
-import interfaces.RutaMaritima;
+import interfaces.IRutaMaritima;
 
 public abstract class MejorCircuito {
 
-    public RutaMaritima mejorEntre(List<RutaMaritima> rutas) {
+    public IRutaMaritima mejorEntre(List<IRutaMaritima> rutas) {
         
-    	RutaMaritima mejor = rutas.get(0);
+    	IRutaMaritima mejor = rutas.get(0);
         
-        for (RutaMaritima current : rutas) {
+        for (IRutaMaritima current : rutas) {
             if (condicionDeMejor(current, mejor)) {
                 mejor = current;
             }
@@ -18,5 +18,5 @@ public abstract class MejorCircuito {
         return mejor;
     }
 
-    protected abstract boolean condicionDeMejor(RutaMaritima current, RutaMaritima mejor);
+    protected abstract boolean condicionDeMejor(IRutaMaritima current, IRutaMaritima mejor);
 }
