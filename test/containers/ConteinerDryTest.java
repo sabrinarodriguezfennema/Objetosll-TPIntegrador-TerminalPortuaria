@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.*;
 
+import bl.BillOfLading;
+import clientes.Consignee;
 import servicios.Servicio;
 import servicios.ServicioDesconsolidado;
 

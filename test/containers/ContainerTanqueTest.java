@@ -1,26 +1,27 @@
 package containers;
 
 import static org.junit.Assert.*;
+
 import static org.mockito.Mockito.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.*;
 
-import servicios.Servicio;
+import bl.BillOfLading;
+import clientes.Consignee;
 import servicios.ServicioRevisionDiaria;
 
 public class ContainerTanqueTest {
 	
 	ContainerTanque c;
-	List<Servicio> servicios = new ArrayList<>();
 	ServicioRevisionDiaria s;
+	BillOfLading bl;
+	Consignee consignee;
 	
 	
 	@BeforeEach
 	void setUp() {
-		c = new ContainerTanque(0, 0, 0, null, 0, null, null, servicios);
+		bl = mock(BillOfLading.class);
+		
+		c = new ContainerTanque(10, 5, 30, "ABCD", 1234567, bl, consignee);
 		s = mock(ServicioRevisionDiaria.class);
 	}
 	
@@ -29,10 +30,44 @@ public class ContainerTanqueTest {
 		assertEquals("Tanque", c.tipo());
 	}
 	
-//	@Test
-//	void verificarListaConServicioRevision() {
-//		c.agregarServicio(s);
-//		assertEquals(List.of(s), c.getServicios());
-//	}
-
+	@Test 
+	void obtenerAltura() {
+		assertEquals(10, c.getAltura(), 1);	
+	}
+	
+	@Test
+	void obtenerAncho() {
+		assertEquals(5, c.getAncho(), 1);	
+	}
+	
+	@Test 
+	void obtenerLargo() {
+		assertEquals(30, c.getLargo(), 1);	
+	}
+	
+	@Test
+	void obtenerIdentificador() {
+		assertEquals("ABCD1234567", c.getId());
+	}
+	
+	@Test
+	void obtenerBL() {
+		assertEquals(bl, c.getBL());
+	}
+	
+	@Test
+	void obtenerDueño() {
+		assertEquals(consignee, c.getDueño());
+	}
+	
+	@Test
+	void obtenerVolumen() {
+		assertEquals(1500, c.volumen(), 1);
+	}
+	
+	@Test
+	void obtenerPeso() {
+		when(bl.peso()).thenReturn(500.00);
+		assertEquals(500, c.getPeso(),1 );
+	}
 }

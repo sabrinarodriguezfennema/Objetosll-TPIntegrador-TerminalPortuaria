@@ -2,6 +2,8 @@ package tramo;
 
 import java.time.Duration;
 
+import terminal.Terminal;
+
 public class Tramo {
 	
 	private Duration duracion;

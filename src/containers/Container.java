@@ -1,11 +1,9 @@
 package containers;
 
-import java.util.ArrayList;
-import java.util.List;
+import bl.BillOfLading;
+import clientes.Consignee;
 
-import servicios.Servicio;
-
-public class Container { 
+public abstract class Container { 
    
 	private double altura;
 	private double ancho;
@@ -59,18 +57,8 @@ public class Container {
 		return largo;
 	}
 	
-	public int getPeso() {
-		return bl.pesoTotal();
+	public double getPeso() {
+		return bl.peso();
 	}
-	
-//	public int totalDeLosServicios() {
-//		int total = 0; 
-//		
-//		for (Servicio s : servicios) {
-//			total += s.getPrecio(this);  
-//		}
-//		
-//		return total;
-//	}	
-	
+		
 }

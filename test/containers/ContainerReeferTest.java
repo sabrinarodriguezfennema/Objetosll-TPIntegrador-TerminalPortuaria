@@ -5,6 +5,9 @@ import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.*;
 
+import bl.BillOfLading;
+import clientes.Consignee;
+
 public class ContainerReeferTest {
 	
 	ContainerReefer c; 

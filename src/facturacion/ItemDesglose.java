@@ -4,9 +4,9 @@ import java.time.LocalDate;
 
 public class ItemDesglose {
 	
-	String detalle;
-	int monto;
-	LocalDate fecha;
+	private String detalle;
+	private int monto;
+	private LocalDate fecha;
 	
 	public ItemDesglose(String detalle, int monto, LocalDate fecha) {
 		this.detalle = detalle;

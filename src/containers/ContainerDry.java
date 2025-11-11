@@ -1,9 +1,8 @@
 package containers;
 
-import java.util.List;
 
-import servicios.Servicio;
-import servicios.ServicioDesconsolidado;
+import bl.BillOfLading;
+import clientes.Consignee;
 
 public class ContainerDry extends Container {
 
@@ -13,9 +12,9 @@ public class ContainerDry extends Container {
 		this.tipo = "Dry";
 	}
 	
-	public boolean requiereServicioEspecial() {
-		return bl.tieneMasDeUnImportador();
-	}
+	//public boolean requiereServicioEspecial() {
+	//	return bl.tieneMasDeUnImportador();
+	//}
 	
 //	public void agregarServicioEspecial(ServicioDesconsolidado s) {
 //		if (!this.requiereServicioEspecial()) {

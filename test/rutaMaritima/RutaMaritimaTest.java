@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.*;
 
 import circuito.Circuito;
+import terminal.Terminal;
 import tramo.*;
 import viaje.Viaje;
 

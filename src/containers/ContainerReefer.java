@@ -1,5 +1,8 @@
 package containers;
 
+import bl.BillOfLading;
+import clientes.Consignee;
+
 public class ContainerReefer extends Container {
 	
 	private int kwPorHora;

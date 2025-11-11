@@ -1,18 +1,17 @@
 package circuito;
 
 import java.time.Duration;
-import tramo.Terminal;
+
+import terminal.Terminal;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import tramo.Tramo;
 
 public class Circuito {
 	
-	List<Tramo> tramos = new ArrayList<>();
-	List <Terminal> terminales = new ArrayList<>();
+	private List<Tramo> tramos = new ArrayList<>();
+	private List <Terminal> terminales = new ArrayList<>();
 	
 	public Circuito() {}
 			

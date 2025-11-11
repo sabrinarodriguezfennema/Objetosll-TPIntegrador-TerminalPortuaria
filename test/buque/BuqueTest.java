@@ -24,14 +24,13 @@ public class BuqueTest {
 		buque = new Buque("nico");
 		c1 = mock(Container.class);
 		c2 = mock(Container.class);
-		
 	}
 	
 	@Test
 	void agregandoContainersYpreguntarPorEl() {
+		
 		buque.addContainer(c1);
 		buque.addContainer(c2);
-		
 		assertEquals(List.of(c1, c2), buque.getContainers());
 	}
 	
@@ -40,6 +39,18 @@ public class BuqueTest {
 	      
 		//when(buque.getNombre()).thenReturn("nico");
 		assertEquals("nico", buque.getNombre());
+	}
+	
+	@Test
+	void eliminarCarga() {
+		
+		buque.addContainer(c1);
+		buque.addContainer(c2);
+		
+		buque.eliminarContainers();
+		
+		assertEquals(List.of(),buque.getContainers());
+		
 	}
 	
 

@@ -9,6 +9,7 @@ import java.util.Map;
 
 import buque.Buque;
 import circuito.Circuito;
+import terminal.Terminal;
 import tramo.*;
 
 public class Viaje {

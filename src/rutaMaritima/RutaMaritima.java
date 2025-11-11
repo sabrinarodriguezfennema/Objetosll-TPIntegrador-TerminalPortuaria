@@ -1,11 +1,12 @@
 package rutaMaritima;
 
 import java.time.Duration;
+
 import java.time.LocalDate;
 import java.util.List;
 
 import circuito.Circuito;
-import tramo.Terminal;
+import terminal.Terminal;
 import viaje.Viaje;
 
 public class RutaMaritima {

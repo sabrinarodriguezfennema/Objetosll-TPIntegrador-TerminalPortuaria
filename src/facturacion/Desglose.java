@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Desglose {
 	
-	List<ItemDesglose> items;
+	private List<ItemDesglose> items;
 	
 	public Desglose() {
 		this.items = new ArrayList<>();

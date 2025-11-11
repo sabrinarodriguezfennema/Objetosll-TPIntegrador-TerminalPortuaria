@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.*;
 
+import terminal.Terminal;
 import tramo.*;
 
 public class CircuitoTest {
