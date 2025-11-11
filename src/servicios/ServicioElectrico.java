@@ -12,7 +12,7 @@ public class ServicioElectrico implements Servicio {
 	private LocalDateTime diaIngreso;
 	private LocalDateTime diaEgreso;
 	
-	public ServicioElectrico(int precioPorKw, LocalDateTime diaIngreso, LocalDateTime diaEgreso) {
+	public ServicioElectrico(double precioPorKw, LocalDateTime diaIngreso, LocalDateTime diaEgreso) {
 		this.precioPorKw = precioPorKw;
 		this.diaEgreso = diaEgreso;
 		this.diaIngreso = diaIngreso;

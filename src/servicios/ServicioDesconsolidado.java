@@ -6,7 +6,7 @@ public class ServicioDesconsolidado implements Servicio {
 	
 	private double precioFijo;
 	
-	public ServicioDesconsolidado(int precioFijo) {
+	public ServicioDesconsolidado(double precioFijo) {
 		this.precioFijo = precioFijo;
 		
 	}

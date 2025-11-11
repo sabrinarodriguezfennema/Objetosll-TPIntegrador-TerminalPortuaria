@@ -6,7 +6,7 @@ public class ServicioPesado implements Servicio {
 	
 	private double costoFijo;
 	
-	public ServicioPesado(int costoFijo) {
+	public ServicioPesado(double costoFijo) {
 		this.costoFijo = costoFijo;
 	}
 
