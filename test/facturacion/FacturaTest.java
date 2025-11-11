@@ -2,49 +2,29 @@ package facturacion;
 
 import static org.junit.Assert.*;
 
+
 import static org.mockito.Mockito.*;
 
-<<<<<<< HEAD
-=======
 import java.util.HashSet;
-import java.util.List;
->>>>>>> branch 'main' of https://github.com/sabrinarodriguezfennema/Objetosll-TPIntegrador-TerminalPortuaria.git
 import java.util.Set;
 
 import org.junit.jupiter.api.*;
 
+import containers.Container;
 import servicios.Servicio;
 
 public class FacturaTest {
 	
-	Factura factura; 
-	Desglose desglose;
-<<<<<<< HEAD
-	Set<Servicio> servicios;
-=======
+    private Factura factura; 
+    private Desglose desglose;
+    private Container c;
+
 	private Set<Servicio> servicios;
->>>>>>> branch 'main' of https://github.com/sabrinarodriguezfennema/Objetosll-TPIntegrador-TerminalPortuaria.git
+	@BeforeEach	void setUp() {		servicios = new HashSet<Servicio>();		Servicio s = mock(Servicio.class);
+		c = mock(Container.class);
+				servicios.add(s);		when(s.getPrecio(c)).thenReturn(500.00);		desglose = mock(Desglose.class);				factura = new Factura(servicios);			}
+     //Para cuando Factura ya ande
 	
-<<<<<<< HEAD
-	@BeforeEach
-	void setUp() {
-		
-		desglose = mock(Desglose.class);		
-		factura = new Factura(servicios);		
-	}
-	
-=======
-//	@BeforeEach
-//	void setUp() {
-//		servicios = new HashSet<Servicio>();
-//		Servicio s = mock(Servicio.class);
-//		servicios.add(s);
-//		when(s.getPrecio()).thenReturn(500);
-//		desglose = mock(Desglose.class);		
-//		factura = new Factura(servicios);		
-//	}
-//Para cuando Factura ya ande
->>>>>>> branch 'main' of https://github.com/sabrinarodriguezfennema/Objetosll-TPIntegrador-TerminalPortuaria.git
 	@Test 
 	void obtenerMontoTotal() {
 			

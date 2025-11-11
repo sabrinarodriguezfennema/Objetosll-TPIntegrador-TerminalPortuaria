@@ -11,7 +11,7 @@ public class ConteinerReeferTest {
 	
 	@BeforeEach
 	void setUp() {
-		c = new ContainerReefer(0,0,0,null,0,null,null,null,50); 
+		c = new ContainerReefer(0,0,0,null,0,null,null,50); 
 	}
 	
 	@Test

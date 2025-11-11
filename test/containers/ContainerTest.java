@@ -1,6 +1,7 @@
 package containers;
 
 import static org.junit.Assert.*;
+
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
@@ -84,33 +85,16 @@ public class ContainerTest {
 //		assertEquals(List.of(s1,s2), c.getServicios());
 //	}
 	
-<<<<<<< HEAD
-	@Test
-	void precioDeTodosLosServicios() {
-		
-		when(s1.getPrecio(c)).thenReturn((double) 100);
-;		when(s2.getPrecio(c)).thenReturn((double) 200);
-		
-		c.agregarServicio(s1);
-		c.agregarServicio(s2);
-		
-		assertEquals(300, c.totalDeLosServicios());
-	}
-	
-=======
+
 //	@Test
 //	void precioDeTodosLosServicios() {
-//		
+		
 //		when(s1.getPrecio(c)).thenReturn(100.00);
 //		when(s2.getPrecio(c)).thenReturn(200.00);
-//		
+		
 //		c.agregarServicio(s1);
 //		c.agregarServicio(s2);
 //		
-//		assertEquals(300.00, c.totalDeLosServicios());
+//		assertEquals(300, c.totalDeLosServicios());
 //	}
-//	
->>>>>>> branch 'main' of https://github.com/sabrinarodriguezfennema/Objetosll-TPIntegrador-TerminalPortuaria.git
-	
-
 }

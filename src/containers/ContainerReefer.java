@@ -1,9 +1,5 @@
 package containers;
 
-import java.util.List;
-
-import servicios.Servicio;
-
 public class ContainerReefer extends Container {
 	
 	private int kwPorHora;
