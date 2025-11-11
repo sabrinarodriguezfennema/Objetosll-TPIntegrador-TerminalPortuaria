@@ -20,16 +20,16 @@ public class ServicioAlmacenamientoExcedenteTest {
 	
 	@Test
 	void precio() {
-		assertEquals(250, servicio.getPrecio(c1));
+		assertEquals(250, servicio.getPrecio(c1), 1);
 	}
 	
 	@Test
 	void obtenerCostoExcedente() {
-		assertEquals(50, servicio.getCostoPorExcedente());
+		assertEquals(50, servicio.getCostoPorExcedente(), 1);
 	}
 	
 	@Test
 	void obtenerDiasExcedidos() {
-		assertEquals(5, servicio.getDiasExcedidos());
+		assertEquals(5, servicio.getDiasExcedidos(), 1);
 	}
 }

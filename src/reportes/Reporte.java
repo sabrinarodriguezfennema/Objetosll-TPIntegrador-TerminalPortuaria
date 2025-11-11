@@ -3,26 +3,26 @@ package reportes;
 import java.util.List;
 import java.util.Set;
 
-import interfaces.Buque;
+import interfaces.IBuque;
 import interfaces.Container;
 import interfaces.IOrdenDeExportacion;
 import interfaces.IOrdenDeImportacion;
-import interfaces.Viaje;
+import interfaces.IViaje;
 
 public class Reporte {
 
-	private Viaje viaje;
+	private IViaje viaje;
 	private List<IOrdenDeExportacion> exportaciones;
 	List<IOrdenDeImportacion> importaciones;
 
-	public Reporte(Viaje viaje,List<IOrdenDeImportacion> importaciones, List<IOrdenDeExportacion> exportaciones ) {
+	public Reporte(IViaje viaje,List<IOrdenDeImportacion> importaciones, List<IOrdenDeExportacion> exportaciones ) {
 		this.viaje = viaje;
 		this.exportaciones = exportaciones;
 		this.importaciones = importaciones;
 	}
 
 	public String generarReporteMuelle() {
-		Buque buque1 = viaje.getBuque();
+		IBuque buque1 = viaje.getBuque();
 		int cantidad = buque1.getContainers().size();
 
 		return "Buque: " + buque1.getNombre() + "\nFecha de arribo: " + viaje.fechaSalida() + "\nFecha de partida: "
@@ -30,7 +30,7 @@ public class Reporte {
 	}
 
 	public String generarReporteAduana() {
-		Buque buque1 = viaje.getBuque();
+		IBuque buque1 = viaje.getBuque();
 		Set<Container> containers = buque1.getContainers();
 		StringBuilder reporte = new StringBuilder();
 
@@ -53,7 +53,7 @@ public class Reporte {
 
 	public String generarReporteBuque() {
 
-		Buque buque1 = viaje.getBuque();
+		IBuque buque1 = viaje.getBuque();
 		StringBuilder reporte = new StringBuilder();
 
 		reporte.append("<report>\n");

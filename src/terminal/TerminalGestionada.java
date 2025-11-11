@@ -12,11 +12,12 @@ import java.util.Set;
 
 import buqueViaje.Coordenadas;
 import clases.MotorDeBusqueda;
+import excepciones.OperacionNoDisponibleException;
 import interfaces.IFactura;
-import interfaces.Viaje;
+import interfaces.IViaje;
 import interfaces.ICliente;
 import interfaces.IShipper;
-import interfaces.Buque;
+import interfaces.IBuque;
 import interfaces.IBuqueViaje;
 import interfaces.Container;
 import interfaces.Naviera;
@@ -26,6 +27,7 @@ import interfaces.IConsignee;
 import interfaces.IOrden;
 import ordenes.OrdenDeExportacion;
 import ordenes.OrdenDeImportacion;
+import viaje.Viaje;
 import interfaces.EmpresaTransportista;
 import interfaces.IOrdenDeExportacion;
 import interfaces.IOrdenDeImportacion;
@@ -43,13 +45,17 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	private Map<String, IOrdenDeExportacion> ordenesActivasPorPatente;
 	private Map<String, IOrden> ordenPorContainer;
 	private Set<IFactura> facturas;
-	private Map<Container, Viaje> containersPorViaje;
+	private Map<Container, IViaje> containersPorViaje;
+	private boolean sePuedenRealizarPagos;
+	private boolean sePuedenInformarImportacionesYExportaciones;
 
 
 	public TerminalGestionada(String nombre, Coordenadas ubicacion) {
 
 		this.nombre = nombre;
 		this.ubicacion = ubicacion;
+		sePuedenRealizarPagos = true;
+		sePuedenInformarImportacionesYExportaciones = true;
 		this.navierasRegistradas = new HashSet<Naviera>();
 		this.containers = new HashSet<Container>();
 		this.ordenesImportacion = new HashSet<IOrdenDeImportacion>();
@@ -60,7 +66,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		this.clientesRegistrados = new HashSet<ICliente>();
 		this.ordenesActivasPorPatente = new HashMap<String, IOrdenDeExportacion>();
 		this.ordenPorContainer = new HashMap<String, IOrden>();
-		this.containersPorViaje = new HashMap<Container, Viaje>();
+		this.containersPorViaje = new HashMap<Container, IViaje>();
 		this.facturas = new HashSet<IFactura>();
 
 	}
@@ -139,37 +145,72 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 
 	@Override
 	public void avisoDeSalida(IBuqueViaje bv) {
-		//avisarle a los shipper 
-		//for (IOrdenDeExportacion orden : ordenesExportacion) {
-		//	IShipper shipper = orden.getShipper();
-		//	shipper.recibirMail("Su carga ya ha salido de la terminal");
+		//avisarle a los shippers que hayan exportado su container en ese bv
+		IViaje viajeDelBuqueViaje = bv.getViaje();
+		IShipper shipper;
+		for (IOrdenDeExportacion orden : ordenesExportacion) {
+			if(containersPorViaje.get(orden.getDatosDeCarga()) == viajeDelBuqueViaje) {
+				shipper = orden.getShipper();
+				shipper.recibirMail("Su carga ya ha salido de la terminal");
+			}
 		}
+		sePuedenRealizarPagos = false;//Pasa a outbound, donde no se pueden realizar pagos hasta departing
+	}
 	
 	
 	@Override
 	public void inminenteArribo(IBuqueViaje bv) {
-		//
-		//for (IOrdenDeImportacion orden : ordenesImportacion) {
-		//	IShipper shipper =(Shipper) orden.getCliente();
-		//	shipper.recibirMail("Su carga esta llegando a la terminal");
+		sePuedenInformarImportacionesYExportaciones = false; //Pasa a Arrived, donde no se pueden informar Importaciones ni Exportaciones
+		
+		IViaje viajeDelBuqueViaje = bv.getViaje();
+		ICliente consignee;
+		for (IOrdenDeImportacion orden : ordenesImportacion) {
+			if(containersPorViaje.get(orden.getDatosDeCarga()) == viajeDelBuqueViaje) {
+				consignee = orden.getCliente();
+				consignee.recibirMail("Su carga esta llegando a la terminal");
+			}
 		}
+	}
 	
 	@Override
 	public void avisoDeLlegada(IBuqueViaje bv) {
+		sePuedenInformarImportacionesYExportaciones = true; //deja de estar en Arrived, donde ya se pueden informar Importaciones y Exportaciones
 		
 		bv.inicioDeTrabajo();
+		IViaje viajeDelBuqueViaje = bv.getViaje();
+		IBuque buqueDelBuqueViaje =  viajeDelBuqueViaje.getBuque();
+		Set<Container> containersDelBuqueViaje = buqueDelBuqueViaje.getContainers(); 
 		
-		//pedirle a buqeuviaje el viaje, al viaje el buque y al buque los containers y agregarlos a mi lista
-		
-		//agregaarle al buque lso containers de su viaje
+		for (Container container : containersDelBuqueViaje) {
+			if(containersPorViaje.get(container) == viajeDelBuqueViaje) {
+				IOrden orden = ordenPorContainer.get(container.getId());
+				if(ordenesExportacion.contains(orden)) { //Si es de exportación
+					buqueDelBuqueViaje.addContainer(container);
+					orden.generarFactura(LocalDateTime.now(), 300d, viajeDelBuqueViaje);
+					
+					containers.remove(container);
+					ordenPorContainer.remove(container.getId());
+					containersPorViaje.remove(container);
+				} else { //Donde ya es de importación siosi
+					buqueDelBuqueViaje.removeContainer(container);
+					containers.add(container);
+				}
+			}
+		}
 		bv.depart();
-
-		
+		sePuedenRealizarPagos = true; //Pasa a Departing, donde si se pueden realizar pagos
+	}
+	
+	//registrarPago(factura) error
+	public void registrarPago(IFactura factura) throws OperacionNoDisponibleException{
+		if(!this.sePuedenRealizarPagos) {
+			throw new OperacionNoDisponibleException("No se pueden realizar pagos en este momento");
+		}
 	}
 
 	@Override
 	public MotorDeBusqueda cronogramaExportacion(Terminal terminalDestino) {
-		List<Viaje> viajesDisponibles = new ArrayList<>();
+		List<IViaje> viajesDisponibles = new ArrayList<>();
 
 		for (Naviera naviera : navierasRegistradas) {
 			viajesDisponibles.addAll(naviera.getViajes());
@@ -179,7 +220,11 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 
 	@Override
 	public void exportar(Container c, Terminal t, RutaMaritima rm, List<Servicio> servicios, IShipper exportador,
-			EmpresaTransportista empresa) {
+			EmpresaTransportista empresa) throws OperacionNoDisponibleException{ 
+		if(!sePuedenInformarImportacionesYExportaciones) {
+			throw new OperacionNoDisponibleException("No se pueden informar importaciones o exportaciones en este momento");
+		}
+		
 		LocalDate salida = rm.fechaSalida();
 		LocalDate llegada = rm.fechaLlegada();
 		String patenteCamion = empresa.asignarCamionPara(c);
@@ -196,15 +241,18 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	}
 
 	@Override
-	public void datosParaElRetiro(IConsignee importador, EmpresaTransportista empresa, Container c) {
-
-		Buque buque = navierasRegistradas.stream().
+	public void datosParaElRetiro(IConsignee importador, EmpresaTransportista empresa, Container c) throws OperacionNoDisponibleException{ 
+		if(!sePuedenInformarImportacionesYExportaciones) {
+			throw new OperacionNoDisponibleException("No se pueden informar importaciones o exportaciones en este momento");
+		}
+		
+		IBuque buque = navierasRegistradas.stream().
 				flatMap(naviera -> naviera.getBuques().stream())
 				.filter(b -> b.getContainers().contains(c))
 				.findFirst()
 				.orElseThrow(() -> new RuntimeException("Contenedor no encontrado en ningún buque registrado"));
 		
-		Viaje viajeDelContenedor = navierasRegistradas.stream()
+		IViaje viajeDelContenedor = navierasRegistradas.stream()
 			    .flatMap(naviera -> naviera.getViajes().stream())
 			    .filter(viaje -> viaje.getBuque().equals(buque) && 
 			                     viaje.getBuque().getContainers().contains(c))

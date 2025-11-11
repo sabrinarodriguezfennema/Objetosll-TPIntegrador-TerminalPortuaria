@@ -2,13 +2,13 @@ package clases;
 
 import java.util.List;
 
-import interfaces.Viaje;
+import interfaces.IViaje;
 import terminal.Terminal;
 import terminal.TerminalGestionada;
 
 public class MotorDeBusqueda {
 
-	public MotorDeBusqueda(List<Viaje> viajesDisponibles, TerminalGestionada terminalGestionada,
+	public MotorDeBusqueda(List<IViaje> viajesDisponibles, TerminalGestionada terminalGestionada,
 			Terminal terminalDestino) {
 		
 	}

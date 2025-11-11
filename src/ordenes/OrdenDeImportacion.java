@@ -11,7 +11,7 @@ import interfaces.IConsignee;
 import interfaces.IFactura;
 import facturacion.Factura;
 import interfaces.IOrdenDeImportacion;
-import interfaces.Viaje;
+import interfaces.IViaje;
 import interfaces.Container;
 import servicios.Servicio;
 import servicios.ServicioAlmacenamientoExcedente;
@@ -37,7 +37,7 @@ public class OrdenDeImportacion extends Orden implements IOrdenDeImportacion{
 	}
 	
 	@Override
-	public IFactura generarFactura(LocalDateTime  fechaDeRetiro, double montoPorDiaExcedente, Viaje viaje) {
+	public IFactura generarFactura(LocalDateTime  fechaDeRetiro, double montoPorDiaExcedente, IViaje viaje) {
 	    
 	    int díasExcedentes = (int) Duration.between(this.fechaYHoraDeLlegada, fechaDeRetiro).toDays();
 

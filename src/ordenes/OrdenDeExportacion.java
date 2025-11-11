@@ -7,7 +7,7 @@ import interfaces.Container;
 import interfaces.IFactura;
 import interfaces.IOrdenDeExportacion;
 import interfaces.IShipper;
-import interfaces.Viaje;
+import interfaces.IViaje;
 import terminal.Terminal;
 import terminal.TerminalGestionada;
 
@@ -23,6 +23,7 @@ public class OrdenDeExportacion extends Orden implements IOrdenDeExportacion {
 		this.fechaSalida = fechaSalida;
 		this.fechaLlegada = fechaLlegada;
 		this.terminalDestino = terminalDestino;
+		this.cliente = cliente;
 	}
 	
 
@@ -55,7 +56,7 @@ public class OrdenDeExportacion extends Orden implements IOrdenDeExportacion {
 	}
 
 	@Override
-	public IFactura generarFactura(LocalDateTime fecha, double montoPorDíaExcedente, Viaje viaje) {
+	public IFactura generarFactura(LocalDateTime fecha, double montoPorDíaExcedente, IViaje viaje) {
 		// TODO Auto-generated method stub
 		return null;
 	}

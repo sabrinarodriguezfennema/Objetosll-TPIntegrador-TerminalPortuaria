@@ -6,19 +6,20 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import interfaces.IViaje;
 import interfaces.Localizable;
 import interfaces.Notificable;
 import paraMock.Viaje;
 
 class TestBuqueViaje {
-	Viaje unViaje;
+	IViaje unViaje;
 	BuqueViaje unBuqueViaje;
 	Notificable unNotificable;
 	Localizable unDestino;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		unViaje = mock(Viaje.class);
+		unViaje = mock(IViaje.class);
 		unNotificable = mock(Notificable.class);
 		unDestino = mock(Localizable.class);
 		unBuqueViaje = new BuqueViaje(unViaje, unDestino, unNotificable);

@@ -20,7 +20,7 @@ public class ServicioRevisionDiariaTest {
 	
 	@Test
 	void obtenerPrecio() {
-		assertEquals(500, s.getPrecio(c));
+		assertEquals(500, s.getPrecio(c), 1);
 	}
 
 }

@@ -10,17 +10,17 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import interfaces.Buque;
+import interfaces.IBuque;
 import interfaces.Container;
 import interfaces.IOrdenDeExportacion;
 import interfaces.IOrdenDeImportacion;
-import interfaces.Viaje;
+import interfaces.IViaje;
 import reportes.Reporte;
 
 class ReporteTest {
 
-	private Viaje viaje;
-	private Buque buque;
+	private IViaje viaje;
+	private IBuque buque;
 	private Container container1;
 	private Container container2;
 	private IOrdenDeExportacion ordenExportacion;
@@ -31,8 +31,8 @@ class ReporteTest {
 	@BeforeEach
 	void setUp() {
 
-		viaje = mock(Viaje.class);
-		buque = mock(Buque.class);
+		viaje = mock(IViaje.class);
+		buque = mock(IBuque.class);
 		container1 = mock(Container.class);
 		container2 = mock(Container.class);
 		ordenExportacion = mock(IOrdenDeExportacion.class);

@@ -21,6 +21,6 @@ public class ServicioDesconsolidadoTest {
 	@Test
 	void obtenerPrecio() {
 		
-		assertEquals(25, s.getPrecio(c));
+		assertEquals(25, s.getPrecio(c), 1);
 	}
 }

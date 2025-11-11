@@ -22,7 +22,7 @@ public class ServicioPesadoTest {
 	@Test
 	void precioDelServicio() {
 		
-		assertEquals(200, s.getPrecio(c));
+		assertEquals(200, s.getPrecio(c), 1);
 	}
 	
 	

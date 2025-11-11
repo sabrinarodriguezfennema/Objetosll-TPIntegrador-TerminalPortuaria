@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 
 import interfaces.Container;
+import interfaces.ICliente;
 import interfaces.IShipper;
 import ordenes.OrdenDeExportacion;
 import terminal.Terminal;
@@ -49,7 +50,7 @@ class OrdenDeExportacionTest {
 	@Test
 	void testGetShipper() {
 		// Ejecución
-		IShipper resultado = orden.getShipper();
+		ICliente resultado = orden.getCliente();
 
 		// Verificación
 		assertEquals(mockShipper, resultado);

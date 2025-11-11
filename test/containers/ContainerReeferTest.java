@@ -5,13 +5,17 @@ import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.*;
 
-public class ConteinerReeferTest {
+public class ContainerReeferTest {
 	
 	ContainerReefer c; 
+	BillOfLading bl;
+	Consignee consignee;
 	
 	@BeforeEach
 	void setUp() {
-		c = new ContainerReefer(0,0,0,null,0,null,null,null,50); 
+		bl = mock(BillOfLading.class);
+		consignee = mock(Consignee.class);
+		c = new ContainerReefer(10,5,30,"ABCD",1234567, bl, consignee,50); 
 		
 	}
 	

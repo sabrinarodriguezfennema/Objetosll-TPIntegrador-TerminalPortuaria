@@ -1,7 +1,8 @@
 package interfaces;
 
 import buqueViaje.Coordenadas;
-// TODO sacar si sale bien import paraMock.TerminalGestionada;
+import viaje.Viaje;
+
 
 public interface IBuqueViaje {
 	
@@ -13,4 +14,5 @@ public interface IBuqueViaje {
 	
 	public void inicioDeTrabajo();
 	public void depart();
+	public IViaje getViaje();
 }
