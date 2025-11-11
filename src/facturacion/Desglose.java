@@ -9,14 +9,10 @@ public class Desglose {
 	
 	public Desglose() {
 		this.items = new ArrayList<>();
-	}
+	} 
 	
 	public int montoTotal() {
-		int total = 0; 
-		
-		for (ItemDesglose itemDesglose : items) 
-			total += itemDesglose.getMonto(); 
-		return total;
+		return items.stream().mapToInt(ItemDesglose::getMonto).sum();
 	}
 	
 	public void agregarItem(ItemDesglose itd) {

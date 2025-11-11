@@ -7,7 +7,7 @@ public class ServicioRevisionDiaria implements Servicio {
 	private double precioFijo; 
 	private int diasEnLaTerminal;  // TODAVIA FALTA CALCULAR LA CANTIDAD DE DIAS
 	
-	public ServicioRevisionDiaria(int precioFijo, int diasEnLaTerminal) {
+	public ServicioRevisionDiaria(double precioFijo, int diasEnLaTerminal) {
 		this.precioFijo = precioFijo;
 		this.diasEnLaTerminal = diasEnLaTerminal;
 		

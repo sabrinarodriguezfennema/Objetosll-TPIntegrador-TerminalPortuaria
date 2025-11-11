@@ -7,7 +7,7 @@ public class ServicioLavado implements Servicio {
 	private double montoSupera70m3;
 	private double montoDebajo70m3;
 	
-	public ServicioLavado(int montoSupera70m3,int montoDebajo70m3 ) {
+	public ServicioLavado(double montoSupera70m3,double montoDebajo70m3 ) {
 		this.montoSupera70m3 = montoSupera70m3;
 		this.montoDebajo70m3 = montoDebajo70m3;
 	}
