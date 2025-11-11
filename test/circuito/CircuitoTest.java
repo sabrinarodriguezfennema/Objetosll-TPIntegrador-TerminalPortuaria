@@ -3,6 +3,7 @@ package circuito;
 import static org.junit.Assert.*;
 
 
+
 import static org.mockito.Mockito.*;
 
 import java.time.Duration;
@@ -10,8 +11,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.*;
 
-import terminal.Terminal;
-import tramo.*;
+import interfaces.Terminal;
+import interfaces.Tramo;
+
 
 public class CircuitoTest {
 	

@@ -1,32 +1,18 @@
 package containers;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.*;
 
-import bl.BillOfLading;
-import clientes.Consignee;
-import servicios.Servicio;
-import servicios.ServicioDesconsolidado;
 
 public class ConteinerDryTest {
 	
-	ServicioDesconsolidado s; 
-	ContainerDry c; 
-	BillOfLading bl;
-	Consignee consignee;
-	List<Servicio> servicios = new ArrayList<>();
+	ContainerDry c;
 	
 	@BeforeEach
 	void setUp() {
 		
-		s = mock(ServicioDesconsolidado.class);
-		bl = mock(BillOfLading.class);
-		c = new ContainerDry(10, 5, 30, "ABCD", 1234567, bl, consignee);
+		c = new ContainerDry(10, 5, 30, "ABCD", 1234567, null, null);
 	}
 	
 	@Test

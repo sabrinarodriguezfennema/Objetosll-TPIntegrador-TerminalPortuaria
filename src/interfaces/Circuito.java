@@ -1,9 +1,8 @@
 package interfaces;
 
 import java.time.Duration;
-import java.util.Date;
+import java.util.List;
 
-import terminal.Terminal;
 
 public interface Circuito {
 
@@ -14,5 +13,9 @@ public interface Circuito {
 	public int cantidadDeTerminales();
 
 	public Duration duracionDesde_Hasta_(Terminal terminalOrigen, Terminal terminalDestino);
+
+	public List<Terminal> getTodasLasTerminalesDestino();
+
+	public List<Tramo> getTramos();
 
 }

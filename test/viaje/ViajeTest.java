@@ -2,6 +2,7 @@ package viaje;
 
 import static org.junit.Assert.*;
 
+
 import static org.mockito.Mockito.*;
 
 import java.time.Duration;
@@ -11,10 +12,10 @@ import java.util.Map;
 
 import org.junit.jupiter.api.*;
 
-import buque.Buque;
-import circuito.Circuito;
-import terminal.Terminal;
-import tramo.Tramo;
+import interfaces.Buque;
+import interfaces.Circuito;
+import interfaces.Terminal;
+import interfaces.Tramo;
 
 public class ViajeTest {
 	 

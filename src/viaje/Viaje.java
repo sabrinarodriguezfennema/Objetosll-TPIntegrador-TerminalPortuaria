@@ -2,15 +2,16 @@ package viaje;
 
 import java.time.Duration;
 
+
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import buque.Buque;
-import circuito.Circuito;
-import terminal.Terminal;
-import tramo.*;
+import interfaces.Buque;
+import interfaces.Circuito;
+import interfaces.Terminal;
+import interfaces.Tramo;
 
 public class Viaje {
 	

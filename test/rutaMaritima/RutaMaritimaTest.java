@@ -1,6 +1,7 @@
 package rutaMaritima;
 
 import static org.junit.Assert.*;
+
 import static org.mockito.Mockito.*;
 
 import java.time.Duration;
@@ -9,10 +10,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.*;
 
-import circuito.Circuito;
-import terminal.Terminal;
-import tramo.*;
-import viaje.Viaje;
+import interfaces.Circuito;
+import interfaces.Terminal;
+import interfaces.Tramo;
+import interfaces.Viaje;
 
 public class RutaMaritimaTest {
 	

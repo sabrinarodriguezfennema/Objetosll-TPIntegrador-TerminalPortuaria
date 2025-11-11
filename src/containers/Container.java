@@ -1,7 +1,7 @@
 package containers;
 
-import bl.BillOfLading;
-import clientes.Consignee;
+import interfaces.BillOfLading;
+import interfaces.Consignee;
 
 public abstract class Container { 
    

@@ -2,10 +2,9 @@ package naviera;
 
 import org.junit.jupiter.api.*;
 
-import buque.Buque;
-import circuito.Circuito;
-import naviera.Naviera;
-import viaje.Viaje;
+import interfaces.Buque;
+import interfaces.Circuito;
+import interfaces.Viaje;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;

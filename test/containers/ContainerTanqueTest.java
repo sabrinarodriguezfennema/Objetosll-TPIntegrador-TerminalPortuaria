@@ -2,17 +2,16 @@ package containers;
 
 import static org.junit.Assert.*;
 
+
 import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.*;
 
-import bl.BillOfLading;
-import clientes.Consignee;
-import servicios.ServicioRevisionDiaria;
+import interfaces.BillOfLading;
+import interfaces.Consignee;
 
 public class ContainerTanqueTest {
 	
 	ContainerTanque c;
-	ServicioRevisionDiaria s;
 	BillOfLading bl;
 	Consignee consignee;
 	
@@ -22,7 +21,6 @@ public class ContainerTanqueTest {
 		bl = mock(BillOfLading.class);
 		
 		c = new ContainerTanque(10, 5, 30, "ABCD", 1234567, bl, consignee);
-		s = mock(ServicioRevisionDiaria.class);
 	}
 	
 	@Test

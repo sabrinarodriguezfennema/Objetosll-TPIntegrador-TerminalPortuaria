@@ -6,8 +6,7 @@ import java.time.Duration;
 
 import org.junit.jupiter.api.*;
 
-import terminal.Terminal;
-import tramo.Tramo;
+import interfaces.Terminal;
 
 public class TramoTest {
 	

@@ -2,11 +2,12 @@ package circuito;
 
 import java.time.Duration;
 
-import terminal.Terminal;
+
+import interfaces.Terminal;
 import java.util.ArrayList;
 import java.util.List;
 
-import tramo.Tramo;
+import interfaces.Tramo;
 
 public class Circuito {
 	

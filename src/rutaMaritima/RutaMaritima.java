@@ -2,12 +2,13 @@ package rutaMaritima;
 
 import java.time.Duration;
 
+
 import java.time.LocalDate;
 import java.util.List;
 
-import circuito.Circuito;
-import terminal.Terminal;
-import viaje.Viaje;
+import interfaces.Circuito;
+import interfaces.Terminal;
+import interfaces.Viaje;
 
 public class RutaMaritima {
 	
@@ -17,7 +18,7 @@ public class RutaMaritima {
 	public RutaMaritima(Viaje viaje) {
 		this.viaje = viaje;
 		this.circuitoDeViaje = viaje.getCircuito();
-	}
+	} 
 	
 	public boolean contienePuertoDestino(Terminal destino) {
 		List<Terminal> terminales = circuitoDeViaje.getTodasLasTerminalesDestino();
