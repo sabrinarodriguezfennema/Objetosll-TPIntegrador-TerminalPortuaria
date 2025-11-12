@@ -2,7 +2,7 @@ package containers;
 
 
 import interfaces.BillOfLading;
-import interfaces.Consignee;
+import clientes.Consignee;
 
 public class ContainerDry extends Container {
 

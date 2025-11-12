@@ -1,7 +1,7 @@
 package containers;
 
 import interfaces.BillOfLading;
-import interfaces.Consignee;
+import clientes.Consignee;
 import interfaces.IContainer;
 
 public abstract class Container implements IContainer{ 
