@@ -18,6 +18,7 @@ public abstract class Cliente implements ICliente{
         this.nombre = nombre;
         this.email = email;
         this.mailsRecibidos = new ArrayList<>();
+        this.facturas = new ArrayList<>();
     }
 	
     public void recibirMail(String contenido) {
@@ -38,5 +39,9 @@ public abstract class Cliente implements ICliente{
     
     public void recibirFactura(IFactura factura) {
     	facturas.add(factura);
+    }
+    
+    public List<IFactura> getFacturasRecibidas() {
+        return new ArrayList<>(facturas);
     }
 }

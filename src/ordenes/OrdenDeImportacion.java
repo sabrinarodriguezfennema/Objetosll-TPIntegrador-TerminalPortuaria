@@ -24,14 +24,12 @@ public class OrdenDeImportacion extends Orden implements IOrdenDeImportacion{
 	
 	private int diasTolerancia;
 	private LocalDateTime fechaYHoraDeLlegada;
-	private Set<Servicio> servicios;
 	
 
 	public OrdenDeImportacion(IConsignee cliente, Container datosDeCarga, String patenteCamion, String dniChofer, LocalDateTime fechaYHoraDeLlegada) {
 		super(datosDeCarga, patenteCamion, dniChofer, cliente);
 		this.diasTolerancia = 1;
 		this.fechaYHoraDeLlegada = fechaYHoraDeLlegada;
-		this.servicios = new HashSet<Servicio>(); 
 	}
 	
 	public boolean verificarAutorizacion(String patenteCamion, String dniChofer) {
@@ -46,13 +44,9 @@ public class OrdenDeImportacion extends Orden implements IOrdenDeImportacion{
 
 	    if (díasExcedentes > this.diasTolerancia) {
 	    	int díasDeMas = díasExcedentes - this.diasTolerancia;
-	    	servicios.add(new ServicioAlmacenamientoExcedente(montoPorDiaExcedente, díasDeMas));
+	    	this.agregarServicio(new ServicioAlmacenamientoExcedente(montoPorDiaExcedente, díasDeMas));
 	    }
 	    return new Factura(servicios,null);
-	}
-	
-	public void agregarServicio(Servicio s) {
-		servicios.add(s);
 	}
 	
 	@Override
