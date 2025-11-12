@@ -4,9 +4,10 @@ import java.util.ArrayList;
 
 import java.util.List;
 
+import interfaces.IBuque;
 import interfaces.IContainer;
 
-public class Buque {
+public class Buque implements IBuque {
 	
 	private String nombre;
 	private List<IContainer> containers;
@@ -30,5 +31,11 @@ public class Buque {
 	
 	public void eliminarContainers() {
 		containers.clear();
+	}
+
+	@Override
+	public void removeContainer(IContainer container) {
+		// TODO Auto-generated method stub
+		
 	}
 }

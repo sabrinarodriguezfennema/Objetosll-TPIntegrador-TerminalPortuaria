@@ -9,31 +9,33 @@ import java.util.List;
 import java.util.Map;
 
 import interfaces.Buque;
-import interfaces.Circuito;
-import interfaces.Terminal;
-import interfaces.Tramo;
+import interfaces.ICircuito;
+import interfaces.IBuque;
+import interfaces.IViaje;
+import interfaces.ITerminal;
+import interfaces.ITramo;
 
-public class Viaje {
+public class Viaje implements IViaje{
 	
 	private LocalDate fechaInicio;
-	private Buque buque;
-	private Circuito circuito;
+	private IBuque buque;
+	private ICircuito circuito;
 	
 	
-	public Viaje(LocalDate  fechaInicio, Buque buque,Circuito circuito) {
+	public Viaje(LocalDate fechaInicio, IBuque buque,ICircuito circuito) {
 		this.fechaInicio = fechaInicio;
 		this.buque = buque;
 		this.circuito = circuito;
 	}
 	
-	public Buque getBuque() {
+	public IBuque getBuque() {
 		return buque;
 	}
 	
-	public Map<Terminal, LocalDate> cronograma() {
-        Map<Terminal, LocalDate> cronograma = new LinkedHashMap<>();
+	public Map<ITerminal, LocalDate> cronograma() {
+        Map<ITerminal, LocalDate> cronograma = new LinkedHashMap<>();
 
-        List<Tramo> tramos = circuito.getTramos();
+        List<ITramo> tramos = circuito.getTramos();
 
         LocalDate fechaActual = fechaInicio;
 
@@ -42,7 +44,7 @@ public class Viaje {
         }
         
         // recorremos los tramos sumando la duración de cada tramo y agregandolos al map 
-        for (Tramo tramo : tramos) {
+        for (ITramo tramo : tramos) {
             Duration duracion = tramo.getDuracion();
             fechaActual = fechaActual.plusDays(duracion.toDays()); // sumamos a la fecha actual los dias estimados de llegada al destino del tramo
             cronograma.put(tramo.getDestino(), fechaActual);
@@ -50,15 +52,27 @@ public class Viaje {
         return cronograma;
     }
 	
-	public LocalDate getFechaInicio() {
+	public LocalDate getFechaSalida() {
 		return fechaInicio;
 	}
 	
-	public Circuito getCircuito() {
+	public ICircuito getCircuito() {
 		return circuito;
 	}
 	
 	public double precioTotal() {
 	    return circuito.precioTotal();
+	}
+
+	@Override
+	public LocalDate fechaSalida() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LocalDate getFechaInicio() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

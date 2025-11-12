@@ -13,33 +13,34 @@ import java.util.Map;
 import org.junit.jupiter.api.*;
 
 import interfaces.Buque;
-import interfaces.Circuito;
-import interfaces.Terminal;
-import interfaces.Tramo;
+import interfaces.ICircuito;
+import interfaces.IBuque;
+import interfaces.ITerminal;
+import interfaces.ITramo;
 
 public class ViajeTest {
 	 
 	Viaje viaje;
-	Buque buque;
-	Circuito circuito;
+	IBuque buque;
+	ICircuito circuito;
 	LocalDate fechaInicio;
-	Tramo tramo1;
-    Tramo tramo2;
-    Terminal t1;
-    Terminal t2;
-    Terminal t3;
+	ITramo tramo1;
+    ITramo tramo2;
+    ITerminal t1;
+    ITerminal t2;
+    ITerminal t3;
 	
 	@BeforeEach
 	void setup() {
 		
 		fechaInicio = LocalDate.of(2025, 11, 10);
-		circuito = mock(Circuito.class);
+		circuito = mock(ICircuito.class);
 	
-		tramo1 = mock(Tramo.class);
-	    tramo2 = mock(Tramo.class);
-	    t1 = mock(Terminal.class);
-	    t2 = mock(Terminal.class);
-	    t3 = mock(Terminal.class);
+		tramo1 = mock(ITramo.class);
+	    tramo2 = mock(ITramo.class);
+	    t1 = mock(ITerminal.class);
+	    t2 = mock(ITerminal.class);
+	    t3 = mock(ITerminal.class);
 	    
 	    
 	    viaje = new Viaje(fechaInicio, buque, circuito);
@@ -73,7 +74,7 @@ public class ViajeTest {
 
 	      when(circuito.getTramos()).thenReturn(List.of(tramo1, tramo2));
 	      
-	      Map<Terminal, LocalDate> cronograma = viaje.cronograma();
+	      Map<ITerminal, LocalDate> cronograma = viaje.cronograma();
 
 	      assertEquals(3, cronograma.size());
 	      assertEquals(fechaInicio, cronograma.get(t1));  

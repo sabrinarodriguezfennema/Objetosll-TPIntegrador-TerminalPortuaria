@@ -3,16 +3,17 @@ package tramo;
 import java.time.Duration;
 
 
-import interfaces.Terminal;
+import interfaces.ITerminal;
+import interfaces.ITramo;
 
-public class Tramo {
+public class Tramo implements ITramo{
 	
 	private Duration duracion;
 	private int precio;
-	private Terminal origen;
-	private Terminal destino;
+	private ITerminal origen;
+	private ITerminal destino;
 	
-	public Tramo(Terminal origen, Terminal destino, Duration duracion, int precio) {
+	public Tramo(ITerminal origen, ITerminal destino, Duration duracion, int precio) {
 		this.origen = origen;
 		this.destino = destino;
 		this.duracion = duracion;
@@ -27,11 +28,11 @@ public class Tramo {
 		return precio;
 	}
 	
-	public Terminal getOrigen() {
+	public ITerminal getOrigen() {
 		return origen;		
 	}
 	
-	public Terminal getDestino() {
+	public ITerminal getDestino() {
 		return destino;		
 	}
 

@@ -3,7 +3,7 @@ package naviera;
 import org.junit.jupiter.api.*;
 
 import interfaces.Buque;
-import interfaces.Circuito;
+import interfaces.ICircuito;
 import interfaces.Viaje;
 
 import static org.junit.Assert.*;
@@ -20,9 +20,9 @@ public class NavieraTest {
 	Viaje v2;
 	Viaje v3;
 	
-	Circuito c1;
-	Circuito c2;
-	Circuito c3;
+	ICircuito c1;
+	ICircuito c2;
+	ICircuito c3;
 	
 	Buque b1;
 	Buque b2;
@@ -41,9 +41,9 @@ public class NavieraTest {
 		f2 = mock(LocalDate.class);
 		f3 = mock(LocalDate.class);
 		
-		c1 = mock(Circuito.class);
-		c2 = mock(Circuito.class);
-		c3 = mock(Circuito.class);
+		c1 = mock(ICircuito.class);
+		c2 = mock(ICircuito.class);
+		c3 = mock(ICircuito.class);
 		
 		v1 = mock(Viaje.class);
 		v2 = mock(Viaje.class);

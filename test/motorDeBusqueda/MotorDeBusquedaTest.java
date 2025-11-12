@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import filtro.Filtro;
-import interfaces.Terminal;
+import interfaces.ITerminal;
 import motorDeBusqueda.MotorDeBusqueda;
 import paraMock.RutaMaritima;
 

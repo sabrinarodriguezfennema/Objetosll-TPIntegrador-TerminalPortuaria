@@ -6,18 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import interfaces.Buque;
-import interfaces.Circuito;
+import interfaces.IBuque;
+import interfaces.ICircuito;
+import interfaces.INaviera;
+import interfaces.IViaje;
 import interfaces.Viaje;
 
-public class Naviera {
+public class Naviera implements INaviera{
 	
 	private List<Viaje> viajes = new ArrayList<>();
-	private List<Circuito> circuitos = new ArrayList<>();
-	private List<Buque> buques = new ArrayList<>();
+	private List<ICircuito> circuitos = new ArrayList<>();
+	private List<IBuque> buques = new ArrayList<>();
 	
 	public Naviera() {}
 	
-	public void agregarCircuito(Circuito c) {
+	public void agregarCircuito(ICircuito c) {
 		circuitos.add(c);
 	}
 
@@ -25,19 +28,19 @@ public class Naviera {
 		viajes.add(v);
 	}
 	
-	public void agregarBuque(Buque b) {
+	public void agregarBuque(IBuque b) {
 		buques.add(b);
 	}
 	
-	public List<Circuito> getCircuitos() {
+	public List<ICircuito> getCircuitos() {
 		return circuitos;
 	}
 	 
-	public List<Buque> getBuques() {
+	public List<IBuque> getBuques() {
 		return buques; 
 	}
 	
-	public List<Viaje> getViajes() {
+	public List<IViaje> getViajes() {
 		return viajes;
 	}
 	
@@ -49,5 +52,18 @@ public class Naviera {
 			fechasViajes.add(viaje.getFechaInicio());
 		}
 		return fechasViajes;
+	}
+
+	@Override
+	public void agregarViaje(IViaje primerViaje) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public IViaje crearViaje(LocalDate fechaSalida, IBuque unBuque, ICircuito circuito) {
+		IViaje viaje = new Viaje(fechaSalida, unBuque, circuito);
+		viajes.add(viaje);
+		return viaje;
 	}
 }

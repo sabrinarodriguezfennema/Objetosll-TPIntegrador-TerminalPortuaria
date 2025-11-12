@@ -2,11 +2,11 @@ package interfaces;
 
 import java.time.Duration;
 
-public interface Tramo {
+public interface ITramo {
 	
 	public Duration getDuracion();
 	public int getPrecio();
-	public Terminal getOrigen();
-	public Terminal getDestino();
+	public ITerminal getOrigen();
+	public ITerminal getDestino();
 
 }

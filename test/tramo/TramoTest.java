@@ -6,15 +6,15 @@ import java.time.Duration;
 
 import org.junit.jupiter.api.*;
 
-import interfaces.Terminal;
+import interfaces.ITerminal;
 
 public class TramoTest {
 	
 	Tramo tramo;
 	Duration duracion;
 	int precio;
-	Terminal origen;
-	Terminal destino;
+	ITerminal origen;
+	ITerminal destino;
 	
 	@BeforeEach
 	void setup() {

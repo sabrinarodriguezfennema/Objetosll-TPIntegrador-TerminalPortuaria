@@ -3,19 +3,19 @@ package paraMock;
 import java.util.Date;
 
 
-import interfaces.Circuito;
+import interfaces.ICircuito;
 
-import interfaces.Terminal;
+import interfaces.ITerminal;
 
 public interface RutaMaritima {
 	
-	public Terminal puertoDestino();
+	public ITerminal puertoDestino();
 	
 	public Date fechaSalida();
 	
 	public Date fechaLlegada();
 
-	public Circuito getCircuito();
+	public ICircuito getCircuito();
 
 
 }

@@ -20,7 +20,7 @@ import interfaces.IShipper;
 import interfaces.IBuque;
 import interfaces.IBuqueViaje;
 import interfaces.IContainer;
-import interfaces.Naviera;
+import interfaces.INaviera;
 import interfaces.IRutaMaritima;
 import interfaces.IServicio;
 import interfaces.IConsignee;
@@ -33,7 +33,7 @@ import interfaces.IOrdenDeImportacion;
 
 public class TerminalGestionada extends Terminal implements GestionLogistica, GestionEnvio {
 
-	private Set<Naviera> navierasRegistradas;
+	private Set<INaviera> navierasRegistradas;
 	private Set<IContainer> containers;
 	private Set<EmpresaTransportista> empresasTransportistas;
 	private Set<String> camionesRegistrados;
@@ -55,7 +55,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		this.ubicacion = ubicacion;
 		sePuedenRealizarPagos = true;
 		sePuedenInformarImportacionesYExportaciones = true;
-		this.navierasRegistradas = new HashSet<Naviera>();
+		this.navierasRegistradas = new HashSet<INaviera>();
 		this.containers = new HashSet<IContainer>();
 		this.ordenesImportacion = new HashSet<IOrdenDeImportacion>();
 		this.ordenesExportacion = new HashSet<IOrdenDeExportacion>();
@@ -70,7 +70,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 
 	}
 
-	public void registrarNaviera(Naviera naviera) {
+	public void registrarNaviera(INaviera naviera) {
 		navierasRegistradas.add(naviera);
 	}
 
@@ -213,7 +213,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	public MotorDeBusqueda cronogramaExportacion(Terminal terminalDestino) {
 		List<IViaje> viajesDisponibles = new ArrayList<>();
 
-		for (Naviera naviera : navierasRegistradas) {
+		for (INaviera naviera : navierasRegistradas) {
 			viajesDisponibles.addAll(naviera.getViajes());
 		}
 		return new MotorDeBusqueda(viajesDisponibles, this, terminalDestino);

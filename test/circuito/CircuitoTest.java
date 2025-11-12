@@ -11,35 +11,35 @@ import java.util.List;
 
 import org.junit.jupiter.api.*;
 
-import interfaces.Terminal;
-import interfaces.Tramo;
+import interfaces.ITerminal;
+import interfaces.ITramo;
 
 
 public class CircuitoTest {
 	
 	Circuito circuito;
-	Tramo t1;
-	Tramo t2;
-	Tramo t3;
-	Tramo t4;
-	Terminal ter1;
-	Terminal ter2;
-	Terminal ter3;
-	Terminal ter4;
+	ITramo t1;
+	ITramo t2;
+	ITramo t3;
+	ITramo t4;
+	ITerminal ter1;
+	ITerminal ter2;
+	ITerminal ter3;
+	ITerminal ter4;
 	
 	@BeforeEach
 	void setUp() {
 		
 		circuito = new Circuito();
-		t1 = mock(Tramo.class);
-		t2 = mock(Tramo.class);
-		t3 = mock(Tramo.class);
-		t4 = mock(Tramo.class); 
+		t1 = mock(ITramo.class);
+		t2 = mock(ITramo.class);
+		t3 = mock(ITramo.class);
+		t4 = mock(ITramo.class); 
 		
-		ter1 = mock(Terminal.class);
-		ter2 = mock(Terminal.class);
-		ter3 = mock(Terminal.class);
-		ter4 = mock(Terminal.class);
+		ter1 = mock(ITerminal.class);
+		ter2 = mock(ITerminal.class);
+		ter3 = mock(ITerminal.class);
+		ter4 = mock(ITerminal.class);
 
 		when(t1.getOrigen()).thenReturn(ter1);
 		when(t1.getDestino()).thenReturn(ter2);

@@ -14,7 +14,7 @@ import filtro.FechaSalidaAntesDe;
 import filtro.FechaSalidaDespuesDe;
 import filtro.FiltroSimple;
 import filtro.PuertoIgualA;
-import interfaces.Terminal;
+import interfaces.ITerminal;
 import paraMock.RutaMaritima;
 
 
@@ -22,12 +22,12 @@ import paraMock.RutaMaritima;
 class FiltroSimpleTest {
 
 	RutaMaritima unaRutaMaritima;
-	Terminal unPuerto;
+	ITerminal unPuerto;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		unaRutaMaritima = mock(RutaMaritima.class);
-		unPuerto        = mock(Terminal.class);
+		unPuerto        = mock(ITerminal.class);
 	}
 
 	@Test
@@ -43,7 +43,7 @@ class FiltroSimpleTest {
 	
 	@Test
 	void testFiltroSimplePuertoNoEsIgualAOtroPuerto() {
-		Terminal otroPuerto = mock(Terminal.class);
+		ITerminal otroPuerto = mock(ITerminal.class);
 		when(unaRutaMaritima.puertoDestino()).thenReturn(otroPuerto);
 		FiltroSimple unFiltroSimple = new PuertoIgualA(unPuerto);
 		

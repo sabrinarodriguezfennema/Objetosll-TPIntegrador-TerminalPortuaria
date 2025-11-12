@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-import interfaces.Circuito;
+import interfaces.ICircuito;
 import interfaces.IRutaMaritima;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,9 +22,9 @@ class MejorCircuitoTest {
 	private IRutaMaritima ruta1;
 	private IRutaMaritima ruta2;
 	private IRutaMaritima ruta3;
-	private Circuito circuito1;
-	private Circuito circuito2;
-	private Circuito circuito3;
+	private ICircuito circuito1;
+	private ICircuito circuito2;
+	private ICircuito circuito3;
 	private List<IRutaMaritima> rutas;
 
 	@BeforeEach
@@ -38,9 +38,9 @@ class MejorCircuitoTest {
 		ruta2 = mock(IRutaMaritima.class);
 		ruta3 = mock(IRutaMaritima.class);
 		
-		circuito1 = mock(Circuito.class);
-		circuito2 = mock(Circuito.class);
-		circuito3 = mock(Circuito.class);
+		circuito1 = mock(ICircuito.class);
+		circuito2 = mock(ICircuito.class);
+		circuito3 = mock(ICircuito.class);
 	
 
 		when(ruta1.getCircuito()).thenReturn(circuito1);

@@ -12,7 +12,7 @@ public interface IRutaMaritima {
 
 	public Terminal puertoDestino();
 
-	public Circuito getCircuito();
+	public ICircuito getCircuito();
 
 	public String getNombre();
 

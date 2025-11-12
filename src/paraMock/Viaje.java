@@ -1,9 +1,9 @@
 package paraMock;
 
-import interfaces.Terminal;
+import interfaces.ITerminal;
 
 public interface Viaje {
 
-	public RutaMaritima rutaMaritimaDesde_Hasta_(Terminal t1, Terminal t2);
+	public RutaMaritima rutaMaritimaDesde_Hasta_(ITerminal t1, ITerminal t2);
 
 }

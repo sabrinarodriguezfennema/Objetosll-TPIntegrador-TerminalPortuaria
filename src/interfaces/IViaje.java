@@ -1,18 +1,18 @@
 package interfaces;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 public interface IViaje {
 
 	public LocalDate fechaSalida();
 
-	public Circuito getCircuito();
+	public ICircuito getCircuito();
 
 	public IBuque getBuque();
 
 	public double precioTotal();
-
-	public LocalDate getFechaInicio();
-
+	
+	public Map<ITerminal, LocalDate> cronograma();
 
 }

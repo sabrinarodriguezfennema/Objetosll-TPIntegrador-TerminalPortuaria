@@ -1,13 +1,11 @@
 package buqueViaje;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import paraMock.TerminalGestionada;
 import interfaces.Notificable;
 import interfaces.Localizable;
 
@@ -137,7 +135,7 @@ class TestFaseBuqueViaje {
 		//Otros
 		
 		@Test
-		void testSiAUnaFaseDistintaDeArrivedSeLeOrdenaInicioTrabajoNoSeHaceNada() { //TODO O tira un error, o todas pasan a working
+		void testSiAUnaFaseDistintaDeArrivedSeLeOrdenaInicioTrabajoNoSeHaceNada() { 
 			FaseBuqueViaje faseBuqueViaje = new Working(buqueViaje);
 			
 			faseBuqueViaje.inicioDeTrabajo(buqueViaje);
@@ -147,7 +145,7 @@ class TestFaseBuqueViaje {
 		}
 		
 		@Test
-		void testSiAUnaFaseDistintaDeWorkingSeLeOrdenaDepartNoSeHaceNada() { //O tira un error, o todas pasan a departing
+		void testSiAUnaFaseDistintaDeWorkingSeLeOrdenaDepartNoSeHaceNada() {
 			FaseBuqueViaje faseBuqueViaje = new Arrived(buqueViaje);
 			
 			faseBuqueViaje.depart(buqueViaje);

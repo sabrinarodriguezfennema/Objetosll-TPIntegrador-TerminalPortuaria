@@ -1,13 +1,13 @@
 package filtro;
 
-import interfaces.Terminal;
+import interfaces.ITerminal;
 import paraMock.RutaMaritima;
 
 public class PuertoIgualA extends FiltroSimple {
 
-	private Terminal puerto;
+	private ITerminal puerto;
 	
-	public PuertoIgualA(Terminal puerto) {
+	public PuertoIgualA(ITerminal puerto) {
 		this.puerto = puerto;
 	}
 

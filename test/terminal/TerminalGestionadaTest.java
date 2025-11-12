@@ -28,7 +28,7 @@ public class TerminalGestionadaTest {
 
 	private TerminalGestionada terminal;
 
-	private Naviera mockNaviera;
+	private INaviera mockNaviera;
 	private IContainer mockContainer;
 	private EmpresaTransportista mockEmpresaTransportista;
 	private ICliente mockCliente;
@@ -42,13 +42,13 @@ public class TerminalGestionadaTest {
 	private IServicio mockServicio;
 	private IBuque mockBuque;
 	private IViaje mockViaje;
-	private Circuito mockCircuito;
+	private ICircuito mockCircuito;
 	private Coordenadas coordenadas;
 	private IFactura mockFactura;
 
 	@BeforeEach
 	void setUp() {
-		mockNaviera = mock(Naviera.class);
+		mockNaviera = mock(INaviera.class);
 		mockContainer = mock(IContainer.class);
 		mockEmpresaTransportista = mock(EmpresaTransportista.class);
 		mockCliente = mock(ICliente.class);
@@ -62,7 +62,7 @@ public class TerminalGestionadaTest {
 		mockServicio = mock(IServicio.class);
 		mockBuque = mock(IBuque.class);
 		mockViaje = mock(IViaje.class);
-		mockCircuito = mock(Circuito.class);
+		mockCircuito = mock(ICircuito.class);
 		mockFactura = mock(IFactura.class);
 		coordenadas = new Coordenadas(1, 1);
 
@@ -562,8 +562,8 @@ public class TerminalGestionadaTest {
 
 	@Test
 	void testCronogramaExportacion() {
-		Naviera mockNaviera2 = mock(Naviera.class);
-		Naviera mockNaviera3 = mock(Naviera.class);
+		INaviera mockNaviera2 = mock(INaviera.class);
+		INaviera mockNaviera3 = mock(INaviera.class);
 
 		IViaje mockViaje1 = mock(IViaje.class);
 		IViaje mockViaje2 = mock(IViaje.class);

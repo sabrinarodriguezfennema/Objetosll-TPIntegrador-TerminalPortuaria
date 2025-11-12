@@ -4,19 +4,19 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
-import interfaces.Circuito;
-import interfaces.Terminal;
+import interfaces.ICircuito;
+import interfaces.ITerminal;
 import interfaces.Viaje;
 
 public class RutaMaritima {
 	
 	private Viaje viaje;
-	private Circuito circuitoDeViaje;
-	private Terminal terminalOrigen;
-	private Terminal terminalDestino;
-	private Map<Terminal, LocalDate> cronograma;
+	private ICircuito circuitoDeViaje;
+	private ITerminal terminalOrigen;
+	private ITerminal terminalDestino;
+	private Map<ITerminal, LocalDate> cronograma;
 	
-	public RutaMaritima(Viaje viaje, Terminal terminalOrigen, Terminal terminalDestino) {
+	public RutaMaritima(Viaje viaje, ITerminal terminalOrigen, ITerminal terminalDestino) {
 		this.viaje = viaje;
 		this.circuitoDeViaje = viaje.getCircuito();
 		this.terminalOrigen = terminalOrigen;
@@ -24,13 +24,13 @@ public class RutaMaritima {
 		this.cronograma = viaje.cronograma();
 	} 
 	
-	private void validarTerminal(Terminal t) {
-		if (!perteneceA(t)) {
+	private void validarTerminal(ITerminal t) {
+		if (!perteneceARuta(t)) {
 			throw new IllegalArgumentException("la terminal no pertenece al circuito del viaje");
 		}
 	}
 	
-	public Terminal puertoDestino() {
+	public ITerminal puertoDestino() {
 		validarTerminal(terminalDestino);
 		return terminalDestino;
 	}
@@ -45,12 +45,12 @@ public class RutaMaritima {
 		return cronograma.get(terminalDestino);
 	}
 	
-	public boolean perteneceA(Terminal t) {
-		List<Terminal> terminales = circuitoDeViaje.getTodasLasTerminales();
+	public boolean perteneceARuta(ITerminal t) {
+		List<ITerminal> terminales = circuitoDeViaje.getTodasLasTerminales();
 		return terminales.contains(t);
 	}
 
-	public Circuito getCircuito() {
+	public ICircuito getCircuito() {
 		return circuitoDeViaje;
 	}
 	
@@ -58,7 +58,7 @@ public class RutaMaritima {
 		return viaje;
 	}
 
-	public String getNombre() {
+	public String getNombreDeBuque() {
 		return viaje.getBuque().getNombre();
 	}
 }
