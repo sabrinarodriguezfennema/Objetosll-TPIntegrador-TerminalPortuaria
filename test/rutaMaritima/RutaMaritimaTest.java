@@ -2,17 +2,17 @@ package rutaMaritima;
 
 import static org.junit.Assert.*;
 
+
 import static org.mockito.Mockito.*;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.List;
 
 import org.junit.jupiter.api.*;
 
+import interfaces.Buque;
 import interfaces.Circuito;
 import interfaces.Terminal;
-import interfaces.Tramo;
 import interfaces.Viaje;
 
 public class RutaMaritimaTest {
@@ -20,82 +20,60 @@ public class RutaMaritimaTest {
 	RutaMaritima ruta; 
 	Viaje viaje; 
 	Circuito circuito;
-	Tramo tramo1, tramo2, tramo3;
-	Terminal ter1, ter2, ter3, ter4;
+	Terminal ter1;
 	LocalDate fechaInicio;
 	
 	@BeforeEach
 	void setUp() {
 		viaje = mock(Viaje.class);
 		circuito = mock(Circuito.class);
-		tramo1 = mock(Tramo.class);
-		tramo2 = mock(Tramo.class);
-		tramo3 = mock(Tramo.class);
 		ter1 = mock(Terminal.class);
-		ter2 = mock(Terminal.class);
-		ter3 = mock(Terminal.class);
-		ter4 = mock(Terminal.class);
 		
 		when(viaje.getCircuito()).thenReturn(circuito);
 
-		ruta = new RutaMaritima(viaje);
+		ruta = new RutaMaritima(viaje,ter1);
 		
 		fechaInicio = LocalDate.of(2025, 11, 9);
 		
 		when(viaje.getFechaInicio()).thenReturn(fechaInicio);
 	}
 	
-	@Test 
-	void contieneDestino() {
-	    
-	    when(circuito.getTodasLasTerminalesDestino()).thenReturn(List.of(ter2,ter3,ter4));
-	    assertTrue(ruta.contienePuertoDestino(ter2));
-	}
-	
-	@Test
-	void noContieneDestino() {
-		
-	    when(circuito.getTodasLasTerminalesDestino()).thenReturn(List.of(ter2, ter3, ter4));
-	    assertFalse(ruta.contienePuertoDestino(ter1));
-	}
-
 	@Test
 	void fechaEstimadaDeLLegada() {
 		
 		when(circuito.duracionTotal()).thenReturn(Duration.ofDays(5));
-		assertEquals(LocalDate.of(2025, 11, 14), ruta.fechaEstimadaDeLlegada());
+		assertEquals(LocalDate.of(2025, 11, 14), ruta.fechaLlegada());
+	}
+	
+	@Test 
+	void fechaDeInicioViaje() {
+		
+		assertTrue(ruta.fechaSalida().equals(fechaInicio));
 	}
 	
 	@Test
-	void llegaAntesDe() {
+	void circuitoDelViaje() {
 		
-		LocalDate fechaLimite = LocalDate.of(2025, 11, 15); 
-		
-		when(circuito.duracionTotal()).thenReturn(Duration.ofDays(3));
-		assertTrue(ruta.llegaAntesDe(fechaLimite));
+		assertTrue(ruta.getCircuito().equals(circuito));
 	}
 	
 	@Test
-	void noLlegaAntesDe() {
-	
-		LocalDate fechaLimite = LocalDate.of(2025, 11, 15); 
+	void puertoDestino() {
 		
-		when(circuito.duracionTotal()).thenReturn(Duration.ofDays(6));
-		assertFalse(ruta.llegaAntesDe(fechaLimite));
+		assertTrue(ruta.puertoDestino().equals(ter1));
+	}
+	
+	@Test 
+	void obtenerViaje() {
+		assertEquals(viaje, ruta.getViaje());
 	}
 	
 	@Test
-	void saleDespuesDe() {
+	void getNombre() {
+		Buque buque = mock(Buque.class);
 		
-		LocalDate fecha = LocalDate.of(2025, 11, 5); 
-		assertTrue(ruta.saleDespuesDe(fecha));
+		when(viaje.getBuque()).thenReturn(buque);
+		when(buque.getNombre()).thenReturn("buque");
+		assertEquals("buque", ruta.getNombre());
 	}
-	
-	@Test
-	void noSaleDespuesDe() {
-		
-		LocalDate fecha = LocalDate.of(2025, 11, 15); 
-		assertFalse(ruta.saleDespuesDe(fecha));
-	}
-
 }

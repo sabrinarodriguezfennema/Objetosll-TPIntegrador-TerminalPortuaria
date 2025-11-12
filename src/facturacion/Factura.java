@@ -11,8 +11,9 @@ public class Factura implements IFactura{
 	private Desglose desglose;
 	private Set<Servicio> servicios;
 	
-	public Factura(Set<Servicio> servicios) {
-		this.servicios = new HashSet<Servicio>(); 
+	public Factura(Set<Servicio> servicios, Desglose desglose) {
+		this.servicios = new HashSet<Servicio>();
+		this.desglose = desglose;
 	}
 	
 	public int montoTotal() {

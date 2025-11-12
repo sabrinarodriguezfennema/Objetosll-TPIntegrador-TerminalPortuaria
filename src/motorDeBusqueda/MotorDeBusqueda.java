@@ -1,6 +1,7 @@
 package motorDeBusqueda;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import filtro.Filtro;

@@ -2,9 +2,7 @@ package rutaMaritima;
 
 import java.time.Duration;
 
-
 import java.time.LocalDate;
-import java.util.List;
 
 import interfaces.Circuito;
 import interfaces.Terminal;
@@ -14,28 +12,38 @@ public class RutaMaritima {
 	
 	private Viaje viaje;   // tuve que agregar viaje ya que con circuito no puedo obtener la fecha de inicio entonces no podria calcular la fecha limite
 	private Circuito circuitoDeViaje;
+	private Terminal terminal;
 	
-	public RutaMaritima(Viaje viaje) {
+	public RutaMaritima(Viaje viaje, Terminal terminal) {
 		this.viaje = viaje;
 		this.circuitoDeViaje = viaje.getCircuito();
+		this.terminal = terminal;
 	} 
 	
-	public boolean contienePuertoDestino(Terminal destino) {
-		List<Terminal> terminales = circuitoDeViaje.getTodasLasTerminalesDestino();
-		return terminales.contains(destino);
+    public Terminal puertoDestino() {
+    	return terminal;
+    }
+	
+	public LocalDate fechaSalida() {
+		return viaje.getFechaInicio();
 	}
-		
-	public LocalDate fechaEstimadaDeLlegada() {
+	
+	public LocalDate fechaLlegada() {
 		Duration duracionTotal = circuitoDeViaje.duracionTotal();
 		int dias = (int) duracionTotal.toDays();
 		return viaje.getFechaInicio().plusDays(dias);
-	}
 		
-	public boolean llegaAntesDe(LocalDate fechaLimite) {
-		return fechaEstimadaDeLlegada().isBefore(fechaLimite);
 	}
-		
-	public boolean saleDespuesDe(LocalDate fechaInicio) {
-		return viaje.getFechaInicio().isAfter(fechaInicio);
+
+	public Circuito getCircuito() {
+		return circuitoDeViaje;
+	}
+	
+	public Viaje getViaje() {
+		return viaje;
+	}
+
+	public String getNombre() {
+		return viaje.getBuque().getNombre();
 	}
 }
