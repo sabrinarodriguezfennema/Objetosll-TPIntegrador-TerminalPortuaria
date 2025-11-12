@@ -4,6 +4,7 @@ import java.time.Duration;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,12 +19,12 @@ import interfaces.ITramo;
 
 public class Viaje implements IViaje{
 	
-	private LocalDate fechaSalida;
+	private LocalDateTime fechaSalida;
 	private IBuque buque;
 	private ICircuito circuito;
 	
 	
-	public Viaje(LocalDate fechaSalida, IBuque buque,ICircuito circuito) {
+	public Viaje(LocalDateTime fechaSalida, IBuque buque,ICircuito circuito) {
 		this.fechaSalida = fechaSalida;
 		this.buque = buque;
 		this.circuito = circuito;
@@ -33,12 +34,12 @@ public class Viaje implements IViaje{
 		return buque;
 	}
 	
-	public Map<ITerminal, LocalDate> cronograma() {
-        Map<ITerminal, LocalDate> cronograma = new LinkedHashMap<>();
+	public Map<ITerminal, LocalDateTime> cronograma() {
+        Map<ITerminal, LocalDateTime> cronograma = new LinkedHashMap<>();
 
         List<ITramo> tramos = circuito.getTramos();
 
-        LocalDate fechaActual = fechaSalida;
+        LocalDateTime fechaActual = fechaSalida;
 
         if (!tramos.isEmpty()) {
             cronograma.put(tramos.get(0).getOrigen(), fechaActual);
@@ -63,7 +64,7 @@ public class Viaje implements IViaje{
 	}
 
 	@Override
-	public LocalDate fechaSalida() {
+	public LocalDateTime fechaSalida() {
 		return fechaSalida;
 	}
 

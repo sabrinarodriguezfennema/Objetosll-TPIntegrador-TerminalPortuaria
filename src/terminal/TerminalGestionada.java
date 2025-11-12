@@ -205,7 +205,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 				IOrden orden = ordenPorContainer.get(container.getId());
 				if(ordenesExportacion.contains(orden)) { //Si es de exportación
 					buqueDelBuqueViaje.addContainer(container);
-					orden.generarFactura(LocalDateTime.now(),100.00, 300.00, viajeDelBuqueViaje); //TODO hacer que la orden de exportacion gener factura también
+					orden.generarFactura(LocalDateTime.now(),100.00, 300.00, viajeDelBuqueViaje);
 					
 					containers.remove(container);
 					ordenPorContainer.remove(container.getId());
@@ -213,6 +213,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 				} else { //Donde ya es de importación siosi
 					buqueDelBuqueViaje.removeContainer(container);
 					containers.add(container);
+					((IConsignee) orden.getCliente()).fechaDeImportacion(viajeDelBuqueViaje.cronograma().get(this));
 				}
 			}
 		}
