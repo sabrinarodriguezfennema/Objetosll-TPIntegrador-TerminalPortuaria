@@ -49,6 +49,13 @@ class TestBuqueViaje {
 		assertEquals(unasCoordenadas, resultado);
 	}
 	
+	@Test
+	void testUnBuqueViajeConoceSuViaje() {		
+		IViaje resultado = unBuqueViaje.getViaje();
+		
+		assertEquals(unViaje, resultado);
+	}
+	
 //	@Test
 //	void testUnBuqueViajeIniciaAlComienzoDeSuViaje() {
 //		Coordenadas resultado = unBuqueViaje.getCoordenadas();

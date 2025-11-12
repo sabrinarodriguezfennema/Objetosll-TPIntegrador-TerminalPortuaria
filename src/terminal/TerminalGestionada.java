@@ -187,7 +187,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 				IOrden orden = ordenPorContainer.get(container.getId());
 				if(ordenesExportacion.contains(orden)) { //Si es de exportación
 					buqueDelBuqueViaje.addContainer(container);
-					orden.generarFactura(LocalDateTime.now(), 300d, viajeDelBuqueViaje);
+					orden.generarFactura(LocalDateTime.now(), 300d, viajeDelBuqueViaje); //TODO hacer que la orden de exportacion gener factura también
 					
 					containers.remove(container);
 					ordenPorContainer.remove(container.getId());

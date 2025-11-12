@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,8 +32,8 @@ class BillOfLadingTest {
 	void testUnBLSimpleConoceSuTipoDeProducto() {
 		BLSimple unBLSimple = new BLSimple("Ropa", 15);
 		
-		List<String> resultado = unBLSimple.tipoDeProducto();
-		List<String> esperado = new ArrayList<String>();
+		Set<String> resultado = unBLSimple.tipoDeProducto();
+		Set<String> esperado = new HashSet<String>();
 		esperado.add("Ropa");
 		assertEquals(esperado, resultado);
 	}
@@ -60,20 +62,20 @@ class BillOfLadingTest {
 		BLSimple otroBLSimple = mock(BLSimple.class);
 		listaDeBLsEnUnBLEspecial.add(unBLSimple);
 		listaDeBLsEnUnBLEspecial.add(otroBLSimple);
-		List<String> tipoDeProductoDeUnBLSimple = new ArrayList<String>();
-		List<String> tipoDeProductoDeOtroBLSimple = new ArrayList<String>();
+		Set<String> tipoDeProductoDeUnBLSimple = new HashSet<String>();
+		Set<String> tipoDeProductoDeOtroBLSimple = new HashSet<String>();
 		tipoDeProductoDeUnBLSimple.add("Ropa");
 		tipoDeProductoDeUnBLSimple.add("Cosmético");
 		when(unBLSimple.tipoDeProducto()).thenReturn(tipoDeProductoDeUnBLSimple);
 		when(otroBLSimple.tipoDeProducto()).thenReturn(tipoDeProductoDeOtroBLSimple);
 		BLEspecial unBLEspecial = new BLEspecial(listaDeBLsEnUnBLEspecial);
 		
-		List<String> resultado = unBLEspecial.tipoDeProducto();
-		List<String> expected  = new ArrayList<String>();
-		expected.add("Ropa");
-		expected.add("Cosmético");
+		Set<String> resultado = unBLEspecial.tipoDeProducto();
+		Set<String> esperado  = new HashSet<String>();
+		esperado.add("Ropa");
+		esperado.add("Cosmético");
 		
-		assertEquals(expected, resultado);
+		assertEquals(esperado, resultado);
 	}
 	
 	@Test

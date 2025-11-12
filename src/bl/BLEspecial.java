@@ -1,7 +1,8 @@
 package bl;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class BLEspecial implements BillOfLading{
 
@@ -12,11 +13,11 @@ public class BLEspecial implements BillOfLading{
 	}
 
 	@Override
-	public List<String> tipoDeProducto() { //TODO posiblemente podría ser un Set
-		List<String> tiposDeProductos = new ArrayList<String>(); 
+	public Set<String> tipoDeProducto() {
+		Set<String> tiposDeProductos = new HashSet<String>(); 
 		for (BillOfLading bl : blsAgrupados) {
 			tiposDeProductos.addAll(bl.tipoDeProducto());
-		} //TODO buqueViaje IBuqueVIaje Viaje TerminalGestionada Terminal RutaMaritima
+		}
 		return tiposDeProductos;
 	}
 

@@ -1,7 +1,7 @@
 package bl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BLSimple implements BillOfLading {
 
@@ -17,8 +17,8 @@ public class BLSimple implements BillOfLading {
 		return peso;
 	}
 
-	public List<String> tipoDeProducto() {
-		List<String> resultado = new ArrayList<String>();
+	public Set<String> tipoDeProducto() {
+		Set<String> resultado = new HashSet<String>();
 		resultado.add(tipoDeProducto);
 		return resultado;
 	}

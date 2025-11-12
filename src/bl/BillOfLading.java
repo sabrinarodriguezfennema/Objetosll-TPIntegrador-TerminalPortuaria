@@ -1,10 +1,11 @@
 package bl;
 
-import java.util.List;
+
+import java.util.Set;
 
 public interface BillOfLading {
 	
-	public List<String> tipoDeProducto();
+	public Set<String> tipoDeProducto();
 	
 	public double peso();
 }
