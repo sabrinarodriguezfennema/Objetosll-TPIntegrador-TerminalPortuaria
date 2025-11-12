@@ -8,6 +8,7 @@ import interfaces.IContainer;
 import interfaces.IFactura;
 import interfaces.IOrdenDeExportacion;
 import interfaces.IShipper;
+import interfaces.ITerminal;
 import interfaces.IViaje;
 import terminal.Terminal;
 import terminal.TerminalGestionada;
@@ -17,13 +18,13 @@ public class OrdenDeExportacion extends Orden implements IOrdenDeExportacion {
 	private LocalDate fechaSalida;
 	private LocalDate fechaLlegada;
 	private LocalDateTime turno;
-	private Terminal terminalDestino;
+	private ITerminal terminalDestino;
 
-	public OrdenDeExportacion(IShipper cliente, IContainer datosDeCarga, String patenteCamion, String dniChofer, LocalDate fechaSalida, LocalDate fechaLlegada, Terminal terminalDestino) {
+	public OrdenDeExportacion(IShipper cliente, IContainer datosDeCarga, String patenteCamion, String dniChofer, LocalDate fechaSalida, LocalDate fechaLlegada, ITerminal terminal) {
 		super(datosDeCarga, patenteCamion, dniChofer, cliente);
 		this.fechaSalida = fechaSalida;
 		this.fechaLlegada = fechaLlegada;
-		this.terminalDestino = terminalDestino;
+		this.terminalDestino = terminal;
 		this.cliente = cliente;
 	}
 	
@@ -52,7 +53,7 @@ public class OrdenDeExportacion extends Orden implements IOrdenDeExportacion {
 	}
 
 	@Override
-	public Terminal getTerminalDestino() {
+	public ITerminal getTerminalDestino() {
 		return terminalDestino;
 	}
 

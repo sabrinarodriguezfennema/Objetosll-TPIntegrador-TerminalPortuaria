@@ -3,6 +3,7 @@ package filtro;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +15,7 @@ import filtro.FechaSalidaAntesDe;
 import filtro.FechaSalidaDespuesDe;
 import filtro.FiltroSimple;
 import filtro.PuertoIgualA;
+import interfaces.IRutaMaritima;
 import interfaces.ITerminal;
 import paraMock.RutaMaritima;
 
@@ -21,12 +23,12 @@ import paraMock.RutaMaritima;
 
 class FiltroSimpleTest {
 
-	RutaMaritima unaRutaMaritima;
+	IRutaMaritima unaRutaMaritima;
 	ITerminal unPuerto;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		unaRutaMaritima = mock(RutaMaritima.class);
+		unaRutaMaritima = mock(IRutaMaritima.class);
 		unPuerto        = mock(ITerminal.class);
 	}
 
@@ -55,9 +57,9 @@ class FiltroSimpleTest {
 	
 	@Test
 	void testFiltroSimpleFechaLlegadaMenorA() {
-		Date unaFecha = new Date(2025, 3, 1);
+		LocalDate unaFecha = LocalDate.of(2025, 3, 1);
 		when(unaRutaMaritima.fechaLlegada()).thenReturn(unaFecha);
-		FiltroSimple unFiltroSimple = new FechaLlegadaAntesDe(new Date(2025, 4, 1));
+		FiltroSimple unFiltroSimple = new FechaLlegadaAntesDe(LocalDate.of(2025, 4, 1));
 		
 		boolean resultado = unFiltroSimple.cumple(unaRutaMaritima); 
 		
@@ -67,9 +69,9 @@ class FiltroSimpleTest {
 	
 	@Test
 	void testFiltroSimpleFechaLlegadaNoEsMenorA() {
-		Date unaFecha = new Date(2025, 3, 1);
+		LocalDate unaFecha = LocalDate.of(2025, 3, 1);
 		when(unaRutaMaritima.fechaLlegada()).thenReturn(unaFecha);
-		FiltroSimple unFiltroSimple = new FechaLlegadaAntesDe(new Date(2025, 2, 1));
+		FiltroSimple unFiltroSimple = new FechaLlegadaAntesDe(LocalDate.of(2025, 2, 1));
 		
 		boolean resultado = unFiltroSimple.cumple(unaRutaMaritima); 
 		
@@ -79,9 +81,9 @@ class FiltroSimpleTest {
 	
 	@Test
 	void testFiltroSimpleFechaLlegadaMayorA() {
-		Date unaFecha = new Date(2025, 3, 1);
+		LocalDate unaFecha = LocalDate.of(2025, 3, 1);
 		when(unaRutaMaritima.fechaLlegada()).thenReturn(unaFecha);
-		FiltroSimple unFiltroSimple = new FechaLlegadaDespuesDe(new Date(2025, 2, 1));
+		FiltroSimple unFiltroSimple = new FechaLlegadaDespuesDe(LocalDate.of(2025, 2, 1));
 		
 		boolean resultado = unFiltroSimple.cumple(unaRutaMaritima); 
 		
@@ -91,9 +93,9 @@ class FiltroSimpleTest {
 	
 	@Test
 	void testFiltroSimpleFechaLlegadaNoEsMayorA() {
-		Date unaFecha = new Date(2025, 3, 1);
+		LocalDate unaFecha = LocalDate.of(2025, 3, 1);
 		when(unaRutaMaritima.fechaLlegada()).thenReturn(unaFecha);
-		FiltroSimple unFiltroSimple = new FechaLlegadaDespuesDe(new Date(2025, 4, 1));
+		FiltroSimple unFiltroSimple = new FechaLlegadaDespuesDe(LocalDate.of(2025, 4, 1));
 		
 		boolean resultado = unFiltroSimple.cumple(unaRutaMaritima); 
 		
@@ -103,9 +105,9 @@ class FiltroSimpleTest {
 	
 	@Test
 	void testFiltroSimpleFechaSalidaMenorA() {
-		Date unaFecha = new Date(2025, 3, 1);
+		LocalDate unaFecha = LocalDate.of(2025, 3, 1);
 		when(unaRutaMaritima.fechaSalida()).thenReturn(unaFecha);
-		FiltroSimple unFiltroSimple = new FechaSalidaAntesDe(new Date(2025, 4, 1));
+		FiltroSimple unFiltroSimple = new FechaSalidaAntesDe(LocalDate.of(2025, 4, 1));
 		
 		boolean resultado = unFiltroSimple.cumple(unaRutaMaritima); 
 		
@@ -115,9 +117,9 @@ class FiltroSimpleTest {
 	
 	@Test
 	void testFiltroSimpleFechaSalidaNoEsMenorA() {
-		Date unaFecha = new Date(2025, 3, 1);
+		LocalDate unaFecha = LocalDate.of(2025, 3, 1);
 		when(unaRutaMaritima.fechaSalida()).thenReturn(unaFecha);
-		FiltroSimple unFiltroSimple = new FechaSalidaAntesDe(new Date(2025, 2, 1));
+		FiltroSimple unFiltroSimple = new FechaSalidaAntesDe(LocalDate.of(2025, 2, 1));
 		
 		boolean resultado = unFiltroSimple.cumple(unaRutaMaritima); 
 		
@@ -127,9 +129,9 @@ class FiltroSimpleTest {
 	
 	@Test
 	void testFiltroSimpleFechaSalidaMayorA() {
-		Date unaFecha = new Date(2025, 3, 1);
+		LocalDate unaFecha = LocalDate.of(2025, 3, 1);
 		when(unaRutaMaritima.fechaSalida()).thenReturn(unaFecha);
-		FiltroSimple unFiltroSimple = new FechaSalidaDespuesDe(new Date(2025, 2, 1));
+		FiltroSimple unFiltroSimple = new FechaSalidaDespuesDe(LocalDate.of(2025, 2, 1));
 		
 		boolean resultado = unFiltroSimple.cumple(unaRutaMaritima); 
 		
@@ -139,9 +141,9 @@ class FiltroSimpleTest {
 	
 	@Test
 	void testFiltroSimpleFechaSalidaNoEsMayorA() {
-		Date unaFecha = new Date(2025, 3, 1);
+		LocalDate unaFecha = LocalDate.of(2025, 3, 1);
 		when(unaRutaMaritima.fechaSalida()).thenReturn(unaFecha);
-		FiltroSimple unFiltroSimple = new FechaSalidaDespuesDe(new Date(2025, 4, 1));
+		FiltroSimple unFiltroSimple = new FechaSalidaDespuesDe(LocalDate.of(2025, 4, 1));
 		
 		boolean resultado = unFiltroSimple.cumple(unaRutaMaritima); 
 		

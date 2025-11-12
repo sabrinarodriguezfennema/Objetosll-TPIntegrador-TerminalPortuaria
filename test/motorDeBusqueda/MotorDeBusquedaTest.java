@@ -10,24 +10,23 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import filtro.Filtro;
-import interfaces.ITerminal;
-import motorDeBusqueda.MotorDeBusqueda;
-import paraMock.RutaMaritima;
+import interfaces.IRutaMaritima;
+
 
 class MotorDeBusquedaTest {
 	
-	List<RutaMaritima> rutasMaritimas;
-	RutaMaritima ruta1;
-	RutaMaritima ruta2;
-	RutaMaritima ruta3;
+	List<IRutaMaritima> rutasMaritimas;
+	IRutaMaritima ruta1;
+	IRutaMaritima ruta2;
+	IRutaMaritima ruta3;
 	Filtro filtro;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		rutasMaritimas = new ArrayList<RutaMaritima>();
-		ruta1 = mock(RutaMaritima.class);
-		ruta2 = mock(RutaMaritima.class);
-		ruta3 = mock(RutaMaritima.class);
+		rutasMaritimas = new ArrayList<IRutaMaritima>();
+		ruta1 = mock(IRutaMaritima.class);
+		ruta2 = mock(IRutaMaritima.class);
+		ruta3 = mock(IRutaMaritima.class);
 		rutasMaritimas.add(ruta1);
 		rutasMaritimas.add(ruta2);
 		rutasMaritimas.add(ruta3);
@@ -45,7 +44,7 @@ class MotorDeBusquedaTest {
 		MotorDeBusqueda unMotorDeBusqueda = new MotorDeBusqueda(rutasMaritimas);
 		
 		unMotorDeBusqueda.aplicarFiltro(filtro);
-		List<RutaMaritima> resultado = unMotorDeBusqueda.getRutasFiltradas();
+		List<IRutaMaritima> resultado = unMotorDeBusqueda.getRutasFiltradas();
 		
 		assertEquals(3, resultado.size());
 	}
@@ -60,7 +59,7 @@ class MotorDeBusquedaTest {
 		MotorDeBusqueda unMotorDeBusqueda = new MotorDeBusqueda(rutasMaritimas);
 		
 		unMotorDeBusqueda.aplicarFiltro(filtro);
-		List<RutaMaritima> resultado = unMotorDeBusqueda.getRutasFiltradas();
+		List<IRutaMaritima> resultado = unMotorDeBusqueda.getRutasFiltradas();
 		
 		assertEquals(1, resultado.size());
 	}
@@ -86,7 +85,7 @@ class MotorDeBusquedaTest {
 		unMotorDeBusqueda.aplicarFiltro(filtro2);
 		
 		
-		List<RutaMaritima> resultado = unMotorDeBusqueda.getRutasFiltradas();
+		List<IRutaMaritima> resultado = unMotorDeBusqueda.getRutasFiltradas();
 		
 		assertEquals(3, resultado.size());
 	}

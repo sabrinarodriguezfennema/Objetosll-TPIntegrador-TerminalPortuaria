@@ -15,7 +15,6 @@ import buqueViaje.Coordenadas;
 import excepciones.OperacionNoDisponibleException;
 import interfaces.IFactura;
 import interfaces.IViaje;
-import interfaces.Notificable;
 import motorDeBusqueda.MotorDeBusqueda;
 import interfaces.ICliente;
 import interfaces.IShipper;
@@ -25,15 +24,13 @@ import interfaces.IBuqueViaje;
 import interfaces.IContainer;
 import interfaces.INaviera;
 import interfaces.IRutaMaritima;
-import interfaces.IServicio;
 import interfaces.IConsignee;
 import interfaces.IOrden;
 import ordenes.OrdenDeExportacion;
 import ordenes.OrdenDeImportacion;
 import interfaces.IEmpresaTransportista;
-import servicios.Servicio;
+import servicios.ServicioLavado;
 import servicios.ServicioPesado;
-import traslado.EmpresaTransportista;
 import interfaces.IOrdenDeExportacion;
 import interfaces.IOrdenDeImportacion;
 
@@ -54,11 +51,9 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	private boolean sePuedenRealizarPagos;
 	private boolean sePuedenInformarImportacionesYExportaciones;
 	private Set<IBuqueViaje> buqueViajes;
-	
-
 
 	public TerminalGestionada(String nombre, Coordenadas ubicacion) {
-		
+
 		super(nombre, ubicacion);
 		sePuedenRealizarPagos = true;
 		sePuedenInformarImportacionesYExportaciones = true;
@@ -113,12 +108,12 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 
 	}
 
-	public void iniciarViaje (IViaje viaje) {
+	public void iniciarViaje(IViaje viaje) {
 		buqueViajes.add(new BuqueViaje(viaje, this, this));
 
 	}
-	
-	public Set<IBuqueViaje> getBuqueViajes(){
+
+	public Set<IBuqueViaje> getBuqueViajes() {
 		return buqueViajes;
 
 	}
@@ -135,8 +130,8 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		IOrdenDeExportacion orden = ordenesActivasPorPatente.get(patenteCamion);
 
 		if (orden == null) {
-	        return false; 
-	    }
+			return false;
+		}
 
 		boolean validarCamion = this.camionesRegistrados.contains(patenteCamion) && orden.getCamion() == patenteCamion;
 
@@ -162,67 +157,69 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 
 	@Override
 	public void avisoDeSalida(IBuqueViaje bv) {
-		//avisarle a los shippers que hayan exportado su container en ese bv
+		// avisarle a los shippers que hayan exportado su container en ese bv
 		IViaje viajeDelBuqueViaje = bv.getViaje();
 		ICliente shipper;
 		for (IOrdenDeExportacion orden : ordenesExportacion) {
-			if(containersPorViaje.get(orden.getDatosDeCarga()) == viajeDelBuqueViaje) {
+			if (containersPorViaje.get(orden.getDatosDeCarga()) == viajeDelBuqueViaje) {
 				shipper = orden.getCliente();
 				shipper.recibirMail("Su carga ya ha salido de la terminal");
 			}
 		}
-		this.setSePuedenRealizarPagos(false);//Pasa a outbound, donde no se pueden realizar pagos hasta departing
+		this.setSePuedenRealizarPagos(false);// Pasa a outbound, donde no se pueden realizar pagos hasta departing
 	}
-	
-	
-	
 
 	@Override
 	public void inminenteArribo(IBuqueViaje bv) {
-		this.setSePuedenInformarImportacionesYExportaciones(false); //Pasa a Arrived, donde no se pueden informar Importaciones ni Exportaciones
-		
+		this.setSePuedenInformarImportacionesYExportaciones(false); // Pasa a Arrived, donde no se pueden informar
+																	// Importaciones ni Exportaciones
+
 		IViaje viajeDelBuqueViaje = bv.getViaje();
 		ICliente consignee;
 		for (IOrdenDeImportacion orden : ordenesImportacion) {
-			if(viajeDelBuqueViaje.equals(containersPorViaje.get(orden.getDatosDeCarga()))) {
+			if (viajeDelBuqueViaje.equals(containersPorViaje.get(orden.getDatosDeCarga()))) {
 				consignee = orden.getCliente();
 				consignee.recibirMail("Su carga esta llegando a la terminal");
 			}
 		}
 	}
-	
+
 	@Override
 	public void avisoDeLlegada(IBuqueViaje bv) {
-		this.setSePuedenInformarImportacionesYExportaciones(true); //deja de estar en Arrived, donde ya se pueden informar Importaciones y Exportaciones
-		
+		this.setSePuedenInformarImportacionesYExportaciones(true); // deja de estar en Arrived, donde ya se pueden
+																	// informar Importaciones y Exportaciones
+
 		bv.inicioDeTrabajo();
 		IViaje viajeDelBuqueViaje = bv.getViaje();
-		IBuque buqueDelBuqueViaje =  viajeDelBuqueViaje.getBuque();
-		Set<IContainer> containersDelBuqueViaje = buqueDelBuqueViaje.getContainers(); 
-		
+		IBuque buqueDelBuqueViaje = viajeDelBuqueViaje.getBuque();
+		Set<IContainer> containersDelBuqueViaje = buqueDelBuqueViaje.getContainers();
+
 		for (IContainer container : containersDelBuqueViaje) {
-			if(containersPorViaje.get(container) == viajeDelBuqueViaje) {
+			if (containersPorViaje.get(container) == viajeDelBuqueViaje) {
 				IOrden orden = ordenPorContainer.get(container.getId());
-				if(ordenesExportacion.contains(orden)) { //Si es de exportación
+				if (ordenesExportacion.contains(orden)) { // Si es de exportación
 					buqueDelBuqueViaje.addContainer(container);
-					orden.generarFactura(LocalDateTime.now(),100.00, 300.00, viajeDelBuqueViaje); //TODO hacer que la orden de exportacion gener factura también
-					
+					orden.generarFactura(LocalDateTime.now(), 100.00, 300.00, viajeDelBuqueViaje); // TODO hacer que la
+																									// orden de
+																									// exportacion gener
+																									// factura también
+
 					containers.remove(container);
 					ordenPorContainer.remove(container.getId());
 					containersPorViaje.remove(container);
-				} else { //Donde ya es de importación siosi
+				} else { // Donde ya es de importación siosi
 					buqueDelBuqueViaje.removeContainer(container);
 					containers.add(container);
 				}
 			}
 		}
 		bv.depart();
-		setSePuedenRealizarPagos(true); //Pasa a Departing, donde si se pueden realizar pagos
+		setSePuedenRealizarPagos(true); // Pasa a Departing, donde si se pueden realizar pagos
 	}
-	
-	//registrarPago(factura) error
-	public void registrarPago(IFactura factura) throws OperacionNoDisponibleException{
-		if(!sePuedenRealizarPagos) {
+
+	// registrarPago(factura) error
+	public void registrarPago(IFactura factura) throws OperacionNoDisponibleException {
+		if (!sePuedenRealizarPagos) {
 			throw new OperacionNoDisponibleException("No se pueden realizar pagos en este momento");
 		}
 	}
@@ -236,24 +233,25 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		}
 		return new MotorDeBusqueda(viajesDisponibles, this, unaTerminal);
 	}
-	
+
 	@Override
-	public void exportar(IContainer c, Terminal t, IRutaMaritima rm, IShipper exportador,
-			IEmpresaTransportista empresa) throws OperacionNoDisponibleException{ 
-		if(!sePuedenInformarImportacionesYExportaciones) {
-			throw new OperacionNoDisponibleException("No se pueden informar importaciones o exportaciones en este momento");
+	public void exportar(IContainer c, Terminal t, IRutaMaritima rm, IShipper exportador, IEmpresaTransportista empresa)
+			throws OperacionNoDisponibleException {
+		if (!sePuedenInformarImportacionesYExportaciones) {
+			throw new OperacionNoDisponibleException(
+					"No se pueden informar importaciones o exportaciones en este momento");
 		}
-		
+
 		LocalDate salida = rm.fechaSalida();
 		LocalDate llegada = rm.fechaLlegada();
 		String patenteCamion = empresa.asignarCamionPara(c);
 		String dniChofer = empresa.asignarChoferPara(c);
-		
+
 		OrdenDeExportacion orden = new OrdenDeExportacion(exportador, c, patenteCamion, dniChofer, salida, llegada,
 				rm.puertoDestino());
-		
+
 		orden.agregarServicio(new ServicioPesado(100.00));
-		
+
 		registrarOrden(orden);
 		registrarContainer(c);
 		registrarCamion(patenteCamion);
@@ -261,35 +259,30 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		registrarEmpresaTransportista(empresa);
 		registrarCliente(exportador);
 		ordenPorContainer.put(c.getId(), orden);
-		
+
 		IViaje viaje = rm.getViaje();
 		containersPorViaje.put(c, viaje);
 	}
 
 	@Override
-	public void datosParaElRetiro(IConsignee importador, IEmpresaTransportista empresa, IContainer c) throws OperacionNoDisponibleException{ 
-		if(!sePuedenInformarImportacionesYExportaciones) {
-			throw new OperacionNoDisponibleException("No se pueden informar importaciones o exportaciones en este momento");
+	public void datosParaElRetiro(IConsignee importador, IEmpresaTransportista empresa, IContainer c)
+			throws OperacionNoDisponibleException {
+		if (!sePuedenInformarImportacionesYExportaciones) {
+			throw new OperacionNoDisponibleException(
+					"No se pueden informar importaciones o exportaciones en este momento");
 		}
-		
-		IBuque buque = navierasRegistradas.stream().
-				flatMap(naviera -> naviera.getBuques().stream())
-				.filter(b -> b.getContainers().contains(c))
-				.findFirst()
+
+		IBuque buque = navierasRegistradas.stream().flatMap(naviera -> naviera.getBuques().stream())
+				.filter(b -> b.getContainers().contains(c)).findFirst()
 				.orElseThrow(() -> new RuntimeException("Contenedor no encontrado en ningún buque registrado"));
-		
-		IViaje viajeDelContenedor = navierasRegistradas.stream()
-			    .flatMap(naviera -> naviera.getViajes().stream())
-			    .filter(viaje -> viaje.getBuque().equals(buque) && 
-			                     viaje.getBuque().getContainers().contains(c))
-			    .findFirst()
-			    .orElseThrow(() -> new RuntimeException("Viaje no encontrado"));
-				
-		
+
+		IViaje viajeDelContenedor = navierasRegistradas.stream().flatMap(naviera -> naviera.getViajes().stream())
+				.filter(viaje -> viaje.getBuque().equals(buque) && viaje.getBuque().getContainers().contains(c))
+				.findFirst().orElseThrow(() -> new RuntimeException("Viaje no encontrado"));
+
 		containersPorViaje.put(c, viajeDelContenedor);
 
-		LocalDateTime fechaYHoraLlegada = viajeDelContenedor.fechaSalida() 
-				.atStartOfDay() 
+		LocalDateTime fechaYHoraLlegada = viajeDelContenedor.fechaSalida().atStartOfDay()
 				.plus(viajeDelContenedor.getCircuito().duracionTotal());
 
 		String patenteCamion = empresa.asignarCamionPara(c);
@@ -302,6 +295,14 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		registrarCliente(importador);
 		ordenPorContainer.put(c.getId(), orden);
 	}
+	
+	public void agregarServicioDeLavado(IContainer container) {
+		IOrden orden = ordenPorContainer.get(container.getId());
+	    
+	    if (orden != null) {
+	        orden.agregarServicio(new ServicioLavado(200.00, 400.00));
+	    }
+	}
 
 	public String getNombre() {
 		return nombre;
@@ -309,7 +310,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 
 	@Override
 	public Coordenadas getCoordenadas() {
-		
+
 		return ubicacion;
 	}
 
@@ -317,8 +318,8 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		return facturas.size();
 	}
 
-	public void retiroDeContainer(String patente, String dni, String idContainer, LocalDateTime  fechaDeRetiro) {
-		if(verificarCargaRetiro(patente, dni)) {
+	public void retiroDeContainer(String patente, String dni, String idContainer, LocalDateTime fechaDeRetiro) {
+		if (verificarCargaRetiro(patente, dni)) {
 			IOrden orden = ordenPorContainer.get(idContainer);
 			IContainer container = orden.getDatosDeCarga();
 			containers.remove(container);
@@ -328,14 +329,27 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		}
 	}
 
+	public void entregaDeContainer(String patente, String dni, IContainer container, LocalDateTime fechaDeEntrega) {
+		if (verificarCargaLlegada(patente, dni, fechaDeEntrega)) {
+			IOrdenDeImportacion orden = (IOrdenDeImportacion) ordenPorContainer.get(container.getId());
+			if (orden != null) {
+				containers.add(container);
+
+				IViaje viaje = containersPorViaje.get(container);
+				IFactura factura = orden.generarFactura(fechaDeEntrega, 100.00, 200.00, viaje);
+
+				facturas.add(factura);
+				orden.getCliente().recibirFactura(factura);
+			}
+		}
+	}
+
 	protected void setSePuedenInformarImportacionesYExportaciones(boolean b) {
 		sePuedenInformarImportacionesYExportaciones = b;
 	}
-	
+
 	protected void setSePuedenRealizarPagos(boolean b) {
 		sePuedenRealizarPagos = b;
 	}
-
-
 
 }
