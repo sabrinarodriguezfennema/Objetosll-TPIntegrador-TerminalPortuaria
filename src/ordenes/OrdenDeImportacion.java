@@ -4,6 +4,7 @@ package ordenes;
 import java.time.Duration;
 
 
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -48,7 +49,7 @@ public class OrdenDeImportacion extends Orden implements IOrdenDeImportacion{
 	    	int díasDeMas = díasExcedentes - this.diasTolerancia;
 	    	servicios.add(new ServicioAlmacenamientoExcedente(montoPorDiaExcedente, díasDeMas));
 	    }
-	    return new Factura(servicios,null);
+	    return new Factura(servicios);
 	}
 	
 	public void agregarServicio(Servicio s) {

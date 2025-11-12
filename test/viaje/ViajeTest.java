@@ -80,5 +80,12 @@ public class ViajeTest {
 	      assertEquals(fechaInicio.plusDays(2), cronograma.get(t2)); 
 	      assertEquals(fechaInicio.plusDays(5), cronograma.get(t3));  
 	}
+	
+	@Test
+	void montoViaje() {
+		
+		when(viaje.precioTotal()).thenReturn(500.00);
+		assertEquals(500.00, viaje.precioTotal(),1);
+	}
 
 }

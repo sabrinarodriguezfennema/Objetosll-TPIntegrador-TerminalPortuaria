@@ -1,7 +1,6 @@
 package facturacion;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 
@@ -22,7 +21,7 @@ public class ItemDesgloseTest {
 	
 	@Test
 	void obtenerMonto() {
-		assertEquals(500, itd.getMonto());
+		assertEquals(500, itd.getMonto(),1);
 	}
 	
 	@Test

@@ -1,9 +1,15 @@
 package servicios;
 
+import java.time.LocalDate;
+
 import containers.Container;
 
-public interface Servicio {
+public abstract class Servicio {
 	
-	public double getPrecio(Container c);
+	LocalDate fecha;
+	
+	public abstract double getPrecio(Container c);
+	
+	public LocalDate getFecha() { return fecha; }
 
 }

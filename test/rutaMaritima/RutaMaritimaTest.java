@@ -7,6 +7,8 @@ import static org.mockito.Mockito.*;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.*;
 
@@ -20,49 +22,53 @@ public class RutaMaritimaTest {
 	RutaMaritima ruta; 
 	Viaje viaje; 
 	Circuito circuito;
-	Terminal ter1;
-	LocalDate fechaInicio;
+	Terminal terA;
+	Terminal terB;
+	Terminal terC;
 	
 	@BeforeEach
 	void setUp() {
+		
 		viaje = mock(Viaje.class);
+		terA = mock(Terminal.class);
+		terB = mock(Terminal.class);
+		terC = mock(Terminal.class);
 		circuito = mock(Circuito.class);
-		ter1 = mock(Terminal.class);
 		
 		when(viaje.getCircuito()).thenReturn(circuito);
-
-		ruta = new RutaMaritima(viaje,ter1);
 		
-		fechaInicio = LocalDate.of(2025, 11, 9);
+		when(circuito.getTodasLasTerminales()).thenReturn(List.of(terA, terB, terC));
 		
-		when(viaje.getFechaInicio()).thenReturn(fechaInicio);
+		when(viaje.getCircuito()).thenReturn(circuito);
+        when(viaje.cronograma()).thenReturn(
+                Map.of( terA, LocalDate.of(2025, 11, 10),
+                		terB, LocalDate.of(2025, 11, 13),
+                		terC, LocalDate.of(2025, 11, 16)));
+        
+        ruta = new RutaMaritima(viaje,terA, terC);
 	}
 	
 	@Test
-	void fechaEstimadaDeLLegada() {
-		
-		when(circuito.duracionTotal()).thenReturn(Duration.ofDays(5));
-		assertEquals(LocalDate.of(2025, 11, 14), ruta.fechaLlegada());
-	}
-	
-	@Test 
-	void fechaDeInicioViaje() {
-		
-		assertTrue(ruta.fechaSalida().equals(fechaInicio));
-	}
-	
+    void obtenerPuertoDestino() {
+        assertEquals(terC, ruta.puertoDestino());
+    }
+
+    @Test
+    void fechaSalida() {
+        assertEquals(LocalDate.of(2025, 11, 10), ruta.fechaSalida());
+    }
+    
+    @Test
+    void fechaLlegada() {
+        assertEquals(LocalDate.of(2025, 11, 16), ruta.fechaLlegada());
+    }
+    	
 	@Test
 	void circuitoDelViaje() {
 		
 		assertTrue(ruta.getCircuito().equals(circuito));
 	}
-	
-	@Test
-	void puertoDestino() {
 		
-		assertTrue(ruta.puertoDestino().equals(ter1));
-	}
-	
 	@Test 
 	void obtenerViaje() {
 		assertEquals(viaje, ruta.getViaje());

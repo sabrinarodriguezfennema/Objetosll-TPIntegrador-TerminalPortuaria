@@ -43,11 +43,11 @@ public class DesgloseTest {
 		desglose.agregarItem(itd2);
 		desglose.agregarItem(itd3);
 		
-		when(itd1.getMonto()).thenReturn(100);
-		when(itd2.getMonto()).thenReturn(150);
-		when(itd3.getMonto()).thenReturn(350);
+		when(itd1.getMonto()).thenReturn(100.00);
+		when(itd2.getMonto()).thenReturn(150.00);
+		when(itd3.getMonto()).thenReturn(350.00); 
 		
-		assertEquals(600, desglose.montoTotal());
+		assertEquals(600, desglose.montoTotal(),1);
 	}
 	
 

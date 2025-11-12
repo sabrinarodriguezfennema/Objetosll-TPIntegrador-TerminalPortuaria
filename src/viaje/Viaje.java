@@ -58,4 +58,7 @@ public class Viaje {
 		return circuito;
 	}
 	
+	public double precioTotal() {
+	    return circuito.precioTotal();
+	}
 }
