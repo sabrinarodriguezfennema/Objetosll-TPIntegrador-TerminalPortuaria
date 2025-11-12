@@ -1,8 +1,7 @@
 package buque;
 
-import java.util.ArrayList;
-
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import interfaces.IBuque;
 import interfaces.IContainer;
@@ -10,11 +9,11 @@ import interfaces.IContainer;
 public class Buque implements IBuque {
 	
 	private String nombre;
-	private List<IContainer> containers;
+	private Set<IContainer> containers;
 	
 	public Buque(String nombre) {
 		this.nombre = nombre;
-		containers = new ArrayList<>();
+		containers = new HashSet<>();
 	}
 	
 	public String getNombre() {
@@ -25,17 +24,13 @@ public class Buque implements IBuque {
 		containers.add(c);
 	}
 	
-	public List<IContainer> getContainers() {
+	public Set<IContainer> getContainers() {
 		return containers;
-	}
-	
-	public void eliminarContainers() {
-		containers.clear();
 	}
 
 	@Override
 	public void removeContainer(IContainer container) {
-		// TODO Auto-generated method stub
+		containers.clear();
 		
 	}
 }

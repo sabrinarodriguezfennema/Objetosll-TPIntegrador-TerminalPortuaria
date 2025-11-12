@@ -43,7 +43,7 @@ public class Factura implements IFactura {
 	    if (viaje != null) {
             String detalle = "Viaje:";
             double monto = viaje.precioTotal();
-            LocalDate fecha = viaje.getFechaInicio();
+            LocalDate fecha = viaje.fechaSalida();
 
             ItemDesglose itemViaje = new ItemDesglose(detalle, monto, fecha);
             desglose.add(itemViaje);

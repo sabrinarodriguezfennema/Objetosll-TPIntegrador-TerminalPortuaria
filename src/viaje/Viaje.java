@@ -8,7 +8,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import interfaces.Buque;
 import interfaces.ICircuito;
 import interfaces.IBuque;
 import interfaces.IViaje;
@@ -17,13 +16,13 @@ import interfaces.ITramo;
 
 public class Viaje implements IViaje{
 	
-	private LocalDate fechaInicio;
+	private LocalDate fechaSalida;
 	private IBuque buque;
 	private ICircuito circuito;
 	
 	
-	public Viaje(LocalDate fechaInicio, IBuque buque,ICircuito circuito) {
-		this.fechaInicio = fechaInicio;
+	public Viaje(LocalDate fechaSalida, IBuque buque,ICircuito circuito) {
+		this.fechaSalida = fechaSalida;
 		this.buque = buque;
 		this.circuito = circuito;
 	}
@@ -37,7 +36,7 @@ public class Viaje implements IViaje{
 
         List<ITramo> tramos = circuito.getTramos();
 
-        LocalDate fechaActual = fechaInicio;
+        LocalDate fechaActual = fechaSalida;
 
         if (!tramos.isEmpty()) {
             cronograma.put(tramos.get(0).getOrigen(), fechaActual);
@@ -52,9 +51,6 @@ public class Viaje implements IViaje{
         return cronograma;
     }
 	
-	public LocalDate getFechaSalida() {
-		return fechaInicio;
-	}
 	
 	public ICircuito getCircuito() {
 		return circuito;
@@ -66,13 +62,8 @@ public class Viaje implements IViaje{
 
 	@Override
 	public LocalDate fechaSalida() {
-		// TODO Auto-generated method stub
-		return null;
+		return fechaSalida;
 	}
 
-	@Override
-	public LocalDate getFechaInicio() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

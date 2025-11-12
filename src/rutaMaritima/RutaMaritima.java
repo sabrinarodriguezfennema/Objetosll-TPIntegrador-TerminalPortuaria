@@ -6,17 +6,17 @@ import java.util.Map;
 
 import interfaces.ICircuito;
 import interfaces.ITerminal;
-import interfaces.Viaje;
+import interfaces.IViaje;
 
 public class RutaMaritima {
 	
-	private Viaje viaje;
+	private IViaje viaje;
 	private ICircuito circuitoDeViaje;
 	private ITerminal terminalOrigen;
 	private ITerminal terminalDestino;
 	private Map<ITerminal, LocalDate> cronograma;
 	
-	public RutaMaritima(Viaje viaje, ITerminal terminalOrigen, ITerminal terminalDestino) {
+	public RutaMaritima(IViaje viaje, ITerminal terminalOrigen, ITerminal terminalDestino) {
 		this.viaje = viaje;
 		this.circuitoDeViaje = viaje.getCircuito();
 		this.terminalOrigen = terminalOrigen;
@@ -54,7 +54,7 @@ public class RutaMaritima {
 		return circuitoDeViaje;
 	}
 	
-	public Viaje getViaje() {
+	public IViaje getViaje() {
 		return viaje;
 	}
 

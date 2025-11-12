@@ -44,7 +44,7 @@ public class Circuito implements ICircuito{
 		return tramos;
 	}
 	
-	public int precioTotal() {
+	public double precioTotal() {
 		return tramos.stream().mapToInt(ITramo::getPrecio).sum();
 	}
 	
