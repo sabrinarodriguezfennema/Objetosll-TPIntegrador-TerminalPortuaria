@@ -17,6 +17,7 @@ import interfaces.IOrdenDeImportacion;
 import interfaces.IViaje;
 import interfaces.IContainer;
 import servicios.ServicioAlmacenamientoExcedente;
+import servicios.ServicioElectrico;
 import terminal.TerminalGestionada;
 
 
@@ -36,9 +37,8 @@ public class OrdenDeImportacion extends Orden implements IOrdenDeImportacion{
 		
 		return this.dniChofer == dniChofer && this.patenteCamion == patenteCamion;
 	}
-	 
-	@Override
-	public IFactura generarFactura(LocalDateTime  fechaDeRetiro, double montoPorDiaExcedente, IViaje viaje) {
+
+	public IFactura generarFactura(LocalDateTime  fechaDeRetiro, double montoPorDiaExcedente, double precioPorKw, IViaje viaje) {
 	    
 	    int díasExcedentes = (int) Duration.between(this.fechaYHoraDeLlegada, fechaDeRetiro).toDays();
 
@@ -46,6 +46,9 @@ public class OrdenDeImportacion extends Orden implements IOrdenDeImportacion{
 	    	int díasDeMas = díasExcedentes - this.diasTolerancia;
 	    	this.agregarServicio(new ServicioAlmacenamientoExcedente(montoPorDiaExcedente, díasDeMas));
 	    }
+	    if (this.datosDeCarga.getTipo().equals("reefer")) {
+	        this.agregarServicio(new ServicioElectrico(precioPorKw, this.fechaYHoraDeLlegada, fechaDeRetiro));
+	    	}
 	    return new Factura(servicios, viaje);
 	}
 	

@@ -57,7 +57,7 @@ public class OrdenDeExportacion extends Orden implements IOrdenDeExportacion {
 	}
 
 	@Override
-	public IFactura generarFactura(LocalDateTime fecha, double montoPorDíaExcedente, IViaje viaje) {
+	public IFactura generarFactura(LocalDateTime  fechaDeRetiro, double montoPorDiaExcedente, double precioPorKw, IViaje viaje) {
 		return new Factura(servicios);
 	}
 

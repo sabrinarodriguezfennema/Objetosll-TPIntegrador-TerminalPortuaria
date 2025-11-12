@@ -17,6 +17,6 @@ public interface IOrden {
 
 	public ICliente getCliente();
 	
-	public IFactura generarFactura(LocalDateTime fecha, double montoPorDíaExcedente, IViaje viaje);
+	public IFactura generarFactura(LocalDateTime  fechaDeRetiro, double montoPorDiaExcedente, double precioPorKw, IViaje viaje);
 
 }
