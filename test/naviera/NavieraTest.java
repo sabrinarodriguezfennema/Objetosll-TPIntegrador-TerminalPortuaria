@@ -3,8 +3,9 @@ package naviera;
 import org.junit.jupiter.api.*;
 
 import interfaces.Buque;
+import interfaces.IBuque;
 import interfaces.ICircuito;
-import interfaces.Viaje;
+import interfaces.IViaje;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -16,17 +17,17 @@ public class NavieraTest {
 	
 	Naviera naviera;
 	
-	Viaje v1;
-	Viaje v2;
-	Viaje v3;
+	IViaje v1;
+	IViaje v2;
+	IViaje v3;
 	
 	ICircuito c1;
 	ICircuito c2;
 	ICircuito c3;
 	
-	Buque b1;
-	Buque b2;
-	Buque b3;
+	IBuque b1;
+	IBuque b2;
+	IBuque b3;
 	
 	LocalDate f1;
 	LocalDate f2;
@@ -45,13 +46,13 @@ public class NavieraTest {
 		c2 = mock(ICircuito.class);
 		c3 = mock(ICircuito.class);
 		
-		v1 = mock(Viaje.class);
-		v2 = mock(Viaje.class);
-		v3 = mock(Viaje.class);
+		v1 = mock(IViaje.class);
+		v2 = mock(IViaje.class);
+		v3 = mock(IViaje.class);
 		
-		b1 = mock(Buque.class);
-		b2 = mock(Buque.class);
-		b3 = mock(Buque.class);
+		b1 = mock(IBuque.class);
+		b2 = mock(IBuque.class);
+		b3 = mock(IBuque.class);
 		
 	}
 	
@@ -95,9 +96,9 @@ public class NavieraTest {
 		naviera.agregarViaje(v2);
 		naviera.agregarViaje(v3);
 		
-		when(v1.getFechaInicio()).thenReturn(f1);
-		when(v2.getFechaInicio()).thenReturn(f2);
-		when(v3.getFechaInicio()).thenReturn(f3);
+		when(v1.fechaSalida()).thenReturn(f1);
+		when(v2.fechaSalida()).thenReturn(f2);
+		when(v3.fechaSalida()).thenReturn(f3);
 		
 		assertEquals(List.of(f1,f2,f3),naviera.getFechaDeViajes());
 		

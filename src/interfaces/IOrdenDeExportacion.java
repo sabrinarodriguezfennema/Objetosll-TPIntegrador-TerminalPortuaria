@@ -18,7 +18,7 @@ public interface IOrdenDeExportacion extends IOrden{
 	
 	public LocalDate getFechaLlegada();
 
-	public Terminal getTerminalDestino();
+	public ITerminal getTerminalDestino();
 
 	public IContainer getDatosDeCarga();
 

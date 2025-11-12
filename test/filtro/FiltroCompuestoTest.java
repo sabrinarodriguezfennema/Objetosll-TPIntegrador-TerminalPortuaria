@@ -11,7 +11,7 @@ import filtro.FiltroCompuesto;
 import filtro.FiltroCompuestoAND;
 import filtro.FiltroCompuestoOR;
 import filtro.FiltroSimple;
-import paraMock.RutaMaritima;
+import interfaces.IRutaMaritima;
 
 class FiltroCompuestoTest {
 
@@ -31,7 +31,7 @@ class FiltroCompuestoTest {
 		
 		FiltroCompuesto filtroCompuesto = new FiltroCompuestoAND(filtro1, filtro2);
 		
-		boolean resultado = filtroCompuesto.cumple(mock(RutaMaritima.class));
+		boolean resultado = filtroCompuesto.cumple(mock(IRutaMaritima.class));
 		
 		assertTrue(resultado);
 	}
@@ -43,7 +43,7 @@ class FiltroCompuestoTest {
 		
 		FiltroCompuesto filtroCompuesto = new FiltroCompuestoAND(filtro1, filtro2);
 		
-		boolean resultado = filtroCompuesto.cumple(mock(RutaMaritima.class));
+		boolean resultado = filtroCompuesto.cumple(mock(IRutaMaritima.class));
 		
 		assertFalse(resultado);
 	}
@@ -55,7 +55,7 @@ class FiltroCompuestoTest {
 		
 		FiltroCompuesto filtroCompuesto = new FiltroCompuestoOR(filtro1, filtro2);
 		
-		boolean resultado = filtroCompuesto.cumple(mock(RutaMaritima.class));
+		boolean resultado = filtroCompuesto.cumple(mock(IRutaMaritima.class));
 		
 		assertTrue(resultado);
 	}
@@ -67,7 +67,7 @@ class FiltroCompuestoTest {
 		
 		FiltroCompuesto filtroCompuesto = new FiltroCompuestoOR(filtro1, filtro2);
 		
-		boolean resultado = filtroCompuesto.cumple(mock(RutaMaritima.class));
+		boolean resultado = filtroCompuesto.cumple(mock(IRutaMaritima.class));
 		
 		assertFalse(resultado);
 	}
@@ -83,7 +83,7 @@ class FiltroCompuestoTest {
 		FiltroCompuesto filtroCompuesto1 = new FiltroCompuestoOR(filtro1, filtro2);
 		FiltroCompuesto filtroCompuesto2 = new FiltroCompuestoAND(filtroCompuesto1, filtro3);
 		
-		boolean resultado = filtroCompuesto2.cumple(mock(RutaMaritima.class));
+		boolean resultado = filtroCompuesto2.cumple(mock(IRutaMaritima.class));
 		
 		assertTrue(resultado);
 		verify(filtro3).cumple(any());

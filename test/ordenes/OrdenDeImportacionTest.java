@@ -10,16 +10,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InOrder;
-
-import clientes.Cliente;
 import interfaces.IContainer;
 import interfaces.ICliente;
 import interfaces.IConsignee;
 import interfaces.IFactura;
 import interfaces.IViaje;
-import ordenes.OrdenDeImportacion;
-import servicios.Servicio;
 import terminal.TerminalGestionada;
 
 class OrdenDeImportacionTest {
@@ -105,7 +100,7 @@ class OrdenDeImportacionTest {
     void testGenerarFacturaDentroDeLaTolerancia() {
         LocalDateTime fechaRetiro = llegada.plusHours(5);
         
-        IFactura factura = orden.generarFactura(fechaRetiro, 100.0, mockViaje);
+        IFactura factura = orden.generarFactura(fechaRetiro, 100.0, 200.00, mockViaje);
         
         assertNotNull(factura);        
     }
@@ -114,7 +109,7 @@ class OrdenDeImportacionTest {
     void testGenerarFacturaFueraDeLaTolerancia() {
         LocalDateTime fechaRetiro = llegada.plusDays(2);
         
-        IFactura factura = orden.generarFactura(fechaRetiro, 100.0, mockViaje);
+        IFactura factura = orden.generarFactura(fechaRetiro, 100.0, 200.00, mockViaje);
         
         assertNotNull(factura);
     }
@@ -124,7 +119,7 @@ class OrdenDeImportacionTest {
     void testGenerarFacturaFueraDeLaToleranciaAgregaOtroServicio() {
         LocalDateTime fechaRetiro = llegada.plusDays(2);
         
-        orden.generarFactura(fechaRetiro, 100.0, mockViaje);
+        orden.generarFactura(fechaRetiro, 100.0,200.00, mockViaje);
         
         assertEquals(1, orden.getServicios().size());
     }
