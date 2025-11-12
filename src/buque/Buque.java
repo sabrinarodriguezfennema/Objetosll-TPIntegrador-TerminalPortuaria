@@ -30,7 +30,6 @@ public class Buque implements IBuque {
 
 	@Override
 	public void removeContainer(IContainer container) {
-		containers.clear();
-		
+		containers.remove(container);
 	}
 }

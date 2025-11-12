@@ -1,7 +1,6 @@
 package containers;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.*;
 
@@ -16,7 +15,7 @@ public class ConteinerReeferTest {
 	
 	@Test
 	void obtenerTipo() {
-		assertEquals("Reefer", c.tipo());
+		assertEquals("Reefer", c.getTipo());
 	}
 	
 	@Test

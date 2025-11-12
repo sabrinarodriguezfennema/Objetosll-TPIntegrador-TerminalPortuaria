@@ -2,11 +2,10 @@ package circuito;
 
 import static org.junit.Assert.*;
 
-
-
 import static org.mockito.Mockito.*;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.*;
@@ -26,11 +25,12 @@ public class CircuitoTest {
 	ITerminal ter2;
 	ITerminal ter3;
 	ITerminal ter4;
+	List<ITramo> tramos;
 	
 	@BeforeEach
 	void setUp() {
 		
-		circuito = new Circuito();
+		
 		t1 = mock(ITramo.class);
 		t2 = mock(ITramo.class);
 		t3 = mock(ITramo.class);
@@ -47,6 +47,10 @@ public class CircuitoTest {
 		when(t2.getDestino()).thenReturn(ter3);
 		when(t3.getOrigen()).thenReturn(ter3);
 		when(t3.getDestino()).thenReturn(ter4);
+		
+		tramos = new ArrayList<>();
+		
+		circuito = new Circuito(tramos);
 		
 		circuito.agregarTramo(t1);
 		circuito.agregarTramo(t2);
@@ -67,7 +71,7 @@ public class CircuitoTest {
 		when(t2.getPrecio()).thenReturn(100);
 		when(t3.getPrecio()).thenReturn(150);
 		
-		assertEquals(300, circuito.precioTotal());
+		assertEquals(300, circuito.precioTotal(),1);
 	}
 	
 	@Test

@@ -28,7 +28,7 @@ public class RutaMaritima implements IRutaMaritima{
 	private void validarTerminal(ITerminal t) {
 		if (!perteneceARuta(t)) {
 			throw new IllegalArgumentException("la terminal no pertenece al circuito del viaje");
-		}
+		} 
 	}
 	
 	public ITerminal puertoDestino() {

@@ -1,10 +1,9 @@
 package buque;
 
 import static org.junit.Assert.*;
-
 import static org.mockito.Mockito.*;
 
-import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,13 +23,13 @@ public class BuqueTest {
 		c1 = mock(IContainer.class);
 		c2 = mock(IContainer.class);
 	}
-	
+ 
 	@Test
 	void agregandoContainersYpreguntarPorEl() {
 		
 		buque.addContainer(c1);
 		buque.addContainer(c2);
-		assertEquals(List.of(c1, c2), buque.getContainers());
+		assertEquals(Set.of(c1, c2), buque.getContainers());
 	}
 	
 	@Test
@@ -46,9 +45,9 @@ public class BuqueTest {
 		buque.addContainer(c1);
 		buque.addContainer(c2);
 		
-		buque.eliminarContainers();
+		buque.removeContainer(c1);
 		
-		assertEquals(List.of(),buque.getContainers());
+		assertEquals(Set.of(c2),buque.getContainers());
 		
 	}
 	

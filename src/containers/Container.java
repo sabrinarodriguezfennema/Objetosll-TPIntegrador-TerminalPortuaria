@@ -1,6 +1,8 @@
 package containers;
 
-import bl.BillOfLading;
+import interfaces.BillOfLading;
+
+
 import interfaces.IConsignee;
 import interfaces.IContainer;
 
@@ -25,7 +27,7 @@ public abstract class Container implements IContainer{
 		this.consignee = consignee;
 	}
 	
-	public String tipo() {
+	public String getTipo() {
 		return tipo;
 	}
 	

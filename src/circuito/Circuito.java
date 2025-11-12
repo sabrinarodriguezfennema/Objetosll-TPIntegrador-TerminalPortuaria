@@ -18,7 +18,7 @@ public class Circuito implements ICircuito{
 		this.tramos = tramos;
 		this.terminales = new ArrayList<>();
 	}
-			
+		
 	public void agregarTramo(ITramo t) {
 		
 		int cantTramos = tramos.size();

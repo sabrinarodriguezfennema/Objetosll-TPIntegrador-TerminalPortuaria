@@ -1,6 +1,7 @@
 package containers;
 
-import bl.BillOfLading;
+import interfaces.BillOfLading;
+
 import interfaces.IConsignee;
 
 public class ContainerReefer extends Container {
@@ -15,10 +16,5 @@ public class ContainerReefer extends Container {
 	
 	public int getkwPorHora() {
 		return kwPorHora;
-	}
-
-	@Override
-	public String getTipo() {
-		return tipo;
 	}
 }

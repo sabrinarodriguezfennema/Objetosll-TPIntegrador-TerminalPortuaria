@@ -17,7 +17,7 @@ public class ConteinerDryTest {
 	
 	@Test
 	void obtenerTipo() {
-		assertEquals("Dry", c.tipo());
+		assertEquals("Dry", c.getTipo());
 	}
 	
 //	@Test

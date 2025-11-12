@@ -2,19 +2,14 @@ package containers;
 
 import interfaces.BillOfLading;
 
-import clientes.Consignee;
+import interfaces.IConsignee;
 
 public class ContainerTanque extends Container {
 	
-	public ContainerTanque(int altura, int ancho, int largo, String idAlfabetico, 
-			int idNumerico, BillOfLading bl, Consignee consignee
+	public ContainerTanque(double altura, double ancho, double largo, String idAlfabetico, 
+			int idNumerico, BillOfLading bl, IConsignee consignee
 			) {
 		super(altura, ancho, largo, idAlfabetico, idNumerico, bl, consignee);
 		this.tipo = "Tanque";
-	}
-
-	@Override
-	public String getTipo() {
-		return tipo;
 	}
 }
