@@ -53,7 +53,7 @@ public class Factura implements IFactura {
 
 	public double montoTotal() {
 		return desglose.stream().mapToDouble(ItemDesglose::getMonto).sum();
-	}
+	} //terminando factura
 }
 
 	

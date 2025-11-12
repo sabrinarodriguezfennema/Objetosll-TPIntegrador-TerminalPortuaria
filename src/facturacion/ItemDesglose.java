@@ -24,6 +24,6 @@ public class ItemDesglose {
 	
 	public LocalDate getFecha() {
 		return fecha;
-	}
+	}//terminando factura
 
 }
