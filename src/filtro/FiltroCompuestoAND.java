@@ -1,6 +1,6 @@
 package filtro;
 
-import paraMock.RutaMaritima;
+import interfaces.IRutaMaritima;
 
 public class FiltroCompuestoAND extends FiltroCompuesto {
 
@@ -9,7 +9,7 @@ public class FiltroCompuestoAND extends FiltroCompuesto {
 	}
 
 	@Override
-	public boolean cumple(RutaMaritima rm) {
+	public boolean cumple(IRutaMaritima rm) {
 		return this.filtro1.cumple(rm) && this.filtro2.cumple(rm);
 	}
 

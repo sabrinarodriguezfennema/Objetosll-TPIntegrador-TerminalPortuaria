@@ -1,6 +1,6 @@
 package filtro;
 
-import paraMock.RutaMaritima;
+import interfaces.IRutaMaritima;
 
 public abstract class FiltroCompuesto implements Filtro {
 	
@@ -13,5 +13,5 @@ public abstract class FiltroCompuesto implements Filtro {
 	}
 
 	@Override
-	public abstract boolean cumple(RutaMaritima rm);
+	public abstract boolean cumple(IRutaMaritima rm);
 }

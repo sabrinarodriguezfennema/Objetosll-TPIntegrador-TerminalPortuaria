@@ -5,22 +5,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import filtro.Filtro;
+import interfaces.IRutaMaritima;
+import interfaces.ITerminal;
+import interfaces.IViaje;
 import paraMock.RutaMaritima;
 
 public class MotorDeBusqueda {
 
-	private List<RutaMaritima> rutasMaritimas;
-	private List<RutaMaritima> rutasFiltradas;
+	private List<IRutaMaritima> rutasMaritimas;
+	private List<IRutaMaritima> rutasFiltradas;
 
-	public MotorDeBusqueda(List<RutaMaritima> rutasMaritimas) {
+	public MotorDeBusqueda(List<IRutaMaritima> rutasMaritimas) {
 		this.rutasMaritimas = rutasMaritimas;
 		this.rutasFiltradas = this.rutasMaritimas;
 	}
 
 	public void aplicarFiltro(Filtro filtro) {
-		List<RutaMaritima> rutasFiltradas = new ArrayList<RutaMaritima>();
+		List<IRutaMaritima> rutasFiltradas = new ArrayList<IRutaMaritima>();
 		
-		for (RutaMaritima rm : rutasMaritimas) {
+		for (IRutaMaritima rm : rutasMaritimas) {
 			if (filtro.cumple(rm)) {
 				rutasFiltradas.add(rm);
 			}
@@ -30,7 +33,7 @@ public class MotorDeBusqueda {
 	}
 
 	
-	public List<RutaMaritima> getRutasFiltradas(){
+	public List<IRutaMaritima> getRutasFiltradas(){
 		return this.rutasFiltradas;
 	}
 	
@@ -40,9 +43,9 @@ public class MotorDeBusqueda {
 	
 	
 	
-//	public MotorDeBusqueda(List<Viaje> todosLosViajes, Terminal t1, Terminal t2) {
-//		for (Viaje v : todosLosViajes) {
-//			rutasMaritimas.add(v.rutaMaritimaDesde_Hasta_(t1, t2));
-//		} 
-//	}
+	public MotorDeBusqueda(List<IViaje> todosLosViajes, ITerminal t1, ITerminal t2) {
+		for (IViaje v : todosLosViajes) {
+			rutasMaritimas.add(v.rutaMaritimaDesde_Hasta_(t1, t2));
+		} 
+	}
 }

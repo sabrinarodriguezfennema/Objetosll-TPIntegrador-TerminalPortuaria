@@ -1,14 +1,14 @@
 package filtro;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-import paraMock.RutaMaritima;
+import interfaces.IRutaMaritima;
 
 public abstract class FiltroSimpleConFecha extends FiltroSimple {
 
-	Date fechaFiltro;
+	LocalDate fechaFiltro;
 	
 	@Override
-	public abstract boolean cumple(RutaMaritima unaRutaMaritima);
+	public abstract boolean cumple(IRutaMaritima unaRutaMaritima);
 
 }

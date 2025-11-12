@@ -1,19 +1,19 @@
 package filtro;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-import paraMock.RutaMaritima;
+import interfaces.IRutaMaritima;
 
 public class FechaLlegadaAntesDe extends FiltroSimpleConFecha {
 
 
-	public FechaLlegadaAntesDe(Date unaFecha) {
+	public FechaLlegadaAntesDe(LocalDate unaFecha) {
 		this.fechaFiltro = unaFecha;
 	}
 
 	@Override
-	public boolean cumple(RutaMaritima unaRutaMaritima) {
-		return unaRutaMaritima.fechaLlegada().before(this.fechaFiltro);
+	public boolean cumple(IRutaMaritima unaRutaMaritima) {
+		return unaRutaMaritima.fechaLlegada().isBefore(this.fechaFiltro);
 	}
 
 }

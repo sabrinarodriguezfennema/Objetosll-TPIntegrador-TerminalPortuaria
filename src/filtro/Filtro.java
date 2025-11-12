@@ -1,7 +1,7 @@
 package filtro;
 
-import paraMock.RutaMaritima;
+import interfaces.IRutaMaritima;
 
 public interface Filtro {
-	public abstract boolean cumple(RutaMaritima rm);
+	public abstract boolean cumple(IRutaMaritima rm);
 }

@@ -1,7 +1,7 @@
 package filtro;
 
 import interfaces.ITerminal;
-import paraMock.RutaMaritima;
+import interfaces.IRutaMaritima;
 
 public class PuertoIgualA extends FiltroSimple {
 
@@ -12,7 +12,7 @@ public class PuertoIgualA extends FiltroSimple {
 	}
 
 	@Override
-	public boolean cumple(RutaMaritima unaRutaMaritima) {
+	public boolean cumple(IRutaMaritima unaRutaMaritima) {
 		return unaRutaMaritima.puertoDestino() == this.puerto;
 	}
 

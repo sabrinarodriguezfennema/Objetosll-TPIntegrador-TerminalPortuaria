@@ -1,11 +1,9 @@
 package filtro;
 
-import java.util.function.BooleanSupplier;
-
-import paraMock.RutaMaritima;
+import interfaces.IRutaMaritima;
 
 public abstract class FiltroSimple implements Filtro{
 
-	public abstract boolean cumple(RutaMaritima unaRutaMaritima);
+	public abstract boolean cumple(IRutaMaritima unaRutaMaritima);
 
 }

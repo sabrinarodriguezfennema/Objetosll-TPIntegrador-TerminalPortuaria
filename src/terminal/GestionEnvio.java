@@ -2,9 +2,10 @@ package terminal;
 
 import java.util.List;
 
-import clases.MotorDeBusqueda;
 import excepciones.OperacionNoDisponibleException;
 import interfaces.IShipper;
+import interfaces.ITerminal;
+import motorDeBusqueda.MotorDeBusqueda;
 import interfaces.IConsignee;
 import interfaces.IContainer;
 import interfaces.EmpresaTransportista;
@@ -14,7 +15,8 @@ import interfaces.IServicio;
 public interface GestionEnvio {
 	
 	//Exportación
-	public MotorDeBusqueda cronogramaExportacion(Terminal t);
+	public MotorDeBusqueda cronogramaExportacion(ITerminal t);
+	
 	public void exportar(IContainer c, Terminal t, IRutaMaritima rm, List<IServicio> servicios, IShipper exportador, EmpresaTransportista empresa) throws OperacionNoDisponibleException;
 
 	//Importación

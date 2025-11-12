@@ -11,12 +11,13 @@ import java.util.Map;
 import java.util.Set;
 
 import buqueViaje.Coordenadas;
-import clases.MotorDeBusqueda;
 import excepciones.OperacionNoDisponibleException;
 import interfaces.IFactura;
 import interfaces.IViaje;
+import motorDeBusqueda.MotorDeBusqueda;
 import interfaces.ICliente;
 import interfaces.IShipper;
+import interfaces.ITerminal;
 import interfaces.IBuque;
 import interfaces.IBuqueViaje;
 import interfaces.IContainer;
@@ -210,13 +211,13 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	}
 
 	@Override
-	public MotorDeBusqueda cronogramaExportacion(Terminal terminalDestino) {
+	public MotorDeBusqueda cronogramaExportacion(ITerminal unaTerminal) {
 		List<IViaje> viajesDisponibles = new ArrayList<>();
 
 		for (INaviera naviera : navierasRegistradas) {
 			viajesDisponibles.addAll(naviera.getViajes());
 		}
-		return new MotorDeBusqueda(viajesDisponibles, this, terminalDestino);
+		return new MotorDeBusqueda(viajesDisponibles, this, unaTerminal);
 	}
 
 	@Override
