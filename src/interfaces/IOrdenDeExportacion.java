@@ -20,6 +20,6 @@ public interface IOrdenDeExportacion extends IOrden{
 
 	public Terminal getTerminalDestino();
 
-	public Container getDatosDeCarga();
+	public IContainer getDatosDeCarga();
 
 }

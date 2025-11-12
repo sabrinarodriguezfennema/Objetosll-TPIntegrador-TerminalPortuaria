@@ -12,4 +12,9 @@ public class ContainerTanque extends Container {
 		super(altura, ancho, largo, idAlfabetico, idNumerico, bl, consignee);
 		this.tipo = "Tanque";
 	}
+
+	@Override
+	public String getTipo() {
+		return tipo;
+	}
 }

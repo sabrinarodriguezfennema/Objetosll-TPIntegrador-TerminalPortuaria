@@ -2,8 +2,9 @@ package containers;
 
 import interfaces.BillOfLading;
 import interfaces.Consignee;
+import interfaces.IContainer;
 
-public abstract class Container { 
+public abstract class Container implements IContainer{ 
    
 	private double altura;
 	private double ancho;

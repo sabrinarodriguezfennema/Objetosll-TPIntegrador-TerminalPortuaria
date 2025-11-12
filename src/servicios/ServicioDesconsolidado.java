@@ -1,6 +1,6 @@
 package servicios;
 
-import containers.Container;
+import interfaces.IContainer;
 
 public class ServicioDesconsolidado extends Servicio {
 	
@@ -12,7 +12,7 @@ public class ServicioDesconsolidado extends Servicio {
 	}
 
 	@Override
-	public double getPrecio(Container c) {
+	public double getPrecio(IContainer c) {
 		return precioFijo;
 	}
 

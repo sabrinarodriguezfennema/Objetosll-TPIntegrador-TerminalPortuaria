@@ -6,18 +6,18 @@ import clases.MotorDeBusqueda;
 import excepciones.OperacionNoDisponibleException;
 import interfaces.IShipper;
 import interfaces.IConsignee;
-import interfaces.Container;
+import interfaces.IContainer;
 import interfaces.EmpresaTransportista;
 import interfaces.IRutaMaritima;
-import interfaces.Servicio;
+import interfaces.IServicio;
 
 public interface GestionEnvio {
 	
 	//Exportación
 	public MotorDeBusqueda cronogramaExportacion(Terminal t);
-	public void exportar(Container c, Terminal t, IRutaMaritima rm, List<Servicio> servicios, IShipper exportador, EmpresaTransportista empresa) throws OperacionNoDisponibleException;
+	public void exportar(IContainer c, Terminal t, IRutaMaritima rm, List<IServicio> servicios, IShipper exportador, EmpresaTransportista empresa) throws OperacionNoDisponibleException;
 
 	//Importación
-	public void datosParaElRetiro(IConsignee importador, EmpresaTransportista empresa, Container c) throws OperacionNoDisponibleException;
+	public void datosParaElRetiro(IConsignee importador, EmpresaTransportista empresa, IContainer c) throws OperacionNoDisponibleException;
 
 }

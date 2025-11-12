@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import interfaces.IViaje;
-import interfaces.Container;
+import interfaces.IContainer;
 
 public interface Naviera {
 

@@ -1,6 +1,6 @@
 package servicios;
 
-import containers.Container;
+import interfaces.IContainer;
 
 public class ServicioAlmacenamientoExcedente extends Servicio {
 	
@@ -13,7 +13,7 @@ public class ServicioAlmacenamientoExcedente extends Servicio {
 	}
 
 	@Override
-	public double getPrecio(Container c) {
+	public double getPrecio(IContainer c) {
 		return costoPorExcedente * diasExcedidos;
 	}
 	

@@ -10,24 +10,24 @@ import java.util.Set;
 
 import org.junit.jupiter.api.*;
 
-import interfaces.Viaje;
-import servicios.Servicio;
+import interfaces.IViaje;
+import interfaces.IServicio;
 
 public class FacturaTest {
 
-    private Servicio servicio1;
-    private Servicio servicio2;
-    private Viaje viaje;
-    private Set<Servicio> servicios;
+    private IServicio servicio1;
+    private IServicio servicio2;
+    private IViaje viaje;
+    private Set<IServicio> servicios;
     private Factura factura;
     private Factura facturaViaje;
 
     @BeforeEach
     void setUp() {
     	
-        servicio1 = mock(Servicio.class);
-        servicio2 = mock(Servicio.class);
-        viaje = mock(Viaje.class);
+        servicio1 = mock(IServicio.class);
+        servicio2 = mock(IServicio.class);
+        viaje = mock(IViaje.class);
 
         when(servicio1.getPrecio(null)).thenReturn(1000.0);
         when(servicio2.getPrecio(null)).thenReturn(2000.0);

@@ -11,6 +11,11 @@ public class ContainerDry extends Container {
 		super(altura, ancho, largo, idAlfabetico, idNumerico, bl,consignee);
 		this.tipo = "Dry";
 	}
+
+	@Override
+	public String getTipo() {
+		return tipo;
+	}
 	
 	//public boolean requiereServicioEspecial() {
 	//	return bl.tieneMasDeUnImportador();

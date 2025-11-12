@@ -3,7 +3,8 @@ package ordenes;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import interfaces.Container;
+import facturacion.Factura;
+import interfaces.IContainer;
 import interfaces.IFactura;
 import interfaces.IOrdenDeExportacion;
 import interfaces.IShipper;
@@ -18,7 +19,7 @@ public class OrdenDeExportacion extends Orden implements IOrdenDeExportacion {
 	private LocalDateTime turno;
 	private Terminal terminalDestino;
 
-	public OrdenDeExportacion(IShipper cliente, Container datosDeCarga, String patenteCamion, String dniChofer, LocalDate fechaSalida, LocalDate fechaLlegada, Terminal terminalDestino) {
+	public OrdenDeExportacion(IShipper cliente, IContainer datosDeCarga, String patenteCamion, String dniChofer, LocalDate fechaSalida, LocalDate fechaLlegada, Terminal terminalDestino) {
 		super(datosDeCarga, patenteCamion, dniChofer, cliente);
 		this.fechaSalida = fechaSalida;
 		this.fechaLlegada = fechaLlegada;
@@ -57,8 +58,7 @@ public class OrdenDeExportacion extends Orden implements IOrdenDeExportacion {
 
 	@Override
 	public IFactura generarFactura(LocalDateTime fecha, double montoPorDíaExcedente, IViaje viaje) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Factura(servicios);
 	}
 
 }

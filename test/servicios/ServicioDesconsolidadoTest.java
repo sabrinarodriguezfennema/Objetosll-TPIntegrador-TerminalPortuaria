@@ -5,16 +5,16 @@ import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.*;
 
-import containers.Container;
+import interfaces.IContainer;
 
 public class ServicioDesconsolidadoTest {
 	
 	ServicioDesconsolidado s;
-	Container c;
+	IContainer c;
 	
 	@BeforeEach 
 	void setUp() { 
-		c = mock(Container.class);
+		c = mock(IContainer.class);
 		s = new ServicioDesconsolidado(25);
 	}
 	

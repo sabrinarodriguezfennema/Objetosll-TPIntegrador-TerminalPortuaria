@@ -2,13 +2,14 @@ package servicios;
 
 import java.time.LocalDate;
 
-import containers.Container;
+import interfaces.IContainer;
+import interfaces.IServicio;
 
-public abstract class Servicio {
+public abstract class Servicio implements IServicio{
 	
 	LocalDate fecha;
 	
-	public abstract double getPrecio(Container c);
+	public abstract double getPrecio(IContainer c);
 	
 	public LocalDate getFecha() { return fecha; }
 

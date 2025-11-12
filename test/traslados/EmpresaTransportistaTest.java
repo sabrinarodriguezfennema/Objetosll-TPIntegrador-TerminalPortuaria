@@ -7,19 +7,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
-import interfaces.Container;
+import interfaces.IContainer;
 import traslado.EmpresaTransportista;
 
 class EmpresaTransportistaTest {
 
 	private EmpresaTransportista empresa;
-	private Container mockContainer;
+	private IContainer mockContainer;
 
 	@BeforeEach
 	void setUp() {
 
 		empresa = new EmpresaTransportista("Transporte XYZ");
-		mockContainer = mock(Container.class);
+		mockContainer = mock(IContainer.class);
 	}
 
 	@Test

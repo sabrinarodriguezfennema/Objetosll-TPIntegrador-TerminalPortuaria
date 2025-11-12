@@ -1,9 +1,11 @@
 package interfaces;
 
-public interface Container {
+public interface IContainer {
 
 	public String getId();
 
 	public String getTipo();
+
+	public double volumen();
 
 }

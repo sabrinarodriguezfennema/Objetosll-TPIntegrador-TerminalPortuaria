@@ -10,5 +10,9 @@ public interface IViaje {
 
 	public IBuque getBuque();
 
+	public double precioTotal();
+
+	public LocalDate getFechaInicio();
+
 
 }

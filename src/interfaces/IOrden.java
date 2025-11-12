@@ -13,7 +13,7 @@ public interface IOrden {
 	
 	public String getCamion();
 	
-	public Container getDatosDeCarga();
+	public IContainer getDatosDeCarga();
 
 	public ICliente getCliente();
 	

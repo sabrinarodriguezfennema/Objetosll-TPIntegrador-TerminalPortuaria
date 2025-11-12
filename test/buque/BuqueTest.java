@@ -9,20 +9,20 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import interfaces.Container;
+import interfaces.IContainer;
 
 public class BuqueTest {
 	
 	Buque buque; 
-	Container c1;
-	Container c2;
+	IContainer c1;
+	IContainer c2;
 	
 	@BeforeEach
 	void setUp() {
 		
 		buque = new Buque("nico");
-		c1 = mock(Container.class);
-		c2 = mock(Container.class);
+		c1 = mock(IContainer.class);
+		c2 = mock(IContainer.class);
 	}
 	
 	@Test

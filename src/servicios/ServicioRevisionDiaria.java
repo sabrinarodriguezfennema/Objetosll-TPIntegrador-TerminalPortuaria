@@ -1,6 +1,6 @@
 package servicios;
 
-import containers.Container;
+import interfaces.IContainer;
 
 public class ServicioRevisionDiaria extends Servicio {
 	
@@ -14,7 +14,7 @@ public class ServicioRevisionDiaria extends Servicio {
 	}
 
 	@Override
-	public double getPrecio(Container c) {
+	public double getPrecio(IContainer c) {
 		return precioFijo * diasEnLaTerminal;
 	}
 

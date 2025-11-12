@@ -29,7 +29,7 @@ public class TerminalGestionadaTest {
 	private TerminalGestionada terminal;
 
 	private Naviera mockNaviera;
-	private Container mockContainer;
+	private IContainer mockContainer;
 	private EmpresaTransportista mockEmpresaTransportista;
 	private ICliente mockCliente;
 	private IOrdenDeExportacion mockOrdenExportacion;
@@ -39,7 +39,7 @@ public class TerminalGestionadaTest {
 	private IConsignee mockConsignee;
 	private Terminal mockTerminalDestino;
 	private IRutaMaritima mockRutaMaritima;
-	private Servicio mockServicio;
+	private IServicio mockServicio;
 	private IBuque mockBuque;
 	private IViaje mockViaje;
 	private Circuito mockCircuito;
@@ -49,7 +49,7 @@ public class TerminalGestionadaTest {
 	@BeforeEach
 	void setUp() {
 		mockNaviera = mock(Naviera.class);
-		mockContainer = mock(Container.class);
+		mockContainer = mock(IContainer.class);
 		mockEmpresaTransportista = mock(EmpresaTransportista.class);
 		mockCliente = mock(ICliente.class);
 		mockOrdenExportacion = mock(IOrdenDeExportacion.class);
@@ -59,7 +59,7 @@ public class TerminalGestionadaTest {
 		mockConsignee = mock(IConsignee.class);
 		mockTerminalDestino = mock(Terminal.class);
 		mockRutaMaritima = mock(IRutaMaritima.class);
-		mockServicio = mock(Servicio.class);
+		mockServicio = mock(IServicio.class);
 		mockBuque = mock(IBuque.class);
 		mockViaje = mock(IViaje.class);
 		mockCircuito = mock(Circuito.class);
@@ -222,7 +222,7 @@ public class TerminalGestionadaTest {
 		LocalDate fechaSalida = LocalDate.now();
 		Duration duracion = Duration.ofDays(5);
 
-		Set<Container> contenedores = new HashSet<>();
+		Set<IContainer> contenedores = new HashSet<>();
 		contenedores.add(mockContainer);
 
 		Set<IBuque> buques = new HashSet<>();
@@ -271,7 +271,7 @@ public class TerminalGestionadaTest {
 
 		when(mockBuqueViaje.getViaje()).thenReturn(mockViaje);
 
-		List<Servicio> servicios = Arrays.asList(mockServicio);
+		List<IServicio> servicios = Arrays.asList(mockServicio);
 
 		terminal.exportar(mockContainer, mockTerminalDestino, mockRutaMaritima, servicios, mockShipper,
 				mockEmpresaTransportista);
@@ -289,7 +289,7 @@ public class TerminalGestionadaTest {
 		LocalDate salida = LocalDate.now();
 		LocalDate llegada = LocalDate.now().plusDays(10);
 
-		Set<Container> contenedores = new HashSet<>();
+		Set<IContainer> contenedores = new HashSet<>();
 		contenedores.add(mockContainer);
 
 		Set<IBuque> buques = new HashSet<>();
@@ -298,7 +298,7 @@ public class TerminalGestionadaTest {
 		Set<IViaje> viajes = new HashSet<IViaje>();
 		viajes.add(mockViaje);
 
-		List<Servicio> servicios = Arrays.asList(mockServicio);
+		List<IServicio> servicios = Arrays.asList(mockServicio);
 
 		when(mockContainer.getId()).thenReturn("C1");
 		when(mockEmpresaTransportista.asignarCamionPara(mockContainer)).thenReturn(patente);
@@ -330,7 +330,7 @@ public class TerminalGestionadaTest {
 		LocalDate fechaSalida = LocalDate.now();
 		Duration duracion = Duration.ofDays(5);
 
-		Set<Container> contenedores = new HashSet<>();
+		Set<IContainer> contenedores = new HashSet<>();
 		contenedores.add(mockContainer);
 
 		Set<IBuque> buques = new HashSet<>();
@@ -389,7 +389,7 @@ public class TerminalGestionadaTest {
 		LocalDate salida = LocalDate.now();
 		LocalDate llegada = LocalDate.now().plusDays(10);
 
-		Set<Container> contenedores = new HashSet<>();
+		Set<IContainer> contenedores = new HashSet<>();
 		contenedores.add(mockContainer);
 
 		Set<IBuque> buques = new HashSet<>();
@@ -398,7 +398,7 @@ public class TerminalGestionadaTest {
 		Set<IViaje> viajes = new HashSet<IViaje>();
 		viajes.add(mockViaje);
 
-		List<Servicio> servicios = Arrays.asList(mockServicio);
+		List<IServicio> servicios = Arrays.asList(mockServicio);
 
 		when(mockContainer.getId()).thenReturn("C1");
 		when(mockEmpresaTransportista.asignarCamionPara(mockContainer)).thenReturn(patente);
@@ -442,7 +442,7 @@ public class TerminalGestionadaTest {
 		when(mockRutaMaritima.fechaLlegada()).thenReturn(llegada);
 		when(mockRutaMaritima.puertoDestino()).thenReturn(null);
 
-		List<Servicio> servicios = List.of(mockServicio);
+		List<IServicio> servicios = List.of(mockServicio);
 
 		assertThrows(OperacionNoDisponibleException.class, () -> terminal.exportar(mockContainer, null,
 				mockRutaMaritima, servicios, mockShipper, mockEmpresaTransportista));
@@ -459,7 +459,7 @@ public class TerminalGestionadaTest {
 		LocalDate fechaSalida = LocalDate.now();
 		Duration duracion = Duration.ofDays(5);
 
-		Set<Container> contenedores = new HashSet<>();
+		Set<IContainer> contenedores = new HashSet<>();
 		contenedores.add(mockContainer);
 
 		Set<IBuque> buques = new HashSet<>();
@@ -494,7 +494,7 @@ public class TerminalGestionadaTest {
 		LocalDate fechaSalida = LocalDate.now();
 		Duration duracion = Duration.ofDays(5);
 
-		Set<Container> contenedores = new HashSet<>();
+		Set<IContainer> contenedores = new HashSet<>();
 		contenedores.add(mockContainer);
 
 		Set<IBuque> buques = new HashSet<>();
@@ -525,7 +525,7 @@ public class TerminalGestionadaTest {
 	@Test
 	void testDatosParaElRetiroContenedorNoEncontrado() {
 		String containerId = "C3";
-		Set<Container> contenedoresVacio = new HashSet<Container>();
+		Set<IContainer> contenedoresVacio = new HashSet<IContainer>();
 		Set<IBuque> buques = new HashSet<IBuque>();
 		buques.add(mockBuque);
 
@@ -607,7 +607,7 @@ public class TerminalGestionadaTest {
 
 		when(mockContainer.getId()).thenReturn(idContainer);
 
-		Set<Container> listaConContainer = new HashSet<Container>();
+		Set<IContainer> listaConContainer = new HashSet<IContainer>();
 		listaConContainer.add(mockContainer);
 		when(mockBuque.getContainers()).thenReturn(listaConContainer);
 		when(mockCircuito.duracionTotal()).thenReturn(duracionViaje);

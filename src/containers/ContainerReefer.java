@@ -18,4 +18,9 @@ public class ContainerReefer extends Container {
 	public int getkwPorHora() {
 		return kwPorHora;
 	}
+
+	@Override
+	public String getTipo() {
+		return tipo;
+	}
 }

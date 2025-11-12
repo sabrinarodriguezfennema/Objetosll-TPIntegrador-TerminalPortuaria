@@ -13,10 +13,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InOrder;
 
 import clientes.Cliente;
-import interfaces.Container;
+import interfaces.IContainer;
 import interfaces.ICliente;
 import interfaces.IConsignee;
 import interfaces.IFactura;
+import interfaces.IViaje;
 import ordenes.OrdenDeImportacion;
 import servicios.Servicio;
 import terminal.TerminalGestionada;
@@ -25,34 +26,32 @@ class OrdenDeImportacionTest {
 
 	private TerminalGestionada mockTerminalGestionada;
 	private IConsignee mockCliente;
-	private Container mockContainer;
+	private IContainer mockContainer;
 	private String patenteCamion;
 	private String dniChofer;
-	private IFactura mockFactura;
 	private OrdenDeImportacion orden;
 	private LocalDateTime llegada;
-	private LocalDateTime retiro;
+	private IViaje mockViaje;
 
 	@BeforeEach
 	void setUp() {
 
 		mockTerminalGestionada = mock(TerminalGestionada.class);
 
-		mockContainer = mock(Container.class);
-		mockFactura = mock(IFactura.class);
-
+		mockContainer = mock(IContainer.class);
+		mockViaje = mock(IViaje.class);
 		patenteCamion = "ABC123";
 		dniChofer = "12345678";
 
 		llegada = LocalDateTime.of(2025, 10, 28, 10, 0);
-		retiro = LocalDateTime.of(2025, 10, 29, 11, 0);
+
 
 		orden = new OrdenDeImportacion(mockCliente, mockContainer, patenteCamion, dniChofer, llegada);
 	}
 
 	@Test
 	void testGetDatosDeCarga() {
-		Container resultado = orden.getDatosDeCarga();
+		IContainer resultado = orden.getDatosDeCarga();
 
 		assertEquals(mockContainer, resultado);
 	}
@@ -91,6 +90,7 @@ class OrdenDeImportacionTest {
 
 		verify(mockTerminalGestionada, times(1)).registrar(orden);
 	}
+	
 
 	@Test
 	void testGetConsignee_deberiaRetornarElClienteCorrecto() {
@@ -98,5 +98,35 @@ class OrdenDeImportacionTest {
 
 		assertEquals(mockCliente, resultado);
 	}
+	
+	
+	
+	@Test
+    void testGenerarFacturaDentroDeLaTolerancia() {
+        LocalDateTime fechaRetiro = llegada.plusHours(5);
+        
+        IFactura factura = orden.generarFactura(fechaRetiro, 100.0, mockViaje);
+        
+        assertNotNull(factura);        
+    }
+	
+	@Test
+    void testGenerarFacturaFueraDeLaTolerancia() {
+        LocalDateTime fechaRetiro = llegada.plusDays(2);
+        
+        IFactura factura = orden.generarFactura(fechaRetiro, 100.0, mockViaje);
+        
+        assertNotNull(factura);
+    }
+	
+	
+	@Test
+    void testGenerarFacturaFueraDeLaToleranciaAgregaOtroServicio() {
+        LocalDateTime fechaRetiro = llegada.plusDays(2);
+        
+        orden.generarFactura(fechaRetiro, 100.0, mockViaje);
+        
+        assertEquals(1, orden.getServicios().size());
+    }
 
 }

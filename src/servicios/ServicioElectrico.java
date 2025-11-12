@@ -3,7 +3,7 @@ package servicios;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import containers.Container;
+import interfaces.IContainer;
 import containers.ContainerReefer;
 
 public class ServicioElectrico extends Servicio {
@@ -19,7 +19,7 @@ public class ServicioElectrico extends Servicio {
 	}
 
 	@Override
-	public double getPrecio(Container c) {
+	public double getPrecio(IContainer c) {
 	        ContainerReefer rc = (ContainerReefer) c; // ya que solo el containerReefer usa el servicioElectrico
 
 	        return (rc.getkwPorHora() * this.tiempoEnTerminalEnHoras() * precioPorKw);

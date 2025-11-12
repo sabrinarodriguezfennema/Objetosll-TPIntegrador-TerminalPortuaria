@@ -4,27 +4,27 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import interfaces.Container;
+import interfaces.IContainer;
 import interfaces.ICliente;
 import interfaces.IOrden;
-import servicios.Servicio;
+import interfaces.IServicio;
 import terminal.TerminalGestionada;
 
 public abstract class Orden implements IOrden{
 
 	
 	protected String patenteCamion;
-	protected Container datosDeCarga;
+	protected IContainer datosDeCarga;
 	protected String dniChofer;
 	protected ICliente cliente;
-	protected Set<Servicio> servicios;
+	protected Set<IServicio> servicios;
 
-	public Orden(Container datosDeCarga, String patenteCamion, String dniChofer, ICliente cliente) {
+	public Orden(IContainer datosDeCarga, String patenteCamion, String dniChofer, ICliente cliente) {
 		this.datosDeCarga = datosDeCarga;
 		this.patenteCamion = patenteCamion;
 		this.dniChofer = dniChofer;
 		this.cliente = cliente;
-		this.servicios = new HashSet<Servicio>();
+		this.servicios = new HashSet<IServicio>();
 	}
 
 
@@ -32,7 +32,7 @@ public abstract class Orden implements IOrden{
 		return patenteCamion;
 	}
 
-	public Container getDatosDeCarga() {
+	public IContainer getDatosDeCarga() {
 		return datosDeCarga;
 	}
 
@@ -46,11 +46,11 @@ public abstract class Orden implements IOrden{
 
 	public abstract void registrarEn(TerminalGestionada terminalGestionada);
 
-	public void agregarServicio(Servicio s) {
+	public void agregarServicio(IServicio s) {
 		servicios.add(s);
 	}
 	
-	protected Set<Servicio> getServicios() {
+	protected Set<IServicio> getServicios() {
 		return new HashSet<>(servicios);
 	}
 	

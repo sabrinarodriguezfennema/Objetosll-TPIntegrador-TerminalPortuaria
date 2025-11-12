@@ -5,16 +5,16 @@ import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.*;
 
-import containers.Container;
+import interfaces.IContainer;
 
 public class ServicioAlmacenamientoExcedenteTest {
 	
 	ServicioAlmacenamientoExcedente servicio;
-	Container c1;
+	IContainer c1;
 	
 	@BeforeEach
 	void setUp() {
-		c1 = mock(Container.class);
+		c1 = mock(IContainer.class);
 		servicio = new ServicioAlmacenamientoExcedente(50, 5);
 	}
 	

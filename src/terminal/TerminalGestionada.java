@@ -19,10 +19,10 @@ import interfaces.ICliente;
 import interfaces.IShipper;
 import interfaces.IBuque;
 import interfaces.IBuqueViaje;
-import interfaces.Container;
+import interfaces.IContainer;
 import interfaces.Naviera;
 import interfaces.IRutaMaritima;
-import interfaces.Servicio;
+import interfaces.IServicio;
 import interfaces.IConsignee;
 import interfaces.IOrden;
 import ordenes.OrdenDeExportacion;
@@ -34,7 +34,7 @@ import interfaces.IOrdenDeImportacion;
 public class TerminalGestionada extends Terminal implements GestionLogistica, GestionEnvio {
 
 	private Set<Naviera> navierasRegistradas;
-	private Set<Container> containers;
+	private Set<IContainer> containers;
 	private Set<EmpresaTransportista> empresasTransportistas;
 	private Set<String> camionesRegistrados;
 	private Set<String> choferesRegistrados;
@@ -44,7 +44,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	private Map<String, IOrdenDeExportacion> ordenesActivasPorPatente;
 	private Map<String, IOrden> ordenPorContainer;
 	private Set<IFactura> facturas;
-	private Map<Container, IViaje> containersPorViaje;
+	private Map<IContainer, IViaje> containersPorViaje;
 	private boolean sePuedenRealizarPagos;
 	private boolean sePuedenInformarImportacionesYExportaciones;
 
@@ -56,7 +56,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		sePuedenRealizarPagos = true;
 		sePuedenInformarImportacionesYExportaciones = true;
 		this.navierasRegistradas = new HashSet<Naviera>();
-		this.containers = new HashSet<Container>();
+		this.containers = new HashSet<IContainer>();
 		this.ordenesImportacion = new HashSet<IOrdenDeImportacion>();
 		this.ordenesExportacion = new HashSet<IOrdenDeExportacion>();
 		this.empresasTransportistas = new HashSet<EmpresaTransportista>();
@@ -65,7 +65,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		this.clientesRegistrados = new HashSet<ICliente>();
 		this.ordenesActivasPorPatente = new HashMap<String, IOrdenDeExportacion>();
 		this.ordenPorContainer = new HashMap<String, IOrden>();
-		this.containersPorViaje = new HashMap<Container, IViaje>();
+		this.containersPorViaje = new HashMap<IContainer, IViaje>();
 		this.facturas = new HashSet<IFactura>();
 
 	}
@@ -87,7 +87,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		ordenesActivasPorPatente.put(orden.getCamion(), orden);
 	}
 
-	private void registrarContainer(Container container) {
+	private void registrarContainer(IContainer container) {
 		this.containers.add(container);
 	}
 
@@ -180,9 +180,9 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		bv.inicioDeTrabajo();
 		IViaje viajeDelBuqueViaje = bv.getViaje();
 		IBuque buqueDelBuqueViaje =  viajeDelBuqueViaje.getBuque();
-		Set<Container> containersDelBuqueViaje = buqueDelBuqueViaje.getContainers(); 
+		Set<IContainer> containersDelBuqueViaje = buqueDelBuqueViaje.getContainers(); 
 		
-		for (Container container : containersDelBuqueViaje) {
+		for (IContainer container : containersDelBuqueViaje) {
 			if(containersPorViaje.get(container) == viajeDelBuqueViaje) {
 				IOrden orden = ordenPorContainer.get(container.getId());
 				if(ordenesExportacion.contains(orden)) { //Si es de exportación
@@ -220,7 +220,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	}
 
 	@Override
-	public void exportar(Container c, Terminal t, IRutaMaritima rm, List<Servicio> servicios, IShipper exportador,
+	public void exportar(IContainer c, Terminal t, IRutaMaritima rm, List<IServicio> servicios, IShipper exportador,
 			EmpresaTransportista empresa) throws OperacionNoDisponibleException{ 
 		if(!sePuedenInformarImportacionesYExportaciones) {
 			throw new OperacionNoDisponibleException("No se pueden informar importaciones o exportaciones en este momento");
@@ -245,7 +245,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	}
 
 	@Override
-	public void datosParaElRetiro(IConsignee importador, EmpresaTransportista empresa, Container c) throws OperacionNoDisponibleException{ 
+	public void datosParaElRetiro(IConsignee importador, EmpresaTransportista empresa, IContainer c) throws OperacionNoDisponibleException{ 
 		if(!sePuedenInformarImportacionesYExportaciones) {
 			throw new OperacionNoDisponibleException("No se pueden informar importaciones o exportaciones en este momento");
 		}
@@ -298,7 +298,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	public void retiroDeContainer(String patente, String dni, String idContainer, LocalDateTime  fechaDeRetiro, double montoPorDiaExcedente) {
 		if(verificarCargaRetiro(patente, dni)) {
 			IOrden orden = ordenPorContainer.get(idContainer);
-			Container container = orden.getDatosDeCarga();
+			IContainer container = orden.getDatosDeCarga();
 			containers.remove(container);
 			IFactura factura = orden.generarFactura(fechaDeRetiro, montoPorDiaExcedente, containersPorViaje.get(container));
 			facturas.add(factura);

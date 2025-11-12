@@ -15,8 +15,7 @@ import interfaces.IFactura;
 import facturacion.Factura;
 import interfaces.IOrdenDeImportacion;
 import interfaces.IViaje;
-import interfaces.Container;
-import servicios.Servicio;
+import interfaces.IContainer;
 import servicios.ServicioAlmacenamientoExcedente;
 import terminal.TerminalGestionada;
 
@@ -27,7 +26,7 @@ public class OrdenDeImportacion extends Orden implements IOrdenDeImportacion{
 	private LocalDateTime fechaYHoraDeLlegada;
 	
 
-	public OrdenDeImportacion(IConsignee cliente, Container datosDeCarga, String patenteCamion, String dniChofer, LocalDateTime fechaYHoraDeLlegada) {
+	public OrdenDeImportacion(IConsignee cliente, IContainer datosDeCarga, String patenteCamion, String dniChofer, LocalDateTime fechaYHoraDeLlegada) {
 		super(datosDeCarga, patenteCamion, dniChofer, cliente);
 		this.diasTolerancia = 1;
 		this.fechaYHoraDeLlegada = fechaYHoraDeLlegada;
@@ -47,7 +46,7 @@ public class OrdenDeImportacion extends Orden implements IOrdenDeImportacion{
 	    	int díasDeMas = díasExcedentes - this.diasTolerancia;
 	    	this.agregarServicio(new ServicioAlmacenamientoExcedente(montoPorDiaExcedente, díasDeMas));
 	    }
-	    return new Factura(servicios);
+	    return new Factura(servicios, viaje);
 	}
 	
 	@Override

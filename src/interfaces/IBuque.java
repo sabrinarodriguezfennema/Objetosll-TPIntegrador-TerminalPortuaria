@@ -5,13 +5,13 @@ import java.util.Set;
 
 public interface IBuque {
 
-	public void addContainer(Container c);
+	public void addContainer(IContainer c);
 
-	public Set<Container> getContainers();
+	public Set<IContainer> getContainers();
 
 	public String getNombre();
 
-	public void removeContainer(Container container);
+	public void removeContainer(IContainer container);
 
 
 }

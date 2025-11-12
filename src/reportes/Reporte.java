@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import interfaces.IBuque;
-import interfaces.Container;
+import interfaces.IContainer;
 import interfaces.IOrdenDeExportacion;
 import interfaces.IOrdenDeImportacion;
 import interfaces.IViaje;
@@ -31,7 +31,7 @@ public class Reporte {
 
 	public String generarReporteAduana() {
 		IBuque buque1 = viaje.getBuque();
-		Set<Container> containers = buque1.getContainers();
+		Set<IContainer> containers = buque1.getContainers();
 		StringBuilder reporte = new StringBuilder();
 
 		reporte.append("<html><body>");
@@ -41,7 +41,7 @@ public class Reporte {
 		reporte.append("<p><b>Partida:</b> ").append(viaje.fechaSalida()).append("</p>");
 		reporte.append("<h4>Contenedores:</h4>");
 		reporte.append("<ul>");
-		for (Container c : containers) {
+		for (IContainer c : containers) {
 			reporte.append("<li>").append("ID: ").append(c.getId()).append(" - Tipo: ").append(c.getTipo())
 					.append("</li>");
 		}

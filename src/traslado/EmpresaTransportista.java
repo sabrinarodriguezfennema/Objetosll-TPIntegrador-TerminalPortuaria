@@ -3,7 +3,7 @@ package traslado;
 import java.util.HashSet;
 import java.util.Set;
 
-import interfaces.Container;
+import interfaces.IContainer;
 
 public class EmpresaTransportista {
 
@@ -43,7 +43,7 @@ public class EmpresaTransportista {
 		return dniChoferes.size();
 	}
 
-	public String asignarCamionPara(Container container) {
+	public String asignarCamionPara(IContainer container) {
 		return patentesCamiones.stream()
 	            .findAny() 
 	            .orElseThrow(() -> new IllegalStateException("No hay camiones disponibles"));
@@ -51,7 +51,7 @@ public class EmpresaTransportista {
 
 
 
-	public String asignarChoferPara(Container container) {
+	public String asignarChoferPara(IContainer container) {
 		return dniChoferes.stream()
 	            .findAny() 
 	            .orElseThrow(() -> new IllegalStateException("No hay choferes disponibles"));

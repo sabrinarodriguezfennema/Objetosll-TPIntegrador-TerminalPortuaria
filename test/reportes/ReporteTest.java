@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import interfaces.IBuque;
-import interfaces.Container;
+import interfaces.IContainer;
 import interfaces.IOrdenDeExportacion;
 import interfaces.IOrdenDeImportacion;
 import interfaces.IViaje;
@@ -21,8 +21,8 @@ class ReporteTest {
 
 	private IViaje viaje;
 	private IBuque buque;
-	private Container container1;
-	private Container container2;
+	private IContainer container1;
+	private IContainer container2;
 	private IOrdenDeExportacion ordenExportacion;
 	private IOrdenDeImportacion ordenImportacion;
 
@@ -33,8 +33,8 @@ class ReporteTest {
 
 		viaje = mock(IViaje.class);
 		buque = mock(IBuque.class);
-		container1 = mock(Container.class);
-		container2 = mock(Container.class);
+		container1 = mock(IContainer.class);
+		container2 = mock(IContainer.class);
 		ordenExportacion = mock(IOrdenDeExportacion.class);
 		ordenImportacion = mock(IOrdenDeImportacion.class);
 

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-import interfaces.Container;
+import interfaces.IContainer;
 
 public class Buque {
 	
 	private String nombre;
-	private List<Container> containers;
+	private List<IContainer> containers;
 	
 	public Buque(String nombre) {
 		this.nombre = nombre;
@@ -20,11 +20,11 @@ public class Buque {
 		return nombre;
 	}
 	
-	public void addContainer(Container c) {
+	public void addContainer(IContainer c) {
 		containers.add(c);
 	}
 	
-	public List<Container> getContainers() {
+	public List<IContainer> getContainers() {
 		return containers;
 	}
 	
