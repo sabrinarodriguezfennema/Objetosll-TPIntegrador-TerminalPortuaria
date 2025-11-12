@@ -3,6 +3,8 @@ package ordenes;
 import static org.mockito.Mockito.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,10 +18,11 @@ import interfaces.ICliente;
 import interfaces.IConsignee;
 import interfaces.IFactura;
 import ordenes.OrdenDeImportacion;
+import servicios.Servicio;
 import terminal.TerminalGestionada;
 
 class OrdenDeImportacionTest {
-	
+
 	private TerminalGestionada mockTerminalGestionada;
 	private IConsignee mockCliente;
 	private Container mockContainer;
@@ -32,12 +35,12 @@ class OrdenDeImportacionTest {
 
 	@BeforeEach
 	void setUp() {
-		
+
 		mockTerminalGestionada = mock(TerminalGestionada.class);
-		mockCliente = mock(IConsignee.class);
+
 		mockContainer = mock(Container.class);
 		mockFactura = mock(IFactura.class);
-		
+
 		patenteCamion = "ABC123";
 		dniChofer = "12345678";
 
@@ -46,88 +49,53 @@ class OrdenDeImportacionTest {
 
 		orden = new OrdenDeImportacion(mockCliente, mockContainer, patenteCamion, dniChofer, llegada);
 	}
-	
-	@Test
-    void testGetDatosDeCarga() {
-        Container resultado = orden.getDatosDeCarga();
-        assertEquals(mockContainer, resultado);
-    }
- 
- @Test
-    void testGetDNIChofer() {
-        String chofer = orden.getChofer();
-        assertEquals("12345678", chofer);
-    }
- 
- @Test
-    void testGetPatenteCamion() {
-        String camion = orden.getCamion();
-        assertEquals("ABC123", camion);
-    }
-	
-	//@Test
-	//void testRetiroContainerConExcedente() {
-	//	
-	//	llegada = LocalDateTime.of(2025, 10, 28, 10, 0);
-	//	retiro = LocalDateTime.of(2025, 10, 29, 11, 0);
 
- 	//	orden = new OrdenDeImportacion(mockCliente, mockContainer, patenteCamion, dniChofer, llegada);
- 	//
- 	//		//Ejecución
- 	//		orden.retiroContainer(retiro, 100.0, mockFactura);
- 	//
- 	//		//Assert
- 	//		verify(mockFactura).setServicioDeAlmacenamiento(any());
- 	//	}
-	
- //@Test
- //	void testRetiroContainerSinExcedente() {
- //		
- //		llegada = LocalDateTime.of(2025, 10, 28, 10, 0);
- //		retiro = LocalDateTime.of(2025, 10, 29, 9, 0);
- //
- //		orden = new OrdenDeImportacion(mockCliente, mockContainer, patenteCamion, dniChofer, llegada);
- //		
- //		//Ejecución
- //		orden.retiroContainer(retiro, 100.0, mockFactura);
- //
- //		//Assert
- //		verifyNoInteractions(mockFactura);
- //	}
+	@Test
+	void testGetDatosDeCarga() {
+		Container resultado = orden.getDatosDeCarga();
+
+		assertEquals(mockContainer, resultado);
+	}
+
+	@Test
+	void testGetDNIChofer() {
+		String chofer = orden.getChofer();
+
+		assertEquals("12345678", chofer);
+	}
+
+	@Test
+	void testGetPatenteCamion() {
+		String camion = orden.getCamion();
+
+		assertEquals("ABC123", camion);
+	}
 
 	@Test
 	void testVerificarAutorizacionTrue() {
 
-		//Assert
 		assertTrue(orden.verificarAutorizacion(patenteCamion, dniChofer));
 	}
 
 	@Test
 	void testVerificarAutorizacionFalse() {
-
-		//setUp
 		String otraPatente = "XYZ789";
 		String otroDni = "87654321";
 
-		//Assert
 		assertFalse(orden.verificarAutorizacion(otraPatente, otroDni));
 	}
-	
+
 	@Test
 	void testRegistrarEn_deberiaLlamarAlMetodoRegistrar() {
-		// Ejecución
 		orden.registrarEn(mockTerminalGestionada);
-		
-		// Verificación
+
 		verify(mockTerminalGestionada, times(1)).registrar(orden);
 	}
-	
+
 	@Test
 	void testGetConsignee_deberiaRetornarElClienteCorrecto() {
-		// Ejecución
 		ICliente resultado = orden.getCliente();
-		
-		// Verificación
+
 		assertEquals(mockCliente, resultado);
 	}
 

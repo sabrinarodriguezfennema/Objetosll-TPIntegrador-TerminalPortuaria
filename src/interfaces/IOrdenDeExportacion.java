@@ -14,8 +14,6 @@ public interface IOrdenDeExportacion extends IOrden{
 
 	public LocalDateTime turno();
 
-	public IShipper getShipper();
-
 	public LocalDate getFechaSalida();
 	
 	public LocalDate getFechaLlegada();

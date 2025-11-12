@@ -61,12 +61,4 @@ public class OrdenDeExportacion extends Orden implements IOrdenDeExportacion {
 		return null;
 	}
 
-
-	@Override
-	public IShipper getShipper() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 }

@@ -1,9 +1,13 @@
 package ordenes;
 
-import clientes.Cliente;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import interfaces.Container;
 import interfaces.ICliente;
 import interfaces.IOrden;
+import servicios.Servicio;
 import terminal.TerminalGestionada;
 
 public abstract class Orden implements IOrden{
@@ -13,12 +17,14 @@ public abstract class Orden implements IOrden{
 	protected Container datosDeCarga;
 	protected String dniChofer;
 	protected ICliente cliente;
+	protected Set<Servicio> servicios;
 
 	public Orden(Container datosDeCarga, String patenteCamion, String dniChofer, ICliente cliente) {
 		this.datosDeCarga = datosDeCarga;
 		this.patenteCamion = patenteCamion;
 		this.dniChofer = dniChofer;
 		this.cliente = cliente;
+		this.servicios = new HashSet<Servicio>();
 	}
 
 
@@ -38,9 +44,14 @@ public abstract class Orden implements IOrden{
 		return this.cliente;
 	}
 
-
 	public abstract void registrarEn(TerminalGestionada terminalGestionada);
 
+	public void agregarServicio(Servicio s) {
+		servicios.add(s);
+	}
 	
+	protected Set<Servicio> getServicios() {
+		return new HashSet<>(servicios);
+	}
 	
 }
