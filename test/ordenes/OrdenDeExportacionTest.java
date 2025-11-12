@@ -14,6 +14,7 @@ import interfaces.IContainer;
 import interfaces.ICliente;
 import interfaces.IFactura;
 import interfaces.IShipper;
+import interfaces.ITerminal;
 import interfaces.IViaje;
 import interfaces.IServicio;
 import terminal.Terminal;
@@ -83,7 +84,7 @@ class OrdenDeExportacionTest {
 
 	@Test
 	void testGetTerminal() {
-		Terminal terminal = orden.getTerminalDestino();
+		ITerminal terminal = orden.getTerminalDestino();
 
 		assertEquals(mockTerminalDestino, terminal);
 	}
@@ -141,7 +142,7 @@ class OrdenDeExportacionTest {
 	@Test
     void testGenerarFactura() {
 		LocalDateTime fecha = LocalDateTime.of(2025, 10, 28, 15, 0);
-        IFactura factura = orden.generarFactura(fecha, 100.0, mockViaje);
+        IFactura factura = orden.generarFactura(fecha, 100.0, 200.00, mockViaje);
         
         assertNotNull(factura);
         
@@ -153,7 +154,7 @@ class OrdenDeExportacionTest {
 		
 		orden.agregarServicio(mockServicio);
      
-        orden.generarFactura(fecha, 100.0, mockViaje);
+        orden.generarFactura(fecha, 100.0, 200.00, mockViaje);
         
         assertEquals(1, orden.getServicios().size());
     }

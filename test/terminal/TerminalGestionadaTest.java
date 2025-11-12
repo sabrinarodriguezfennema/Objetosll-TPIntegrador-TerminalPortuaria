@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
 import buqueViaje.Coordenadas;
-import clases.MotorDeBusqueda;
+import motorDeBusqueda.MotorDeBusqueda;
 import clientes.*;
 import excepciones.OperacionNoDisponibleException;
 import interfaces.*;
@@ -273,7 +273,7 @@ public class TerminalGestionadaTest {
 
 		List<IServicio> servicios = Arrays.asList(mockServicio);
 
-		terminal.exportar(mockContainer, mockTerminalDestino, mockRutaMaritima, servicios, mockShipper,
+		terminal.exportar(mockContainer, mockTerminalDestino, mockRutaMaritima, mockShipper,
 				mockEmpresaTransportista);
 
 		terminal.avisoDeSalida(mockBuqueViaje);
@@ -312,7 +312,7 @@ public class TerminalGestionadaTest {
 
 		when(mockBuque.getContainers()).thenReturn(contenedores);
 
-		terminal.exportar(mockContainer, mockTerminalDestino, mockRutaMaritima, servicios, mockShipper,
+		terminal.exportar(mockContainer, mockTerminalDestino, mockRutaMaritima, mockShipper,
 				mockEmpresaTransportista);
 		terminal.avisoDeLlegada(mockBuqueViaje);
 
@@ -412,7 +412,7 @@ public class TerminalGestionadaTest {
 
 		when(mockBuque.getContainers()).thenReturn(contenedores);
 
-		terminal.exportar(mockContainer, mockTerminalDestino, mockRutaMaritima, servicios, mockShipper,
+		terminal.exportar(mockContainer, mockTerminalDestino, mockRutaMaritima, mockShipper,
 				mockEmpresaTransportista);
 		terminal.avisoDeLlegada(mockBuqueViaje);
 
@@ -445,7 +445,7 @@ public class TerminalGestionadaTest {
 		List<IServicio> servicios = List.of(mockServicio);
 
 		assertThrows(OperacionNoDisponibleException.class, () -> terminal.exportar(mockContainer, null,
-				mockRutaMaritima, servicios, mockShipper, mockEmpresaTransportista));
+				mockRutaMaritima, mockShipper, mockEmpresaTransportista));
 	}
 
 	@Test
@@ -633,7 +633,7 @@ public class TerminalGestionadaTest {
 
 		terminal.datosParaElRetiro(mockConsignee, mockEmpresaTransportista, mockContainer);
 
-		terminal.retiroDeContainer(patente, dni, idContainer, fechaRetiro, excedente);
+		terminal.retiroDeContainer(patente, dni, idContainer, fechaRetiro);
 
 		assertEquals(terminal.cantidadDeFacturas(), 1);
 	}

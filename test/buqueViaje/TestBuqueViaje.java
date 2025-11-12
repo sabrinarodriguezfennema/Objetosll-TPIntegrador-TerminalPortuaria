@@ -12,7 +12,6 @@ import circuito.Circuito;
 import interfaces.ITerminal;
 import interfaces.IViaje;
 import interfaces.Localizable;
-import paraMock.Viaje;
 import terminal.Notificable;
 
 class TestBuqueViaje {
@@ -62,20 +61,21 @@ class TestBuqueViaje {
 	
 	@Test
 	void testUnBuqueViajeIniciaAlComienzoDeSuViaje() {
-		Coordenadas resultado = unBuqueViaje.getCoordenadas();
 		Circuito unCircuito = mock(Circuito.class);
 		
-		when(unViaje.getCircuito()).thenReturn(unCircuito); //.getTodasLasTerminales().get(0).getCoordenadas()).thenReturn(new Coordenadas(0, 0)
+		when(unViaje.getCircuito()).thenReturn(unCircuito);
 		List<ITerminal> todasLasTerminales = mock(List.class);
 		
-		when(unCircuito.getTodasLasTerminales()).thenReturn(todasLasTerminales); //.get(0).getCoordenadas()).thenReturn(new Coordenadas(0, 0)
+		when(unCircuito.getTodasLasTerminales()).thenReturn(todasLasTerminales);
 		ITerminal unaTerminal = mock(ITerminal.class);
 		
-		when(todasLasTerminales.get(0)).thenReturn(unaTerminal); //.getCoordenadas()).thenReturn(new Coordenadas(0, 0)
+		when(todasLasTerminales.get(0)).thenReturn(unaTerminal);
 		Coordenadas unasCoordenadas = new Coordenadas(0, 0);
 		
 		when(unaTerminal.getCoordenadas()).thenReturn(unasCoordenadas); 
 		Coordenadas coordenadasDeLaPrimeraTerminal = unaTerminal.getCoordenadas();
+		
+		Coordenadas resultado = unBuqueViaje.getCoordenadas();
 		
 		assertEquals(coordenadasDeLaPrimeraTerminal, resultado);
 	}

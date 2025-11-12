@@ -17,7 +17,7 @@ public interface GestionEnvio {
 	//Exportación
 	public MotorDeBusqueda cronogramaExportacion(ITerminal t);
 	
-	public void exportar(IContainer c, Terminal t, IRutaMaritima rm, List<IServicio> servicios, IShipper exportador, IEmpresaTransportista empresa) throws OperacionNoDisponibleException;
+	public void exportar(IContainer c, Terminal t, IRutaMaritima rm, IShipper exportador, IEmpresaTransportista empresa) throws OperacionNoDisponibleException;
 
 	//Importación
 	public void datosParaElRetiro(IConsignee importador, IEmpresaTransportista empresa, IContainer c) throws OperacionNoDisponibleException;

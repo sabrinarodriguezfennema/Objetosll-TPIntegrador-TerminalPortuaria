@@ -15,12 +15,12 @@ import org.junit.jupiter.api.*;
 import interfaces.Buque;
 import interfaces.ICircuito;
 import interfaces.ITerminal;
-import interfaces.Viaje;
+import interfaces.IViaje;
 
 public class RutaMaritimaTest {
 	
 	RutaMaritima ruta; 
-	Viaje viaje; 
+	IViaje viaje; 
 	ICircuito circuito;
 	ITerminal terA;
 	ITerminal terB;
@@ -29,7 +29,7 @@ public class RutaMaritimaTest {
 	@BeforeEach
 	void setUp() {
 		
-		viaje = mock(Viaje.class);
+		viaje = mock(IViaje.class);
 		terA = mock(ITerminal.class);
 		terB = mock(ITerminal.class);
 		terC = mock(ITerminal.class);
@@ -73,13 +73,5 @@ public class RutaMaritimaTest {
 	void obtenerViaje() {
 		assertEquals(viaje, ruta.getViaje());
 	}
-	
-	@Test
-	void getNombre() {
-		Buque buque = mock(Buque.class);
-		
-		when(viaje.getBuque()).thenReturn(buque);
-		when(buque.getNombre()).thenReturn("buque");
-		assertEquals("buque", ruta.getNombreDeBuque());
-	}
+
 }

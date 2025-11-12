@@ -2,6 +2,7 @@ package terminal;
 
 import buqueViaje.Coordenadas;
 import interfaces.ITerminal;
+import interfaces.IViaje;
 import interfaces.Localizable;
 
 public class Terminal implements Localizable, ITerminal{
@@ -17,6 +18,12 @@ public class Terminal implements Localizable, ITerminal{
 	@Override
 	public Coordenadas getCoordenadas() {
 		return ubicacion;
+	}
+
+	@Override
+	public void viajeIniciado(IViaje unViaje) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -58,7 +58,7 @@ public class ViajeTest {
 	
 	@Test
     void obtenerFechaInicio() {
-		assertEquals(fechaInicio, viaje.getFechaInicio());
+		assertEquals(fechaInicio, viaje.fechaSalida());
 	}
 	
 	@Test

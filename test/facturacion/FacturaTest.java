@@ -34,7 +34,7 @@ public class FacturaTest {
         when(servicio1.getFecha()).thenReturn(LocalDate.of(2025, 11, 10));
         when(servicio2.getFecha()).thenReturn(LocalDate.of(2025, 11, 11));
 
-        when(viaje.getFechaInicio()).thenReturn(LocalDate.of(2025, 11, 12));
+        when(viaje.fechaSalida()).thenReturn(LocalDate.of(2025, 11, 12));
 
         servicios = new HashSet<>();
         servicios.add(servicio1);

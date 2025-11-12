@@ -1,11 +1,11 @@
 package interfaces;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 public interface IViaje {
 
-	public LocalDate fechaSalida();
+	public LocalDateTime fechaSalida();
 
 	public ICircuito getCircuito();
 
@@ -13,7 +13,7 @@ public interface IViaje {
 
 	public double precioTotal();
 	
-	public Map<ITerminal, LocalDate> cronograma();
+	public Map<ITerminal, LocalDateTime> cronograma();
 
 	public IRutaMaritima rutaMaritimaDesde_Hasta_(ITerminal t1, ITerminal t2);
 
