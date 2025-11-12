@@ -33,6 +33,7 @@ import ordenes.OrdenDeImportacion;
 import interfaces.IEmpresaTransportista;
 import servicios.Servicio;
 import servicios.ServicioPesado;
+import traslado.EmpresaTransportista;
 import interfaces.IOrdenDeExportacion;
 import interfaces.IOrdenDeImportacion;
 
@@ -238,7 +239,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	
 	@Override
 	public void exportar(IContainer c, Terminal t, IRutaMaritima rm, IShipper exportador,
-			EmpresaTransportista empresa) throws OperacionNoDisponibleException{ 
+			IEmpresaTransportista empresa) throws OperacionNoDisponibleException{ 
 		if(!sePuedenInformarImportacionesYExportaciones) {
 			throw new OperacionNoDisponibleException("No se pueden informar importaciones o exportaciones en este momento");
 		}
