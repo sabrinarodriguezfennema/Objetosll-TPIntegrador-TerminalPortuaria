@@ -70,8 +70,5 @@ public class FacturaTest {
         verify(viaje).precioTotal();
     }
     
-    @Test 
-    void obtenerDesglose() {
-    	
-    }
+  //test okey
 }
