@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface EmpresaTransportista {
+public interface IEmpresaTransportista {
 
 	public String asignarCamionPara(IContainer c);
 

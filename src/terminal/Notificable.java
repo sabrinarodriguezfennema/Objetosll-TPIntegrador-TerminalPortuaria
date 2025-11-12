@@ -1,4 +1,6 @@
-package interfaces;
+package terminal;
+
+import interfaces.IBuqueViaje;
 
 public interface Notificable {
 	public void avisoDeLlegada(IBuqueViaje bv);

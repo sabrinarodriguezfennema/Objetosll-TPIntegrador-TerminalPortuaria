@@ -3,7 +3,7 @@ package buqueViaje;
 import interfaces.IBuqueViaje;
 import interfaces.IViaje;
 import interfaces.Localizable;
-import interfaces.Notificable;
+import terminal.Notificable;
 
 public class BuqueViaje implements IBuqueViaje{
 	
@@ -12,18 +12,13 @@ public class BuqueViaje implements IBuqueViaje{
 	private Coordenadas coordenadas;
 	private Localizable destino;
 	private Notificable aNotificar;
-
-//	public BuqueViaje(Viaje unViaje, TerminalGestionada unaTerminal) {
-//		this.viaje = unViaje;
-//		this.terminal = unaTerminal;
-//		this.faseBuqueViaje = new Outbound();
-//	}
 	
 	public BuqueViaje(IViaje unViaje, Localizable unDestino, Notificable unNotificable) {
 		this.viaje = unViaje;
 		this.destino = unDestino;
 		this.aNotificar = unNotificable;
 		this.faseBuqueViaje = new Outbound(this);
+		this.coordenadas = unViaje.getCircuito().getTodasLasTerminales().get(0).getCoordenadas();
 	}
 
 	@Override

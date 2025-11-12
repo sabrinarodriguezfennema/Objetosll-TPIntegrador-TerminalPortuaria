@@ -4,8 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import interfaces.IContainer;
+import interfaces.IEmpresaTransportista;
 
-public class EmpresaTransportista {
+public class EmpresaTransportista implements IEmpresaTransportista{
 
 	private String nombre;
 	private Set<String> patentesCamiones;

@@ -4,10 +4,12 @@ import java.time.LocalDate;
 
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import interfaces.IBuque;
 import interfaces.ICircuito;
 import interfaces.INaviera;
+import interfaces.ITerminal;
 import interfaces.IViaje;
 import viaje.Viaje;
 
@@ -61,5 +63,13 @@ public class Naviera implements INaviera{
 		IViaje viaje = new Viaje(fechaSalida, unBuque, circuito);
 		viajes.add(viaje);
 		return viaje;
+	}
+
+	@Override
+	public void iniciarViaje(IViaje unViaje) {
+		List<ITerminal> todasLasTerminalesDelCircuito = unViaje.getCircuito().getTodasLasTerminales();
+		for (ITerminal t : todasLasTerminalesDelCircuito) {
+			t.viajeIniciado(unViaje);
+		}
 	}
 }

@@ -8,7 +8,7 @@ import interfaces.ITerminal;
 import motorDeBusqueda.MotorDeBusqueda;
 import interfaces.IConsignee;
 import interfaces.IContainer;
-import interfaces.EmpresaTransportista;
+import interfaces.IEmpresaTransportista;
 import interfaces.IRutaMaritima;
 import interfaces.IServicio;
 
@@ -17,9 +17,9 @@ public interface GestionEnvio {
 	//Exportación
 	public MotorDeBusqueda cronogramaExportacion(ITerminal t);
 	
-	public void exportar(IContainer c, Terminal t, IRutaMaritima rm, List<IServicio> servicios, IShipper exportador, EmpresaTransportista empresa) throws OperacionNoDisponibleException;
+	public void exportar(IContainer c, Terminal t, IRutaMaritima rm, List<IServicio> servicios, IShipper exportador, IEmpresaTransportista empresa) throws OperacionNoDisponibleException;
 
 	//Importación
-	public void datosParaElRetiro(IConsignee importador, EmpresaTransportista empresa, IContainer c) throws OperacionNoDisponibleException;
+	public void datosParaElRetiro(IConsignee importador, IEmpresaTransportista empresa, IContainer c) throws OperacionNoDisponibleException;
 
 }

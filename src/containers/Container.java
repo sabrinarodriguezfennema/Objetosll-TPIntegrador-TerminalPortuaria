@@ -1,7 +1,7 @@
 package containers;
 
-import interfaces.BillOfLading;
-import clientes.Consignee;
+import bl.BillOfLading;
+import interfaces.IConsignee;
 import interfaces.IContainer;
 
 public abstract class Container implements IContainer{ 
@@ -12,16 +12,15 @@ public abstract class Container implements IContainer{
 	private String idAlfabetico;
 	private int idNumerico;
 	protected BillOfLading bl;
-	private Consignee consignee;
+	private IConsignee consignee;
 	protected String tipo;
 	
-	public Container(double altura, double ancho, double largo, String idAlfabetico, 
-			int idNumerico, BillOfLading bl, Consignee consignee) {
+	public Container(double altura, double ancho, double largo, String idAlfabetico, int idNumerico2, BillOfLading bl, IConsignee consignee) {
 		this.altura = altura;
 		this.ancho = ancho;
 		this.largo = largo;
 		this.idAlfabetico = idAlfabetico;
-		this.idNumerico = idNumerico;
+		this.idNumerico = idNumerico2;
 		this.bl = bl;
 		this.consignee = consignee;
 	}
@@ -38,7 +37,7 @@ public abstract class Container implements IContainer{
 		return idAlfabetico + idNumerico;
 	}
 	
-	public Consignee getDueño() {
+	public IConsignee getDueño() {
 		return consignee;
 	}
 	

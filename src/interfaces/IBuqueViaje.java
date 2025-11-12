@@ -1,6 +1,7 @@
 package interfaces;
 
 import buqueViaje.Coordenadas;
+import terminal.Notificable;
 import viaje.Viaje;
 
 

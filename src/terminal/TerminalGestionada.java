@@ -28,7 +28,7 @@ import interfaces.IConsignee;
 import interfaces.IOrden;
 import ordenes.OrdenDeExportacion;
 import ordenes.OrdenDeImportacion;
-import interfaces.EmpresaTransportista;
+import interfaces.IEmpresaTransportista;
 import interfaces.IOrdenDeExportacion;
 import interfaces.IOrdenDeImportacion;
 
@@ -36,7 +36,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 
 	private Set<INaviera> navierasRegistradas;
 	private Set<IContainer> containers;
-	private Set<EmpresaTransportista> empresasTransportistas;
+	private Set<IEmpresaTransportista> empresasTransportistas;
 	private Set<String> camionesRegistrados;
 	private Set<String> choferesRegistrados;
 	private Set<ICliente> clientesRegistrados;
@@ -60,7 +60,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		this.containers = new HashSet<IContainer>();
 		this.ordenesImportacion = new HashSet<IOrdenDeImportacion>();
 		this.ordenesExportacion = new HashSet<IOrdenDeExportacion>();
-		this.empresasTransportistas = new HashSet<EmpresaTransportista>();
+		this.empresasTransportistas = new HashSet<IEmpresaTransportista>();
 		this.camionesRegistrados = new HashSet<String>();
 		this.choferesRegistrados = new HashSet<String>();
 		this.clientesRegistrados = new HashSet<ICliente>();
@@ -92,7 +92,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		this.containers.add(container);
 	}
 
-	public void registrarEmpresaTransportista(EmpresaTransportista empresa) {
+	public void registrarEmpresaTransportista(IEmpresaTransportista empresa) {
 		this.empresasTransportistas.add(empresa);
 	}
 
@@ -222,7 +222,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 
 	@Override
 	public void exportar(IContainer c, Terminal t, IRutaMaritima rm, List<IServicio> servicios, IShipper exportador,
-			EmpresaTransportista empresa) throws OperacionNoDisponibleException{ 
+			IEmpresaTransportista empresa) throws OperacionNoDisponibleException{ 
 		if(!sePuedenInformarImportacionesYExportaciones) {
 			throw new OperacionNoDisponibleException("No se pueden informar importaciones o exportaciones en este momento");
 		}
@@ -246,7 +246,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	}
 
 	@Override
-	public void datosParaElRetiro(IConsignee importador, EmpresaTransportista empresa, IContainer c) throws OperacionNoDisponibleException{ 
+	public void datosParaElRetiro(IConsignee importador, IEmpresaTransportista empresa, IContainer c) throws OperacionNoDisponibleException{ 
 		if(!sePuedenInformarImportacionesYExportaciones) {
 			throw new OperacionNoDisponibleException("No se pueden informar importaciones o exportaciones en este momento");
 		}

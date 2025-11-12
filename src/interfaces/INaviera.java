@@ -22,4 +22,6 @@ public interface INaviera {
 
 	public IViaje crearViaje(LocalDate of, IBuque buque1, ICircuito circuitoBsAsABrasil);
 
+	public void iniciarViaje(IViaje primerViaje);
+
 }

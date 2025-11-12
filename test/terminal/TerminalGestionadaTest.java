@@ -30,7 +30,7 @@ public class TerminalGestionadaTest {
 
 	private INaviera mockNaviera;
 	private IContainer mockContainer;
-	private EmpresaTransportista mockEmpresaTransportista;
+	private IEmpresaTransportista mockEmpresaTransportista;
 	private ICliente mockCliente;
 	private IOrdenDeExportacion mockOrdenExportacion;
 	private OrdenDeImportacion mockOrdenImportacion;
@@ -50,7 +50,7 @@ public class TerminalGestionadaTest {
 	void setUp() {
 		mockNaviera = mock(INaviera.class);
 		mockContainer = mock(IContainer.class);
-		mockEmpresaTransportista = mock(EmpresaTransportista.class);
+		mockEmpresaTransportista = mock(IEmpresaTransportista.class);
 		mockCliente = mock(ICliente.class);
 		mockOrdenExportacion = mock(IOrdenDeExportacion.class);
 		mockOrdenImportacion = mock(OrdenDeImportacion.class);

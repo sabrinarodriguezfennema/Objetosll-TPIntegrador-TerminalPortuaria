@@ -2,8 +2,8 @@ package paraMock;
 
 import buqueViaje.Coordenadas;
 import interfaces.IBuqueViaje;
-import interfaces.Notificable;
 import interfaces.ITerminal;
+import terminal.Notificable;
 
 public interface TerminalGestionada extends ITerminal, Notificable{
 	

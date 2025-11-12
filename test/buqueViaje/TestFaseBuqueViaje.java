@@ -6,8 +6,8 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import interfaces.Notificable;
 import interfaces.Localizable;
+import terminal.Notificable;
 
 class TestFaseBuqueViaje {
 	BuqueViaje buqueViaje;

@@ -3,13 +3,17 @@ package buqueViaje;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import circuito.Circuito;
+import interfaces.ITerminal;
 import interfaces.IViaje;
 import interfaces.Localizable;
-import interfaces.Notificable;
 import paraMock.Viaje;
+import terminal.Notificable;
 
 class TestBuqueViaje {
 	IViaje unViaje;
@@ -56,13 +60,25 @@ class TestBuqueViaje {
 		assertEquals(unViaje, resultado);
 	}
 	
-//	@Test
-//	void testUnBuqueViajeIniciaAlComienzoDeSuViaje() {
-//		Coordenadas resultado = unBuqueViaje.getCoordenadas();
-//		Coordenadas coordenadasDeLaPrimeraTerminal = ; 
-//		
-//		assertEquals(unaTerminal, resultado);
-//	}
+	@Test
+	void testUnBuqueViajeIniciaAlComienzoDeSuViaje() {
+		Coordenadas resultado = unBuqueViaje.getCoordenadas();
+		Circuito unCircuito = mock(Circuito.class);
+		
+		when(unViaje.getCircuito()).thenReturn(unCircuito); //.getTodasLasTerminales().get(0).getCoordenadas()).thenReturn(new Coordenadas(0, 0)
+		List<ITerminal> todasLasTerminales = mock(List.class);
+		
+		when(unCircuito.getTodasLasTerminales()).thenReturn(todasLasTerminales); //.get(0).getCoordenadas()).thenReturn(new Coordenadas(0, 0)
+		ITerminal unaTerminal = mock(ITerminal.class);
+		
+		when(todasLasTerminales.get(0)).thenReturn(unaTerminal); //.getCoordenadas()).thenReturn(new Coordenadas(0, 0)
+		Coordenadas unasCoordenadas = new Coordenadas(0, 0);
+		
+		when(unaTerminal.getCoordenadas()).thenReturn(unasCoordenadas); 
+		Coordenadas coordenadasDeLaPrimeraTerminal = unaTerminal.getCoordenadas();
+		
+		assertEquals(coordenadasDeLaPrimeraTerminal, resultado);
+	}
 	
 	@Test
 	void testUnBuqueViajeLeAvisaASuFaseCuandoRecibeCoordenadas() {
