@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 import interfaces.ICircuito;
+import interfaces.IRutaMaritima;
 import interfaces.IBuque;
 import interfaces.IViaje;
+import rutaMaritima.RutaMaritima;
 import interfaces.ITerminal;
 import interfaces.ITramo;
 
@@ -63,6 +65,11 @@ public class Viaje implements IViaje{
 	@Override
 	public LocalDate fechaSalida() {
 		return fechaSalida;
+	}
+
+	@Override
+	public IRutaMaritima rutaMaritimaDesde_Hasta_(ITerminal t1, ITerminal t2) {
+		return new RutaMaritima(this, t1, t2);
 	}
 
 	

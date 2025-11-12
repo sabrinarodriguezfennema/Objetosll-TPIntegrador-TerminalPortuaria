@@ -5,10 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import interfaces.ICircuito;
+import interfaces.IRutaMaritima;
 import interfaces.ITerminal;
 import interfaces.IViaje;
 
-public class RutaMaritima {
+public class RutaMaritima implements IRutaMaritima{
 	
 	private IViaje viaje;
 	private ICircuito circuitoDeViaje;
@@ -58,7 +59,6 @@ public class RutaMaritima {
 		return viaje;
 	}
 
-	public String getNombreDeBuque() {
-		return viaje.getBuque().getNombre();
-	}
+
+
 }

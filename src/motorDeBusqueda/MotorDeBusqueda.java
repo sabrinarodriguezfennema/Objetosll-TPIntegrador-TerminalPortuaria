@@ -8,7 +8,6 @@ import filtro.Filtro;
 import interfaces.IRutaMaritima;
 import interfaces.ITerminal;
 import interfaces.IViaje;
-import paraMock.RutaMaritima;
 
 public class MotorDeBusqueda {
 

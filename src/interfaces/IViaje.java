@@ -15,4 +15,6 @@ public interface IViaje {
 	
 	public Map<ITerminal, LocalDate> cronograma();
 
+	public IRutaMaritima rutaMaritimaDesde_Hasta_(ITerminal t1, ITerminal t2);
+
 }

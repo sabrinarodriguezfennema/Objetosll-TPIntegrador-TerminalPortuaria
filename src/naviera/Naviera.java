@@ -2,21 +2,20 @@ package naviera;
 
 import java.time.LocalDate;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import interfaces.Buque;
+import java.util.HashSet;
+import java.util.Set;
 import interfaces.IBuque;
 import interfaces.ICircuito;
 import interfaces.INaviera;
 import interfaces.IViaje;
-import interfaces.Viaje;
+import viaje.Viaje;
 
 public class Naviera implements INaviera{
 	
-	private List<Viaje> viajes = new ArrayList<>();
-	private List<ICircuito> circuitos = new ArrayList<>();
-	private List<IBuque> buques = new ArrayList<>();
+	private Set<IViaje> viajes = new HashSet<IViaje>();
+	private Set<ICircuito> circuitos = new HashSet<ICircuito>();
+	private Set<IBuque> buques = new HashSet<IBuque>();
 	
 	public Naviera() {}
 	
@@ -24,7 +23,8 @@ public class Naviera implements INaviera{
 		circuitos.add(c);
 	}
 
-	public void agregarViaje(Viaje v) {
+	@Override
+	public void agregarViaje(IViaje v) {
 		viajes.add(v);
 	}
 	
@@ -32,33 +32,29 @@ public class Naviera implements INaviera{
 		buques.add(b);
 	}
 	
-	public List<ICircuito> getCircuitos() {
+	public Set<ICircuito> getCircuitos() {
 		return circuitos;
 	}
 	 
-	public List<IBuque> getBuques() {
+	public Set<IBuque> getBuques() {
 		return buques; 
 	}
 	
-	public List<IViaje> getViajes() {
+	public Set<IViaje> getViajes() {
 		return viajes;
 	}
 	
-	public List<LocalDate> getFechaDeViajes() {
+	public Set<LocalDate> getFechaDeViajes() {
 		
-		List<LocalDate> fechasViajes = new ArrayList<>();
+		Set<LocalDate> fechasViajes = new HashSet<LocalDate>();
 		
-		for (Viaje viaje: viajes) {
-			fechasViajes.add(viaje.getFechaInicio());
+		for (IViaje viaje: viajes) {
+			fechasViajes.add(viaje.fechaSalida());
 		}
 		return fechasViajes;
 	}
 
-	@Override
-	public void agregarViaje(IViaje primerViaje) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	@Override
 	public IViaje crearViaje(LocalDate fechaSalida, IBuque unBuque, ICircuito circuito) {
