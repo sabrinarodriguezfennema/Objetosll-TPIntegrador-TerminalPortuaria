@@ -1,30 +1,59 @@
 package facturacion;
 
-import java.util.HashSet;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
+import containers.Container;
 import interfaces.IFactura;
+import interfaces.Viaje;
 import servicios.Servicio;
 
-public class Factura implements IFactura{
+public class Factura implements IFactura {
 	
-	private Desglose desglose;
 	private Set<Servicio> servicios;
+	private List<ItemDesglose> desglose;
+	private Viaje viaje;
 	
-	public Factura(Set<Servicio> servicios, Desglose desglose) {
-		this.servicios = new HashSet<Servicio>();
-		this.desglose = desglose;
+	public Factura(Set<Servicio> servicios) {
+		this.servicios = servicios;
+		this.desglose = new ArrayList<>();
 	}
 	
-	public int montoTotal() {
-		return desglose.montoTotal();
+	public Factura(Set<Servicio> servicios, Viaje viaje) {
+		this.servicios = servicios;
+		this.viaje = viaje;
+		this.desglose = new ArrayList<>();
 	}
 	
-	public Desglose getDesglose() {
-		return desglose;
+	public List<ItemDesglose> desglose() {
+		
+	    Container c = null;
+	    
+	    for (Servicio servicio : servicios) {
+	        String detalle = "Servicio";
+	        double monto = servicio.getPrecio(c);
+	        LocalDate fecha = servicio.getFecha();
+	        
+	        ItemDesglose item = new ItemDesglose(detalle, monto, fecha);
+	        desglose.add(item);
+	    }
+	    
+	    if (viaje != null) {
+            String detalle = "Viaje:";
+            double monto = viaje.precioTotal();
+            LocalDate fecha = viaje.getFechaInicio();
+
+            ItemDesglose itemViaje = new ItemDesglose(detalle, monto, fecha);
+            desglose.add(itemViaje);
+        }
+	    return desglose;
 	}
-	
-	public void agregarServicio(Servicio s) {
-		servicios.add(s);
-	}
+
+	public double montoTotal() {
+		return desglose.stream().mapToDouble(ItemDesglose::getMonto).sum();
+	} //terminando factura
 }
+
+	

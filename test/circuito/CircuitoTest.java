@@ -129,7 +129,7 @@ public class CircuitoTest {
 	@Test
 	void todasLasTerminalesDestino() {
             
-		assertEquals(List.of(ter2,ter3,ter4), circuito.getTodasLasTerminalesDestino());
+		assertEquals(List.of(ter2,ter3,ter4), circuito.terminalesDestino());
 	}
 	
 }

@@ -2,7 +2,7 @@ package interfaces;
 
 public interface IFactura {
 
-	public int montoTotal();
+	public double montoTotal();
 
 
 }

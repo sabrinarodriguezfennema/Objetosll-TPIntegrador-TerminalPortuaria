@@ -42,12 +42,7 @@ public class Circuito {
 	}
 	
 	public int precioTotal() {
-		int total = 0;
-		
-		for (Tramo tramo: tramos) {
-			total += tramo.getPrecio();
-		}
-		return total;
+		return tramos.stream().mapToInt(Tramo::getPrecio).sum();
 	}
 	
 	public Duration duracionTotal() {
@@ -83,7 +78,7 @@ public class Circuito {
 		return terminales.size();
 	}
 	
-	public List<Terminal> getTodasLasTerminalesDestino() {
+	public List<Terminal> terminalesDestino() {
 		 
 		List<Terminal> terminalesDestino = new ArrayList<>(); 
 		

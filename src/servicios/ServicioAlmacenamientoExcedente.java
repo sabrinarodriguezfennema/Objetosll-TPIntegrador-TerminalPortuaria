@@ -2,7 +2,7 @@ package servicios;
 
 import containers.Container;
 
-public class ServicioAlmacenamientoExcedente implements Servicio {
+public class ServicioAlmacenamientoExcedente extends Servicio {
 	
 	private double costoPorExcedente;
 	private int diasExcedidos; // TODAVIA FALTA CALCULAR COMO SABER LOS DIAS EXCEDIDOS

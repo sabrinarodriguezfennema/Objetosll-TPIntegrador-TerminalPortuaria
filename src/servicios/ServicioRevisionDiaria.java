@@ -2,7 +2,7 @@ package servicios;
 
 import containers.Container;
 
-public class ServicioRevisionDiaria implements Servicio {
+public class ServicioRevisionDiaria extends Servicio {
 	
 	private double precioFijo; 
 	private int diasEnLaTerminal;  // TODAVIA FALTA CALCULAR LA CANTIDAD DE DIAS

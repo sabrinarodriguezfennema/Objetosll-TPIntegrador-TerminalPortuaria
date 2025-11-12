@@ -1,8 +1,8 @@
 package rutaMaritima;
 
-import java.time.Duration;
-
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 import interfaces.Circuito;
 import interfaces.Terminal;
@@ -10,29 +10,44 @@ import interfaces.Viaje;
 
 public class RutaMaritima {
 	
-	private Viaje viaje;   // tuve que agregar viaje ya que con circuito no puedo obtener la fecha de inicio entonces no podria calcular la fecha limite
+	private Viaje viaje;
 	private Circuito circuitoDeViaje;
-	private Terminal terminal;
+	private Terminal terminalOrigen;
+	private Terminal terminalDestino;
+	private Map<Terminal, LocalDate> cronograma;
 	
-	public RutaMaritima(Viaje viaje, Terminal terminal) {
+	public RutaMaritima(Viaje viaje, Terminal terminalOrigen, Terminal terminalDestino) {
 		this.viaje = viaje;
 		this.circuitoDeViaje = viaje.getCircuito();
-		this.terminal = terminal;
+		this.terminalOrigen = terminalOrigen;
+		this.terminalDestino = terminalDestino;
+		this.cronograma = viaje.cronograma();
 	} 
 	
-    public Terminal puertoDestino() {
-    	return terminal;
-    }
+	private void validarTerminal(Terminal t) {
+		if (!perteneceA(t)) {
+			throw new IllegalArgumentException("la terminal no pertenece al circuito del viaje");
+		}
+	}
+	
+	public Terminal puertoDestino() {
+		validarTerminal(terminalDestino);
+		return terminalDestino;
+	}
 	
 	public LocalDate fechaSalida() {
-		return viaje.getFechaInicio();
+		validarTerminal(terminalOrigen);
+		return cronograma.get(terminalOrigen);
 	}
 	
 	public LocalDate fechaLlegada() {
-		Duration duracionTotal = circuitoDeViaje.duracionTotal();
-		int dias = (int) duracionTotal.toDays();
-		return viaje.getFechaInicio().plusDays(dias);
-		
+		validarTerminal(terminalDestino);
+		return cronograma.get(terminalDestino);
+	}
+	
+	public boolean perteneceA(Terminal t) {
+		List<Terminal> terminales = circuitoDeViaje.getTodasLasTerminales();
+		return terminales.contains(t);
 	}
 
 	public Circuito getCircuito() {

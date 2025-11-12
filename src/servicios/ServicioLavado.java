@@ -2,7 +2,7 @@ package servicios;
 
 import containers.Container;
 
-public class ServicioLavado implements Servicio {
+public class ServicioLavado extends Servicio {
 	
 	private double montoSupera70m3;
 	private double montoDebajo70m3;

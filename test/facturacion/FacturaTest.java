@@ -1,50 +1,74 @@
 package facturacion;
 
-import static org.junit.Assert.*;
-
-
-
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.*;
 
-import containers.Container;
+import interfaces.Viaje;
 import servicios.Servicio;
 
 public class FacturaTest {
-	
-    private Factura factura; 
-    private Desglose desglose;
-    private Container c;
-    private Servicio s;
 
-	private Set<Servicio> servicios;
-	@BeforeEach	void setUp() {
-		 		servicios = new HashSet<Servicio>();		s = mock(Servicio.class); 
-		c = mock(Container.class);
-		
-		servicios.add(s);		when(s.getPrecio(c)).thenReturn(500.00);		desglose = mock(Desglose.class);				factura = new Factura(servicios,desglose);			}
-     //Para cuando Factura ya ande
-	
-    @Test 
-    void obtenerMontoTotal() {
-    		
-           when(desglose.montoTotal()).thenReturn(500);
-    	assertEquals(500, factura.montoTotal());		
-    	verify(desglose, times(1)).montoTotal();
+    private Servicio servicio1;
+    private Servicio servicio2;
+    private Viaje viaje;
+    private Set<Servicio> servicios;
+    private Factura factura;
+    private Factura facturaViaje;
+
+    @BeforeEach
+    void setUp() {
+    	
+        servicio1 = mock(Servicio.class);
+        servicio2 = mock(Servicio.class);
+        viaje = mock(Viaje.class);
+
+        when(servicio1.getPrecio(null)).thenReturn(1000.0);
+        when(servicio2.getPrecio(null)).thenReturn(2000.0);
+        when(servicio1.getFecha()).thenReturn(LocalDate.of(2025, 11, 10));
+        when(servicio2.getFecha()).thenReturn(LocalDate.of(2025, 11, 11));
+
+        when(viaje.getFechaInicio()).thenReturn(LocalDate.of(2025, 11, 12));
+
+        servicios = new HashSet<>();
+        servicios.add(servicio1);
+        servicios.add(servicio2);
+
+        factura = new Factura(servicios);
+        facturaViaje = new Factura(servicios, viaje);
     }
-	
-	@Test 
-	void agregarServicio() {
-		factura.agregarServicio(s);
-		assertTrue(servicios.contains(s));
-	}
-	
-	@Test
-	void getDesglose() {
-		assertTrue(factura.getDesglose().equals(desglose));
-	}
+        
+
+    @Test
+    void facturaSoloConServicios() {
+        
+        List<ItemDesglose> desglose = factura.desglose();
+
+        assertEquals(2, desglose.size());
+        assertEquals(3000.0, factura.montoTotal(), 0.01);
+
+        verify(servicio1).getPrecio(null);
+        verify(servicio2).getPrecio(null);
+    }
+
+    @Test
+    void facturaConServiciosYViaje() {
+       
+        List<ItemDesglose> desglose = facturaViaje.desglose();
+
+        assertEquals(3, desglose.size());
+        assertEquals(3000.0, facturaViaje.montoTotal(), 0.01);
+        
+        verify(servicio1).getPrecio(null);
+        verify(servicio2).getPrecio(null);
+        verify(viaje).precioTotal();
+    }
+    
+  //test okey
 }

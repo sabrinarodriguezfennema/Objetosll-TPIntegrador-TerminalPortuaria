@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import containers.Container;
 import containers.ContainerReefer;
 
-public class ServicioElectrico implements Servicio {
+public class ServicioElectrico extends Servicio {
 	
 	private double precioPorKw;
 	private LocalDateTime diaIngreso;

@@ -11,8 +11,8 @@ public class Desglose {
 		this.items = new ArrayList<>();
 	} 
 	
-	public int montoTotal() {
-		return items.stream().mapToInt(ItemDesglose::getMonto).sum();
+	public double montoTotal() {
+		return items.stream().mapToDouble(ItemDesglose::getMonto).sum();
 	}
 	
 	public void agregarItem(ItemDesglose itd) {
