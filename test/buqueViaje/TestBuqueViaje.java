@@ -35,7 +35,7 @@ class TestBuqueViaje {
 		todasLasTerminales.add(unaTerminal);
 		
 		when(unViaje.getCircuito()).thenReturn(unCircuito);
-		when(unCircuito.terminalesDestino()).thenReturn(todasLasTerminales);
+		when(unCircuito.getTodasLasTerminales()).thenReturn(todasLasTerminales);
 		
 		Coordenadas unasCoordenadas = new Coordenadas(0, 0);
 		when(((Localizable)unaTerminal).getCoordenadas()).thenReturn(unasCoordenadas); 
