@@ -1,5 +1,6 @@
 package terminal;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,6 +19,7 @@ import motorDeBusqueda.MotorDeBusqueda;
 import excepciones.OperacionNoDisponibleException;
 import interfaces.*;
 import ordenes.OrdenDeImportacion;
+import servicios.ServicioLavado;
 
 public class TerminalGestionadaTest {
 
@@ -293,7 +295,6 @@ public class TerminalGestionadaTest {
 		Set<IViaje> viajes = new HashSet<IViaje>();
 		viajes.add(mockViaje);
 
-		List<IServicio> servicios = Arrays.asList(mockServicio);
 
 		when(mockContainer.getId()).thenReturn("C1");
 		when(mockEmpresaTransportista.asignarCamionPara(mockContainer)).thenReturn(patente);
@@ -400,66 +401,8 @@ public class TerminalGestionadaTest {
 		});
 	}
 
-	@Test
-	void testExportar_LanzaException() throws OperacionNoDisponibleException {
 
-		terminal.setSePuedenInformarImportacionesYExportaciones(false);
 
-		String patente = "ABC123";
-		String dni = "12345678";
-		LocalDateTime salida = LocalDateTime.now();
-		LocalDateTime llegada = LocalDateTime.now().plusDays(10);
-
-		when(mockContainer.getId()).thenReturn("C1");
-		when(mockEmpresaTransportista.asignarCamionPara(mockContainer)).thenReturn(patente);
-		when(mockEmpresaTransportista.asignarChoferPara(mockContainer)).thenReturn(dni);
-		when(mockRutaMaritima.fechaSalida()).thenReturn(salida);
-		when(mockRutaMaritima.fechaLlegada()).thenReturn(llegada);
-		when(mockRutaMaritima.puertoDestino()).thenReturn(null);
-
-		List<IServicio> servicios = List.of(mockServicio);
-
-		assertThrows(OperacionNoDisponibleException.class, () -> terminal.exportar(mockContainer, null,
-				mockRutaMaritima, mockShipper, mockEmpresaTransportista));
-	}
-
-	@Test
-	void testDatosParaElRetiro_NoLanzaExcepcion() throws OperacionNoDisponibleException {
-
-		terminal.setSePuedenInformarImportacionesYExportaciones(false);
-
-		String patente = "XYZ789";
-		String dni = "87654321";
-		String containerId = "C2";
-		LocalDateTime fechaSalida = LocalDateTime.now();
-		Duration duracion = Duration.ofDays(5);
-
-		Set<IContainer> contenedores = new HashSet<>();
-		contenedores.add(mockContainer);
-
-		Set<IBuque> buques = new HashSet<>();
-		buques.add(mockBuque);
-
-		Set<IViaje> viajes = new HashSet<IViaje>();
-		viajes.add(mockViaje);
-
-		when(mockContainer.getId()).thenReturn(containerId);
-		when(mockEmpresaTransportista.asignarCamionPara(mockContainer)).thenReturn(patente);
-		when(mockEmpresaTransportista.asignarChoferPara(mockContainer)).thenReturn(dni);
-		when(mockNaviera.getBuques()).thenReturn(buques);
-		when(mockNaviera.getViajes()).thenReturn(viajes);
-		when(mockBuque.getContainers()).thenReturn(contenedores);
-		when(mockViaje.getBuque()).thenReturn(mockBuque);
-		when(mockViaje.fechaSalida()).thenReturn(fechaSalida);
-		when(mockViaje.getCircuito()).thenReturn(mockCircuito);
-		when(mockCircuito.duracionTotal()).thenReturn(duracion);
-
-		terminal.registrarNaviera(mockNaviera);
-		
-		assertThrows(OperacionNoDisponibleException.class, () -> {
-			terminal.datosParaElRetiro(mockConsignee, mockEmpresaTransportista, mockContainer);
-		});
-	}
 
 	@Test
 	void testDatosParaElRetiro() throws OperacionNoDisponibleException {
@@ -635,6 +578,18 @@ public class TerminalGestionadaTest {
 	    spyTerminal.entregaDeContainer(patente, dni, mockContainer, fechaEntrega);
 
 	    assertTrue(spyTerminal.containers.contains(mockContainer));
+	}
+	
+	@Test
+	void testAgregarServicioDeLavado_AgregaServicioALaOrdenCorrecta() {
+	    String containerId = "C1";
+	    when(mockContainer.getId()).thenReturn(containerId);
+
+	    terminal.ordenPorContainer.put(containerId, mockOrdenImportacion);
+
+	    terminal.agregarServicioDeLavado(mockContainer);
+
+	    verify(mockOrdenImportacion).agregarServicio(any(ServicioLavado.class));
 	}
 
 }

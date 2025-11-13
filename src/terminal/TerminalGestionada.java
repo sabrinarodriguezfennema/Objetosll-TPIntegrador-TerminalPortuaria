@@ -196,18 +196,18 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		Set<IContainer> containersDelBuqueViaje = buqueDelBuqueViaje.getContainers();
 		
 		for (IContainer container : containersDelBuqueViaje) { //Por cada container del buqueViaje
-			if (containersPorViaje.get(container) == viajeDelBuqueViaje) { //Si dicho container está relacionado con este viaje entrante
+			if (viajeDelBuqueViaje.equals(containersPorViaje.get(container))) { //Si dicho container está relacionado con este viaje entrante
 				IOrden orden = ordenPorContainer.get(container.getId()); //Agarro la orden de ese container
-//				if (ordenesImportacion.contains(orden)) {
+ 				if (ordenesImportacion.contains(orden)) {
 					buqueDelBuqueViaje.removeContainer(container);
 					containers.add(container);
 					((IConsignee) orden.getCliente()).fechaDeImportacion(viajeDelBuqueViaje.cronograma().get(this)); //Le paso la fecha al consignee para que venga, lo bajé del buque
-//				}
+  				}
 			}
 		}
 		for (IOrdenDeExportacion ordenEx : ordenesExportacion) {
 			IContainer container = ordenEx.getDatosDeCarga();
-			if (containersPorViaje.get(container) == viajeDelBuqueViaje) {
+			if (viajeDelBuqueViaje.equals(containersPorViaje.get(container))) {
 				buqueDelBuqueViaje.addContainer(container);
 				IFactura factura = ordenEx.generarFactura(LocalDateTime.now(),100.00, 300.00, viajeDelBuqueViaje);
 				((IShipper)ordenEx.getCliente()).recibirFactura(factura);
