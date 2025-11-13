@@ -1,6 +1,6 @@
 package containers;
 
-import bl.BillOfLading;
+import interfaces.BillOfLading;
 
 
 import interfaces.IConsignee;

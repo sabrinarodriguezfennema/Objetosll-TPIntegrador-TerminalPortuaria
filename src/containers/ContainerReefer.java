@@ -1,20 +1,20 @@
 package containers;
 
-import bl.BillOfLading;
+import interfaces.BillOfLading;
 
 import interfaces.IConsignee;
 
 public class ContainerReefer extends Container {
 	
-	private int kwPorHora;
+	private double kwPorHora;
 
-	public ContainerReefer(double altura, double ancho, double largo, String idAlfabetico, int idNumerico, BillOfLading bl, IConsignee consignee, int kwPorHora) {
+	public ContainerReefer(double altura, double ancho, double largo, String idAlfabetico, int idNumerico, BillOfLading bl, IConsignee consignee, double kwPorHora) {
 		super(altura, ancho, largo, idAlfabetico, idNumerico, bl, consignee);
 		this.kwPorHora = kwPorHora;
 		this.tipo = "Reefer";
 	}
 	
-	public int getkwPorHora() {
+	public double getkwPorHora() {
 		return kwPorHora;
 	}
 }

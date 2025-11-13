@@ -11,98 +11,93 @@ import org.junit.jupiter.api.Test;
 
 import filtro.Filtro;
 import interfaces.IRutaMaritima;
-
+import interfaces.IViaje;
+import interfaces.ITerminal;
 
 class MotorDeBusquedaTest {
-	
-	List<IRutaMaritima> rutasMaritimas;
+
 	IRutaMaritima ruta1;
 	IRutaMaritima ruta2;
 	IRutaMaritima ruta3;
 	Filtro filtro;
+	IViaje viaje1;
+	IViaje viaje2;
+	IViaje viaje3;
+	ITerminal t1;
+	ITerminal t2;
+	MotorDeBusqueda motorDeBusqueda;
+	List<IViaje> todosLosViajes;
 
 	@BeforeEach
 	void setUp() throws Exception {
-		rutasMaritimas = new ArrayList<IRutaMaritima>();
+		todosLosViajes = new ArrayList<IViaje>();
+		viaje1 = mock(IViaje.class);
+		viaje2 = mock(IViaje.class);
+		viaje3 = mock(IViaje.class);
+
 		ruta1 = mock(IRutaMaritima.class);
 		ruta2 = mock(IRutaMaritima.class);
 		ruta3 = mock(IRutaMaritima.class);
-		rutasMaritimas.add(ruta1);
-		rutasMaritimas.add(ruta2);
-		rutasMaritimas.add(ruta3);
-		
+
+		t1 = mock(ITerminal.class);
+		t2 = mock(ITerminal.class);
+
+		when(viaje1.rutaMaritimaDesde_Hasta_(t1, t2)).thenReturn(ruta1);
+		when(viaje2.rutaMaritimaDesde_Hasta_(t1, t2)).thenReturn(ruta2);
+		when(viaje3.rutaMaritimaDesde_Hasta_(t1, t2)).thenReturn(ruta3);
+
+		todosLosViajes.add(viaje1);
+		todosLosViajes.add(viaje2);
+		todosLosViajes.add(viaje3);
+
+		motorDeBusqueda = new MotorDeBusqueda(todosLosViajes, t1, t2);
+
 		filtro = mock(Filtro.class);
 	}
 
 	@Test
 	void testUnMotorDeBusquedaAplicaUnFiltroYRetornaTodasSusRutasMaritimas() {
-		when(filtro.cumple(ruta1)).thenReturn(true);
-		when(filtro.cumple(ruta2)).thenReturn(true);
-		when(filtro.cumple(ruta3)).thenReturn(true);
-		
-		
-		MotorDeBusqueda unMotorDeBusqueda = new MotorDeBusqueda(rutasMaritimas);
-		
-		unMotorDeBusqueda.aplicarFiltro(filtro);
-		List<IRutaMaritima> resultado = unMotorDeBusqueda.getRutasFiltradas();
-		
+		when(filtro.cumple(any(IRutaMaritima.class))).thenReturn(true);
+
+		motorDeBusqueda.aplicarFiltro(filtro);
+		List<IRutaMaritima> resultado = motorDeBusqueda.getRutasFiltradas();
+
 		assertEquals(3, resultado.size());
 	}
-	
+
 	@Test
 	void testUnMotorDeBusquedaAplicaUnFiltroYNoRetornaTodasSusRutasMaritimas() {
-		when(filtro.cumple(ruta1)).thenReturn(true);
-		when(filtro.cumple(ruta2)).thenReturn(false);
-		when(filtro.cumple(ruta3)).thenReturn(false);
-		
-		
-		MotorDeBusqueda unMotorDeBusqueda = new MotorDeBusqueda(rutasMaritimas);
-		
-		unMotorDeBusqueda.aplicarFiltro(filtro);
-		List<IRutaMaritima> resultado = unMotorDeBusqueda.getRutasFiltradas();
-		
+		when(filtro.cumple(any(IRutaMaritima.class)))
+					.thenReturn(true)
+					.thenReturn(false)
+					.thenReturn(false);
+
+		motorDeBusqueda.aplicarFiltro(filtro);
+		List<IRutaMaritima> resultado = motorDeBusqueda.getRutasFiltradas();
+
 		assertEquals(1, resultado.size());
 	}
-	
+
 	@Test
 	void testUnMotorDeBusquedaAplicaUnFiltroYNoRetornaTodasSusRutasMaritimasPeroAlReiniciarLaBusquedaYAplicarOtroFiltroSiLasDevuelve() {
-		when(filtro.cumple(ruta1)).thenReturn(true);
-		when(filtro.cumple(ruta2)).thenReturn(false);
-		when(filtro.cumple(ruta3)).thenReturn(false);
+
+		when(filtro.cumple(any(IRutaMaritima.class)))
+					.thenReturn(true)
+					.thenReturn(false)
+					.thenReturn(false);
+
+		motorDeBusqueda.aplicarFiltro(filtro);
 		
-		
-		MotorDeBusqueda unMotorDeBusqueda = new MotorDeBusqueda(rutasMaritimas);
-		
-		unMotorDeBusqueda.aplicarFiltro(filtro);
-		
-		unMotorDeBusqueda.reiniciarBúsqueda();
-		
+		motorDeBusqueda.reiniciarBúsqueda();
+
 		Filtro filtro2 = mock(Filtro.class);
+		when(filtro2.cumple(any(IRutaMaritima.class))).thenReturn(true);
 		
-		when(filtro2.cumple(ruta1)).thenReturn(true);
-		when(filtro2.cumple(ruta2)).thenReturn(true);
-		when(filtro2.cumple(ruta3)).thenReturn(true);
-		unMotorDeBusqueda.aplicarFiltro(filtro2);
+		motorDeBusqueda.aplicarFiltro(filtro2);
 		
-		
-		List<IRutaMaritima> resultado = unMotorDeBusqueda.getRutasFiltradas();
-		
+		List<IRutaMaritima> resultado = motorDeBusqueda.getRutasFiltradas();
 		assertEquals(3, resultado.size());
+		
 	}
-
-
-//	List<Viaje> todosLosViajes = new ArrayList<Viaje>();
-//	Viaje viaje1 = mock(Viaje.class);
-//	Viaje viaje2 = mock(Viaje.class);
-//	Viaje viaje3 = mock(Viaje.class);
-	
-//	todosLosViajes.add(viaje1);
-//	todosLosViajes.add(viaje2);
-//	todosLosViajes.add(viaje3);
-	
-//	Terminal t1 = mock(Terminal.class);
-//	Terminal t2 = mock(Terminal.class);
-	
-//	MotorDeBusqueda unMotorDeBusqueda = new MotorDeBusqueda(todasLosViajes, t1, t2);
 
 }
