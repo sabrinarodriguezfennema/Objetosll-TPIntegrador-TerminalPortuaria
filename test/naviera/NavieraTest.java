@@ -6,12 +6,14 @@ import interfaces.Buque;
 import interfaces.IBuque;
 import interfaces.ICircuito;
 import interfaces.IViaje;
+import interfaces.ITerminal;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -105,6 +107,36 @@ public class NavieraTest {
 		assertEquals(Set.of(f1,f2,f3),naviera.getFechaDeViajes());
 		
 		
+	}
+	
+	@Test
+	void iniciarViaje_DeberiaNotificarTodasLasTerminales() {
+		IViaje mockViaje = mock(IViaje.class);
+		ICircuito mockCircuito = mock(ICircuito.class);
+		ITerminal t1 = mock(ITerminal.class);
+		ITerminal t2 = mock(ITerminal.class);
+		
+		when(mockViaje.getCircuito()).thenReturn(mockCircuito);
+		when(mockCircuito.getTodasLasTerminales()).thenReturn(Arrays.asList(t1, t2));
+		
+		naviera.iniciarViaje(mockViaje);
+		
+		verify(t1).viajeIniciado(mockViaje);
+		verify(t2).viajeIniciado(mockViaje);
+		verify(mockCircuito).getTodasLasTerminales();
+	}
+	
+	@Test
+	void crearViaje_DeberiaCrearYAgregarElViaje() {
+		LocalDateTime fecha = LocalDateTime.now();
+		
+		IViaje nuevoViaje = naviera.crearViaje(fecha, b1, c1);
+		
+		assertNotNull(nuevoViaje);
+		assertTrue(naviera.getViajes().contains(nuevoViaje));
+		assertEquals(fecha, nuevoViaje.fechaSalida());
+		assertEquals(b1, nuevoViaje.getBuque());
+		assertEquals(c1, nuevoViaje.getCircuito());
 	}
 	
 	
