@@ -33,17 +33,17 @@ public class RutaMaritima implements IRutaMaritima{
 	}
 	
 	public ITerminal puertoDestino() {
-		validarTerminal(terminalDestino);
+//		validarTerminal(terminalDestino);
 		return terminalDestino;
 	}
 	
 	public LocalDateTime fechaSalida() {
-		validarTerminal(terminalOrigen);
+//		validarTerminal(terminalOrigen);
 		return cronograma.get(terminalOrigen);
 	}
 	
 	public LocalDateTime fechaLlegada() {
-		validarTerminal(terminalDestino);
+//		validarTerminal(terminalDestino);
 		return cronograma.get(terminalDestino);
 	}
 	

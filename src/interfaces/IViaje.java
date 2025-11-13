@@ -1,6 +1,7 @@
 package interfaces;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 public interface IViaje {
@@ -16,5 +17,7 @@ public interface IViaje {
 	public Map<ITerminal, LocalDateTime> cronograma();
 
 	public IRutaMaritima rutaMaritimaDesde_Hasta_(ITerminal t1, ITerminal t2);
+
+	public List<IRutaMaritima> rutaMaritimaDesde_Hasta_EnListaSiExiste(ITerminal t1, ITerminal t2);
 
 }

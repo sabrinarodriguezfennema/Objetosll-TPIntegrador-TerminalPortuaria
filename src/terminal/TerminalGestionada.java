@@ -108,7 +108,8 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 
 	}
 
-	public void iniciarViaje(IViaje viaje) {
+	@Override
+	public void viajeIniciado(IViaje viaje) {
 		buqueViajes.add(new BuqueViaje(viaje, this, this));
 
 	}
@@ -331,12 +332,6 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 			IOrdenDeImportacion orden = (IOrdenDeImportacion) ordenPorContainer.get(container.getId());
 			if (orden != null) {
 				containers.add(container);
-
-				IViaje viaje = containersPorViaje.get(container);
-				IFactura factura = orden.generarFactura(fechaDeEntrega, 100.00, 200.00, viaje);
-
-				facturas.add(factura);
-				orden.getCliente().recibirFactura(factura);
 			}
 		}
 	}

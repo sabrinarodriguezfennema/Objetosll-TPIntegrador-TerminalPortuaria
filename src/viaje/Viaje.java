@@ -6,6 +6,7 @@ import java.time.Duration;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import interfaces.IRutaMaritima;
 import interfaces.IBuque;
 import interfaces.IViaje;
 import rutaMaritima.RutaMaritima;
+import terminal.Terminal;
 import interfaces.ITerminal;
 import interfaces.ITramo;
 
@@ -72,6 +74,18 @@ public class Viaje implements IViaje{
 	@Override
 	public IRutaMaritima rutaMaritimaDesde_Hasta_(ITerminal t1, ITerminal t2) {
 		return new RutaMaritima(this, t1, t2);
+	}
+
+	@Override
+	public List<IRutaMaritima> rutaMaritimaDesde_Hasta_EnListaSiExiste(ITerminal t1, ITerminal t2) {
+		List<IRutaMaritima> listaConRutaSiExiste = new ArrayList<IRutaMaritima>();
+		List<ITerminal> terminalesDelCircuito = circuito.terminalesDestino();
+//		ITerminal ultimoDelCircuito = terminalesDelCircuito.get(terminalesDelCircuito.size() - 1);
+//		terminalesDelCircuito.addFirst(ultimoDelCircuito);
+		if(terminalesDelCircuito.contains(t1) && terminalesDelCircuito.contains(t2) && (terminalesDelCircuito.indexOf(t1) < terminalesDelCircuito.indexOf(t2)))  {
+			listaConRutaSiExiste.add(this.rutaMaritimaDesde_Hasta_(t1, t2));
+		}
+		return listaConRutaSiExiste;
 	}
 
 	

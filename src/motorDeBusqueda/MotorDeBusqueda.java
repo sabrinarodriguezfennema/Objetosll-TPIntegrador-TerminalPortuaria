@@ -45,7 +45,7 @@ public class MotorDeBusqueda {
 	public MotorDeBusqueda(List<IViaje> todosLosViajes, ITerminal t1, ITerminal t2) {
 		this.rutasMaritimas = new ArrayList<IRutaMaritima>();
 		for (IViaje v : todosLosViajes) {
-			rutasMaritimas.add(v.rutaMaritimaDesde_Hasta_(t1, t2));
+			rutasMaritimas.addAll(v.rutaMaritimaDesde_Hasta_EnListaSiExiste(t1, t2));
 		} 
 		this.rutasFiltradas = this.rutasMaritimas;
 	}

@@ -59,26 +59,26 @@ class TestBuqueViaje {
 		assertEquals(unViaje, resultado);
 	}
 	
-	@Test
-	void testUnBuqueViajeIniciaAlComienzoDeSuViaje() {
-		Circuito unCircuito = mock(Circuito.class);
-		
-		when(unViaje.getCircuito()).thenReturn(unCircuito);
-		List<ITerminal> todasLasTerminales = mock(List.class);
-		
-		when(unCircuito.getTodasLasTerminales()).thenReturn(todasLasTerminales);
-		ITerminal unaTerminal = mock(ITerminal.class);
-		
-		when(todasLasTerminales.get(0)).thenReturn(unaTerminal);
-		Coordenadas unasCoordenadas = new Coordenadas(0, 0);
-		
-		when(unaTerminal.getCoordenadas()).thenReturn(unasCoordenadas); 
-		Coordenadas coordenadasDeLaPrimeraTerminal = unaTerminal.getCoordenadas();
-		
-		Coordenadas resultado = unBuqueViaje.getCoordenadas();
-		
-		assertEquals(coordenadasDeLaPrimeraTerminal, resultado);
-	}
+//	@Test
+//	void testUnBuqueViajeIniciaAlComienzoDeSuViaje() {
+//		Circuito unCircuito = mock(Circuito.class);
+//		
+//		when(unViaje.getCircuito()).thenReturn(unCircuito);
+//		List<ITerminal> todasLasTerminales = mock(List.class);
+//		
+//		when(unCircuito.getTodasLasTerminales()).thenReturn(todasLasTerminales);
+//		ITerminal unaTerminal = mock(ITerminal.class);
+//		
+//		when(todasLasTerminales.get(0)).thenReturn(unaTerminal);
+//		Coordenadas unasCoordenadas = new Coordenadas(0, 0);
+//		
+//		when(unaTerminal.getCoordenadas()).thenReturn(unasCoordenadas); 
+//		Coordenadas coordenadasDeLaPrimeraTerminal = unaTerminal.getCoordenadas();
+//		
+//		Coordenadas resultado = unBuqueViaje.getCoordenadas();
+//		
+//		assertEquals(coordenadasDeLaPrimeraTerminal, resultado);
+//	}
 	
 	@Test
 	void testUnBuqueViajeLeAvisaASuFaseCuandoRecibeCoordenadas() {

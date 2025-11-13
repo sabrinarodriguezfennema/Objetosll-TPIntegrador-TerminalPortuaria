@@ -66,7 +66,7 @@ public class Naviera implements INaviera{
 
 	@Override
 	public void iniciarViaje(IViaje unViaje) {
-		List<ITerminal> todasLasTerminalesDelCircuito = unViaje.getCircuito().getTodasLasTerminales();
+		List<ITerminal> todasLasTerminalesDelCircuito = unViaje.getCircuito().terminalesDestino();
 		for (ITerminal t : todasLasTerminalesDelCircuito) {
 			t.viajeIniciado(unViaje);
 		}

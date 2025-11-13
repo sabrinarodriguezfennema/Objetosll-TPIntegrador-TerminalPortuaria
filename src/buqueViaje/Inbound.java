@@ -16,6 +16,7 @@ public class Inbound extends FaseBuqueViaje {
 		}
 		if(coordenadasBuqueViaje.distanciaA(coordenadasDestino) == 0) {
 			bv.setFase(new Arrived(bv));
+			bv.getNotificable().avisoDeLlegada(bv);
 		}
 	}
 }

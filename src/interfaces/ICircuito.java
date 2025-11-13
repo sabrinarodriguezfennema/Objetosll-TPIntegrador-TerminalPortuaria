@@ -16,7 +16,7 @@ public interface ICircuito {
 
 	public Duration duracionDesde_Hasta_(ITerminal terminalOrigen, ITerminal terminalDestino);
 
-	public List<ITerminal> getTodasLasTerminalesDestino();
+	public List<ITerminal> terminalesDestino();
 
 	public List<ITramo> getTramos();
 
