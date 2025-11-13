@@ -14,10 +14,10 @@ public class MotorDeBusqueda {
 	private List<IRutaMaritima> rutasMaritimas;
 	private List<IRutaMaritima> rutasFiltradas;
 
-	public MotorDeBusqueda(List<IRutaMaritima> rutasMaritimas) {
-		this.rutasMaritimas = rutasMaritimas;
-		this.rutasFiltradas = this.rutasMaritimas;
-	}
+//	public MotorDeBusqueda(List<IRutaMaritima> rutasMaritimas) {
+//		this.rutasMaritimas = rutasMaritimas;
+//		this.rutasFiltradas = this.rutasMaritimas;
+//	}
 
 	public void aplicarFiltro(Filtro filtro) {
 		List<IRutaMaritima> rutasFiltradas = new ArrayList<IRutaMaritima>();
@@ -43,8 +43,10 @@ public class MotorDeBusqueda {
 	
 	
 	public MotorDeBusqueda(List<IViaje> todosLosViajes, ITerminal t1, ITerminal t2) {
+		this.rutasMaritimas = new ArrayList<IRutaMaritima>();
 		for (IViaje v : todosLosViajes) {
 			rutasMaritimas.add(v.rutaMaritimaDesde_Hasta_(t1, t2));
 		} 
+		this.rutasFiltradas = this.rutasMaritimas;
 	}
 }

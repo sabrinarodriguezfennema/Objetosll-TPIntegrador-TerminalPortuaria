@@ -1,8 +1,7 @@
 package naviera;
 
 import java.time.LocalDate;
-
-
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -59,7 +58,7 @@ public class Naviera implements INaviera{
 
 
 	@Override
-	public IViaje crearViaje(LocalDate fechaSalida, IBuque unBuque, ICircuito circuito) {
+	public IViaje crearViaje(LocalDateTime fechaSalida, IBuque unBuque, ICircuito circuito) {
 		IViaje viaje = new Viaje(fechaSalida, unBuque, circuito);
 		viajes.add(viaje);
 		return viaje;
