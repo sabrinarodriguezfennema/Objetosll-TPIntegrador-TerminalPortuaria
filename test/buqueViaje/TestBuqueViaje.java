@@ -3,12 +3,14 @@ package buqueViaje;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import circuito.Circuito;
+import interfaces.ICircuito;
 import interfaces.ITerminal;
 import interfaces.IViaje;
 import interfaces.Localizable;
@@ -19,12 +21,26 @@ class TestBuqueViaje {
 	BuqueViaje unBuqueViaje;
 	Notificable unNotificable;
 	Localizable unDestino;
+	ICircuito unCircuito;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		unViaje = mock(IViaje.class);
 		unNotificable = mock(Notificable.class);
 		unDestino = mock(Localizable.class);
+		Circuito unCircuito = mock(Circuito.class);
+		
+		List<ITerminal> todasLasTerminales = new ArrayList<ITerminal>();
+		ITerminal unaTerminal = mock(ITerminal.class);
+		todasLasTerminales.add(unaTerminal);
+		
+		when(unViaje.getCircuito()).thenReturn(unCircuito);
+		when(unCircuito.terminalesDestino()).thenReturn(todasLasTerminales);
+		
+		Coordenadas unasCoordenadas = new Coordenadas(0, 0);
+		when(((Localizable)unaTerminal).getCoordenadas()).thenReturn(unasCoordenadas); 
+		Coordenadas coordenadasDeLaPrimeraTerminal = unaTerminal.getCoordenadas();
+		
 		unBuqueViaje = new BuqueViaje(unViaje, unDestino, unNotificable);
 	}
 
