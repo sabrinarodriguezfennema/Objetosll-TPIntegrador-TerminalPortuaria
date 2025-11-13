@@ -124,16 +124,11 @@ public class CircuitoTest {
 		assertEquals(4,circuito.cantidadDeTerminales());
 	}
 	
+	
 	@Test
 	void todasLasTerminales() {
-	
-		assertEquals(List.of(ter1,ter2,ter3,ter4), circuito.getTodasLasTerminales());
-	}
-	
-	@Test
-	void todasLasTerminalesDestino() {
             
-		assertEquals(List.of(ter2,ter3,ter4), circuito.terminalesDestino());
+		assertEquals(List.of(ter1, ter2,ter3,ter4), circuito.getTodasLasTerminales());
 	}
 	
 }

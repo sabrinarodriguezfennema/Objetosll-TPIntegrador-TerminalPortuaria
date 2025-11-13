@@ -73,15 +73,12 @@ public class Circuito implements ICircuito{
 		}
 	}
 
-	public List<ITerminal> getTodasLasTerminales() { 
-		return terminales;
-	}
 	
 	public int cantidadDeTerminales() {
 		return terminales.size();
 	}
 	
-	public List<ITerminal> terminalesDestino() {
+	public List<ITerminal> getTodasLasTerminales() {
 		 
 		List<ITerminal> terminalesDestino = new ArrayList<>(); 
 		terminalesDestino.add(tramos.get(0).getOrigen());
@@ -94,6 +91,12 @@ public class Circuito implements ICircuito{
 
 	@Override
 	public Duration duracionDesde_Hasta_(ITerminal terminalOrigen, ITerminal terminalDestino) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ITerminal> terminalesDestino() {
 		// TODO Auto-generated method stub
 		return null;
 	}

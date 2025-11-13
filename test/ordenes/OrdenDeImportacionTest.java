@@ -99,6 +99,7 @@ class OrdenDeImportacionTest {
 	@Test
     void testGenerarFacturaDentroDeLaTolerancia() {
         LocalDateTime fechaRetiro = llegada.plusHours(5);
+        when(mockContainer.getTipo()).thenReturn("Dry");
         
         IFactura factura = orden.generarFactura(fechaRetiro, 100.0, 200.00, mockViaje);
         
@@ -108,6 +109,7 @@ class OrdenDeImportacionTest {
 	@Test
     void testGenerarFacturaFueraDeLaTolerancia() {
         LocalDateTime fechaRetiro = llegada.plusDays(2);
+        when(mockContainer.getTipo()).thenReturn("Dry");
         
         IFactura factura = orden.generarFactura(fechaRetiro, 100.0, 200.00, mockViaje);
         
@@ -118,6 +120,7 @@ class OrdenDeImportacionTest {
 	@Test
     void testGenerarFacturaFueraDeLaToleranciaAgregaOtroServicio() {
         LocalDateTime fechaRetiro = llegada.plusDays(2);
+        when(mockContainer.getTipo()).thenReturn("Dry");
         
         orden.generarFactura(fechaRetiro, 100.0,200.00, mockViaje);
         

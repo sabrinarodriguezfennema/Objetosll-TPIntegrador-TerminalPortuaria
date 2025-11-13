@@ -42,10 +42,9 @@ class MotorDeBusquedaTest {
 		t1 = mock(ITerminal.class);
 		t2 = mock(ITerminal.class);
 
-		when(viaje1.rutaMaritimaDesde_Hasta_(t1, t2)).thenReturn(ruta1);
-		when(viaje2.rutaMaritimaDesde_Hasta_(t1, t2)).thenReturn(ruta2);
-		when(viaje3.rutaMaritimaDesde_Hasta_(t1, t2)).thenReturn(ruta3);
-
+		when(viaje1.rutaMaritimaDesde_Hasta_EnListaSiExiste(t1, t2)).thenReturn(List.of(ruta1));
+		when(viaje2.rutaMaritimaDesde_Hasta_EnListaSiExiste(t1, t2)).thenReturn(List.of(ruta2));
+		when(viaje3.rutaMaritimaDesde_Hasta_EnListaSiExiste(t1, t2)).thenReturn(List.of(ruta3));
 		todosLosViajes.add(viaje1);
 		todosLosViajes.add(viaje2);
 		todosLosViajes.add(viaje3);
@@ -67,10 +66,7 @@ class MotorDeBusquedaTest {
 
 	@Test
 	void testUnMotorDeBusquedaAplicaUnFiltroYNoRetornaTodasSusRutasMaritimas() {
-		when(filtro.cumple(any(IRutaMaritima.class)))
-					.thenReturn(true)
-					.thenReturn(false)
-					.thenReturn(false);
+		when(filtro.cumple(any(IRutaMaritima.class))).thenReturn(true).thenReturn(false).thenReturn(false);
 
 		motorDeBusqueda.aplicarFiltro(filtro);
 		List<IRutaMaritima> resultado = motorDeBusqueda.getRutasFiltradas();
@@ -81,23 +77,20 @@ class MotorDeBusquedaTest {
 	@Test
 	void testUnMotorDeBusquedaAplicaUnFiltroYNoRetornaTodasSusRutasMaritimasPeroAlReiniciarLaBusquedaYAplicarOtroFiltroSiLasDevuelve() {
 
-		when(filtro.cumple(any(IRutaMaritima.class)))
-					.thenReturn(true)
-					.thenReturn(false)
-					.thenReturn(false);
+		when(filtro.cumple(any(IRutaMaritima.class))).thenReturn(true).thenReturn(false).thenReturn(false);
 
 		motorDeBusqueda.aplicarFiltro(filtro);
-		
+
 		motorDeBusqueda.reiniciarBúsqueda();
 
 		Filtro filtro2 = mock(Filtro.class);
 		when(filtro2.cumple(any(IRutaMaritima.class))).thenReturn(true);
-		
+
 		motorDeBusqueda.aplicarFiltro(filtro2);
-		
+
 		List<IRutaMaritima> resultado = motorDeBusqueda.getRutasFiltradas();
 		assertEquals(3, resultado.size());
-		
+
 	}
 
 }

@@ -13,6 +13,7 @@ import static org.mockito.Mockito.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public class NavieraTest {
 	
@@ -64,7 +65,7 @@ public class NavieraTest {
 		naviera.agregarViaje(v2);
 		naviera.agregarViaje(v3);
 		
-		assertEquals(List.of(v1,v2,v3), naviera.getViajes());
+		assertEquals(Set.of(v1, v2, v3), naviera.getViajes());
 		
 	}
 	
@@ -75,7 +76,7 @@ public class NavieraTest {
 		naviera.agregarBuque(b2);
 		naviera.agregarBuque(b3);
 		
-		assertEquals(List.of(b1,b2,b3), naviera.getBuques());
+		assertEquals(Set.of(b1,b2,b3), naviera.getBuques());
 		
 	}
 	
@@ -86,7 +87,7 @@ public class NavieraTest {
 		naviera.agregarCircuito(c2);
 		naviera.agregarCircuito(c3);
 		
-		assertEquals(List.of(c1,c2,c3), naviera.getCircuitos());
+		assertEquals(Set.of(c1,c2,c3), naviera.getCircuitos());
 		
 	}
 	
@@ -101,7 +102,7 @@ public class NavieraTest {
 		when(v2.fechaSalida()).thenReturn(f2);
 		when(v3.fechaSalida()).thenReturn(f3);
 		
-		assertEquals(List.of(f1,f2,f3),naviera.getFechaDeViajes());
+		assertEquals(Set.of(f1,f2,f3),naviera.getFechaDeViajes());
 		
 		
 	}

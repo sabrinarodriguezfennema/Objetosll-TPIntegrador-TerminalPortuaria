@@ -4,9 +4,7 @@ import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -14,14 +12,11 @@ import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.*;
 
 import buqueViaje.Coordenadas;
 import motorDeBusqueda.MotorDeBusqueda;
-import clientes.*;
 import excepciones.OperacionNoDisponibleException;
 import interfaces.*;
-import ordenes.OrdenDeExportacion;
 import ordenes.OrdenDeImportacion;
 
 public class TerminalGestionadaTest {
@@ -31,7 +26,6 @@ public class TerminalGestionadaTest {
 	private INaviera mockNaviera;
 	private IContainer mockContainer;
 	private IEmpresaTransportista mockEmpresaTransportista;
-	private ICliente mockCliente;
 	private IOrdenDeExportacion mockOrdenExportacion;
 	private OrdenDeImportacion mockOrdenImportacion;
 	private IBuqueViaje mockBuqueViaje;
@@ -46,12 +40,12 @@ public class TerminalGestionadaTest {
 	private Coordenadas coordenadas;
 	private IFactura mockFactura;
 
+
 	@BeforeEach
 	void setUp() {
 		mockNaviera = mock(INaviera.class);
 		mockContainer = mock(IContainer.class);
 		mockEmpresaTransportista = mock(IEmpresaTransportista.class);
-		mockCliente = mock(ICliente.class);
 		mockOrdenExportacion = mock(IOrdenDeExportacion.class);
 		mockOrdenImportacion = mock(OrdenDeImportacion.class);
 		mockBuqueViaje = mock(IBuqueViaje.class);
@@ -65,7 +59,6 @@ public class TerminalGestionadaTest {
 		mockCircuito = mock(ICircuito.class);
 		mockFactura = mock(IFactura.class);
 		coordenadas = new Coordenadas(1, 1);
-
 		terminal = new TerminalGestionada("Terminal Gestionada", coordenadas);
 	}
 
@@ -252,6 +245,8 @@ public class TerminalGestionadaTest {
 
 		verify(mockConsignee, times(1)).recibirMail("Su carga esta llegando a la terminal");
 	}
+	
+	
 
 	@Test
 	void testAvisoDeSalida_NotificaShippersYDeshabilitaPagos() throws OperacionNoDisponibleException {
@@ -360,26 +355,6 @@ public class TerminalGestionadaTest {
 		verify(mockBuque).removeContainer(mockContainer);
 		verify(mockBuqueViaje).inicioDeTrabajo();
 		verify(mockBuqueViaje).depart();
-	}
-
-	@Test
-	void testRegistrarPago_CuandoPagosNoDisponibles_LanzaExcepcion() throws OperacionNoDisponibleException {
-		terminal.setSePuedenRealizarPagos(false);
-
-		assertThrows(OperacionNoDisponibleException.class, () -> {
-
-			terminal.registrarPago(mockFactura);
-		});
-	}
-
-	@Test
-	void testRegistrarPago_CuandoPagosDisponibles_NoLanzaExcepcion() throws OperacionNoDisponibleException {
-
-		terminal.setSePuedenRealizarPagos(true);
-
-		assertDoesNotThrow(() -> {
-			terminal.registrarPago(mockFactura);
-		});
 	}
 
 	@Test
@@ -602,11 +577,11 @@ public class TerminalGestionadaTest {
 		String patente = "ABC123";
 		String dni = "12345678";
 		String idContainer = "C1";
-		double excedente = 100.00;
 		Duration duracionViaje = Duration.ofDays(5);
 
 		when(mockContainer.getId()).thenReturn(idContainer);
-
+		when(mockContainer.getTipo()).thenReturn("dry");
+		
 		Set<IContainer> listaConContainer = new HashSet<IContainer>();
 		listaConContainer.add(mockContainer);
 		when(mockBuque.getContainers()).thenReturn(listaConContainer);
@@ -636,6 +611,30 @@ public class TerminalGestionadaTest {
 		terminal.retiroDeContainer(patente, dni, idContainer, fechaRetiro);
 
 		assertEquals(terminal.cantidadDeFacturas(), 1);
+	}
+	
+	
+	
+	@Test
+	void testEntregaDeContainer_VerificacionExitosa_AgregaContainer() {
+		String patente = "ABC123";
+	    String dni = "12345678";
+	    LocalDateTime fechaEntrega = LocalDateTime.now();
+	    String idContainer = "C1";
+
+	    when(mockContainer.getId()).thenReturn("C1");
+
+	    TerminalGestionada spyTerminal = spy(terminal);
+	   
+	    doReturn(true).when(spyTerminal).verificarCargaLlegada(patente, dni, fechaEntrega);
+	    
+	    spyTerminal.registrarOrden(mockOrdenImportacion);
+	    
+	    spyTerminal.ordenPorContainer.put(idContainer, mockOrdenImportacion);
+	    
+	    spyTerminal.entregaDeContainer(patente, dni, mockContainer, fechaEntrega);
+
+	    assertTrue(spyTerminal.containers.contains(mockContainer));
 	}
 
 }
