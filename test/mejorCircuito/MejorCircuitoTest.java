@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,9 +31,9 @@ class MejorCircuitoTest {
 	@BeforeEach
 	void setUp() {
 		
-		LocalDate fecha1 = LocalDate.of(2025, 12, 1);
-		LocalDate fecha2 = LocalDate.of(2025, 11, 15);
-		LocalDate fecha3 = LocalDate.of(2025, 11, 10);
+		LocalDateTime fecha1 = LocalDateTime.of(2025, 12, 1, 0, 0);
+		LocalDateTime fecha2 = LocalDateTime.of(2025, 11, 15, 0, 0);
+		LocalDateTime fecha3 = LocalDateTime.of(2025, 11, 10, 0, 0);
 		
 		ruta1 = mock(IRutaMaritima.class);
 		ruta2 = mock(IRutaMaritima.class);

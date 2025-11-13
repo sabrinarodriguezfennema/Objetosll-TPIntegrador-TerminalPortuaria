@@ -1,12 +1,12 @@
 package filtro;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import interfaces.IRutaMaritima;
 
 public abstract class FiltroSimpleConFecha extends FiltroSimple {
 
-	LocalDate fechaFiltro;
+	LocalDateTime fechaFiltro;
 	
 	@Override
 	public abstract boolean cumple(IRutaMaritima unaRutaMaritima);

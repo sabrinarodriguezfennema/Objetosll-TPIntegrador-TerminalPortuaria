@@ -1,9 +1,10 @@
 package facturacion;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import static org.mockito.Mockito.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,10 +32,10 @@ public class FacturaTest {
 
         when(servicio1.getPrecio(null)).thenReturn(1000.0);
         when(servicio2.getPrecio(null)).thenReturn(2000.0);
-        when(servicio1.getFecha()).thenReturn(LocalDate.of(2025, 11, 10));
-        when(servicio2.getFecha()).thenReturn(LocalDate.of(2025, 11, 11));
+        when(servicio1.getFecha()).thenReturn(LocalDateTime.of(2025, 11, 10, 0, 0));
+        when(servicio2.getFecha()).thenReturn(LocalDateTime.of(2025, 11, 11, 0, 0));
 
-        when(viaje.fechaSalida()).thenReturn(LocalDate.of(2025, 11, 12));
+        when(viaje.fechaSalida()).thenReturn(LocalDateTime.of(2025, 11, 12, 0, 0));
 
         servicios = new HashSet<>();
         servicios.add(servicio1);

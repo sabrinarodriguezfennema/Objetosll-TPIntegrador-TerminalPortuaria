@@ -7,6 +7,7 @@ import static org.mockito.Mockito.*;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public class ViajeTest {
 	Viaje viaje;
 	IBuque buque;
 	ICircuito circuito;
-	LocalDate fechaInicio;
+	LocalDateTime fechaInicio;
 	ITramo tramo1;
     ITramo tramo2;
     ITerminal t1;
@@ -33,7 +34,7 @@ public class ViajeTest {
 	@BeforeEach
 	void setup() {
 		
-		fechaInicio = LocalDate.of(2025, 11, 10);
+		fechaInicio = LocalDateTime.of(2025, 11, 10, 0, 0);
 		circuito = mock(ICircuito.class);
 	
 		tramo1 = mock(ITramo.class);
@@ -74,7 +75,7 @@ public class ViajeTest {
 
 	      when(circuito.getTramos()).thenReturn(List.of(tramo1, tramo2));
 	      
-	      Map<ITerminal, LocalDate> cronograma = viaje.cronograma();
+	      Map<ITerminal, LocalDateTime> cronograma = viaje.cronograma();
 
 	      assertEquals(3, cronograma.size());
 	      assertEquals(fechaInicio, cronograma.get(t1));  

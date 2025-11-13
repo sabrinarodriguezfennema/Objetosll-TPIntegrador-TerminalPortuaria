@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import interfaces.IConsignee;
 
 public class Consignee extends Cliente implements IConsignee{
+
 	LocalDateTime turno;
 
 	public Consignee(String nombre, String email) {

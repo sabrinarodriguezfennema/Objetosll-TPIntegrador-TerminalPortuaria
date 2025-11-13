@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -39,7 +40,7 @@ class ReporteTest {
 		ordenImportacion = mock(IOrdenDeImportacion.class);
 
 		when(viaje.getBuque()).thenReturn(buque);
-		when(viaje.fechaSalida()).thenReturn(LocalDate.of(2025, 11, 9));
+		when(viaje.fechaSalida()).thenReturn(LocalDateTime.of(2025, 11, 9, 0, 0));
 		when(buque.getNombre()).thenReturn("Titanic");
 
 		when(container1.getId()).thenReturn("C1");

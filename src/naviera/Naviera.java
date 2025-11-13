@@ -45,9 +45,9 @@ public class Naviera implements INaviera{
 		return viajes;
 	}
 	
-	public Set<LocalDate> getFechaDeViajes() {
+	public Set<LocalDateTime> getFechaDeViajes() {
 		
-		Set<LocalDate> fechasViajes = new HashSet<LocalDate>();
+		Set<LocalDateTime> fechasViajes = new HashSet<LocalDateTime>();
 		
 		for (IViaje viaje: viajes) {
 			fechasViajes.add(viaje.fechaSalida());

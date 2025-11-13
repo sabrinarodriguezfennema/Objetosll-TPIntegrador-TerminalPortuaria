@@ -240,8 +240,8 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 					"No se pueden informar importaciones o exportaciones en este momento");
 		}
 
-		LocalDate salida = rm.fechaSalida();
-		LocalDate llegada = rm.fechaLlegada();
+		LocalDateTime salida = rm.fechaSalida();
+		LocalDateTime llegada = rm.fechaLlegada();
 		String patenteCamion = empresa.asignarCamionPara(c);
 		String dniChofer = empresa.asignarChoferPara(c);
 
@@ -280,8 +280,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 
 		containersPorViaje.put(c, viajeDelContenedor);
 
-		LocalDateTime fechaYHoraLlegada = viajeDelContenedor.fechaSalida().atStartOfDay()
-				.plus(viajeDelContenedor.getCircuito().duracionTotal());
+		LocalDateTime fechaYHoraLlegada = viajeDelContenedor.fechaSalida().plus(viajeDelContenedor.getCircuito().duracionTotal());
 
 		String patenteCamion = empresa.asignarCamionPara(c);
 		String dniChofer = empresa.asignarChoferPara(c);

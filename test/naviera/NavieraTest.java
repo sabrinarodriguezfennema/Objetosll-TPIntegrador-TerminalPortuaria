@@ -11,6 +11,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class NavieraTest {
@@ -29,18 +30,18 @@ public class NavieraTest {
 	IBuque b2;
 	IBuque b3;
 	
-	LocalDate f1;
-	LocalDate f2;
-	LocalDate f3;
+	LocalDateTime f1;
+	LocalDateTime f2;
+	LocalDateTime f3;
 	
 	@BeforeEach
 	void setUp() {
 		
 		naviera = new Naviera();
 		
-		f1 = mock(LocalDate.class);
-		f2 = mock(LocalDate.class);
-		f3 = mock(LocalDate.class);
+		f1 = mock(LocalDateTime.class);
+		f2 = mock(LocalDateTime.class);
+		f3 = mock(LocalDateTime.class);
 		
 		c1 = mock(ICircuito.class);
 		c2 = mock(ICircuito.class);

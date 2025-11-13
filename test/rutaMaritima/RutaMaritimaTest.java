@@ -7,6 +7,7 @@ import static org.mockito.Mockito.*;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -41,9 +42,9 @@ public class RutaMaritimaTest {
 		
 		when(viaje.getCircuito()).thenReturn(circuito);
         when(viaje.cronograma()).thenReturn(
-                Map.of( terA, LocalDate.of(2025, 11, 10),
-                		terB, LocalDate.of(2025, 11, 13),
-                		terC, LocalDate.of(2025, 11, 16)));
+                Map.of( terA, LocalDateTime.of(2025, 11, 10, 0, 0),
+                		terB, LocalDateTime.of(2025, 11, 13, 0, 0),
+                		terC, LocalDateTime.of(2025, 11, 16, 0, 0)));
         
         ruta = new RutaMaritima(viaje,terA, terC);
 	}

@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -57,9 +58,9 @@ class FiltroSimpleTest {
 	
 	@Test
 	void testFiltroSimpleFechaLlegadaMenorA() {
-		LocalDate unaFecha = LocalDate.of(2025, 3, 1);
+		LocalDateTime unaFecha = LocalDateTime.of(2025, 3, 1, 0, 0);
 		when(unaRutaMaritima.fechaLlegada()).thenReturn(unaFecha);
-		FiltroSimple unFiltroSimple = new FechaLlegadaAntesDe(LocalDate.of(2025, 4, 1));
+		FiltroSimple unFiltroSimple = new FechaLlegadaAntesDe(LocalDateTime.of(2025, 4, 1, 0, 0));
 		
 		boolean resultado = unFiltroSimple.cumple(unaRutaMaritima); 
 		
@@ -69,9 +70,9 @@ class FiltroSimpleTest {
 	
 	@Test
 	void testFiltroSimpleFechaLlegadaNoEsMenorA() {
-		LocalDate unaFecha = LocalDate.of(2025, 3, 1);
+		LocalDateTime unaFecha = LocalDateTime.of(2025, 3, 1, 0, 0);
 		when(unaRutaMaritima.fechaLlegada()).thenReturn(unaFecha);
-		FiltroSimple unFiltroSimple = new FechaLlegadaAntesDe(LocalDate.of(2025, 2, 1));
+		FiltroSimple unFiltroSimple = new FechaLlegadaAntesDe(LocalDateTime.of(2025, 2, 1, 0, 0));
 		
 		boolean resultado = unFiltroSimple.cumple(unaRutaMaritima); 
 		
@@ -81,9 +82,9 @@ class FiltroSimpleTest {
 	
 	@Test
 	void testFiltroSimpleFechaLlegadaMayorA() {
-		LocalDate unaFecha = LocalDate.of(2025, 3, 1);
+		LocalDateTime unaFecha = LocalDateTime.of(2025, 3, 1, 0, 0);
 		when(unaRutaMaritima.fechaLlegada()).thenReturn(unaFecha);
-		FiltroSimple unFiltroSimple = new FechaLlegadaDespuesDe(LocalDate.of(2025, 2, 1));
+		FiltroSimple unFiltroSimple = new FechaLlegadaDespuesDe(LocalDateTime.of(2025, 2, 1, 0, 0));
 		
 		boolean resultado = unFiltroSimple.cumple(unaRutaMaritima); 
 		
@@ -93,9 +94,9 @@ class FiltroSimpleTest {
 	
 	@Test
 	void testFiltroSimpleFechaLlegadaNoEsMayorA() {
-		LocalDate unaFecha = LocalDate.of(2025, 3, 1);
+		LocalDateTime unaFecha = LocalDateTime.of(2025, 3, 1, 0, 0);
 		when(unaRutaMaritima.fechaLlegada()).thenReturn(unaFecha);
-		FiltroSimple unFiltroSimple = new FechaLlegadaDespuesDe(LocalDate.of(2025, 4, 1));
+		FiltroSimple unFiltroSimple = new FechaLlegadaDespuesDe(LocalDateTime.of(2025, 4, 1, 0, 0));
 		
 		boolean resultado = unFiltroSimple.cumple(unaRutaMaritima); 
 		
@@ -105,9 +106,9 @@ class FiltroSimpleTest {
 	
 	@Test
 	void testFiltroSimpleFechaSalidaMenorA() {
-		LocalDate unaFecha = LocalDate.of(2025, 3, 1);
+		LocalDateTime unaFecha = LocalDateTime.of(2025, 3, 1, 0, 0);
 		when(unaRutaMaritima.fechaSalida()).thenReturn(unaFecha);
-		FiltroSimple unFiltroSimple = new FechaSalidaAntesDe(LocalDate.of(2025, 4, 1));
+		FiltroSimple unFiltroSimple = new FechaSalidaAntesDe(LocalDateTime.of(2025, 4, 1, 0, 0));
 		
 		boolean resultado = unFiltroSimple.cumple(unaRutaMaritima); 
 		
@@ -117,9 +118,9 @@ class FiltroSimpleTest {
 	
 	@Test
 	void testFiltroSimpleFechaSalidaNoEsMenorA() {
-		LocalDate unaFecha = LocalDate.of(2025, 3, 1);
+		LocalDateTime unaFecha = LocalDateTime.of(2025, 3, 1, 0, 0);
 		when(unaRutaMaritima.fechaSalida()).thenReturn(unaFecha);
-		FiltroSimple unFiltroSimple = new FechaSalidaAntesDe(LocalDate.of(2025, 2, 1));
+		FiltroSimple unFiltroSimple = new FechaSalidaAntesDe(LocalDateTime.of(2025, 2, 1, 0, 0));
 		
 		boolean resultado = unFiltroSimple.cumple(unaRutaMaritima); 
 		
@@ -129,9 +130,9 @@ class FiltroSimpleTest {
 	
 	@Test
 	void testFiltroSimpleFechaSalidaMayorA() {
-		LocalDate unaFecha = LocalDate.of(2025, 3, 1);
+		LocalDateTime unaFecha = LocalDateTime.of(2025, 3, 1, 0, 0);
 		when(unaRutaMaritima.fechaSalida()).thenReturn(unaFecha);
-		FiltroSimple unFiltroSimple = new FechaSalidaDespuesDe(LocalDate.of(2025, 2, 1));
+		FiltroSimple unFiltroSimple = new FechaSalidaDespuesDe(LocalDateTime.of(2025, 2, 1, 0, 0));
 		
 		boolean resultado = unFiltroSimple.cumple(unaRutaMaritima); 
 		
@@ -141,9 +142,9 @@ class FiltroSimpleTest {
 	
 	@Test
 	void testFiltroSimpleFechaSalidaNoEsMayorA() {
-		LocalDate unaFecha = LocalDate.of(2025, 3, 1);
+		LocalDateTime unaFecha = LocalDateTime.of(2025, 3, 1, 0, 0);
 		when(unaRutaMaritima.fechaSalida()).thenReturn(unaFecha);
-		FiltroSimple unFiltroSimple = new FechaSalidaDespuesDe(LocalDate.of(2025, 4, 1));
+		FiltroSimple unFiltroSimple = new FechaSalidaDespuesDe(LocalDateTime.of(2025, 4, 1, 0, 0));
 		
 		boolean resultado = unFiltroSimple.cumple(unaRutaMaritima); 
 		
