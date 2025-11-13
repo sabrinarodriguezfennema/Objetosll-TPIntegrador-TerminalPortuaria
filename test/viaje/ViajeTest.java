@@ -67,9 +67,11 @@ public class ViajeTest {
 
 		when(tramo1.getOrigen()).thenReturn(t1);
 		when(tramo1.getDestino()).thenReturn(t2);
+		when(tramo1.getDuracion()).thenReturn(Duration.ofDays(2));
 
 		when(tramo2.getOrigen()).thenReturn(t2);
 		when(tramo2.getDestino()).thenReturn(t3);
+		when(tramo2.getDuracion()).thenReturn(Duration.ofDays(3));
 
 		when(circuito.getTramos()).thenReturn(List.of(tramo1, tramo2));
 		when(circuito.getTodasLasTerminales()).thenReturn(List.of(t1, t2, t3));
