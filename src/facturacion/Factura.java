@@ -1,6 +1,7 @@
 package facturacion;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -30,11 +31,11 @@ public class Factura implements IFactura {
 	public List<ItemDesglose> desglose() {
 		
 	    IContainer c = null;
-	    
+	   
 	    for (IServicio servicio : servicios) {
 	        String detalle = "Servicio";
 	        double monto = servicio.getPrecio(c);
-	        LocalDate fecha = servicio.getFecha();
+	        LocalDateTime fecha = servicio.getFecha();
 	        
 	        ItemDesglose item = new ItemDesglose(detalle, monto, fecha);
 	        desglose.add(item);
@@ -43,7 +44,7 @@ public class Factura implements IFactura {
 	    if (viaje != null) {
             String detalle = "Viaje:";
             double monto = viaje.precioTotal();
-            LocalDate fecha = viaje.fechaSalida();
+            LocalDateTime fecha = viaje.fechaSalida();
 
             ItemDesglose itemViaje = new ItemDesglose(detalle, monto, fecha);
             desglose.add(itemViaje);

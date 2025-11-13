@@ -1,17 +1,17 @@
 package facturacion;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ItemDesglose {
 	
 	private String detalle;
 	private double monto;
-	private LocalDate fecha;
+	private LocalDateTime fecha;
 	
-	public ItemDesglose(String detalle, double monto, LocalDate fecha) {
+	public ItemDesglose(String detalle, double monto, LocalDateTime fecha2) {
 		this.detalle = detalle;
 		this.monto = monto; 
-		this.fecha = fecha;
+		this.fecha = fecha2;
 	}
 	
 	public double getMonto() {
@@ -22,7 +22,7 @@ public class ItemDesglose {
 		return detalle;
 	}
 	
-	public LocalDate getFecha() {
+	public LocalDateTime getFecha() {
 		return fecha;
 	}//terminando factura
 

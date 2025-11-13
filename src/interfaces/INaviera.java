@@ -1,12 +1,8 @@
 package interfaces;
 
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Set;
 
-import interfaces.IViaje;
-import interfaces.IContainer;
 
 public interface INaviera {
 
@@ -20,7 +16,7 @@ public interface INaviera {
 	
 	public void agregarViaje(IViaje primerViaje);
 
-	public IViaje crearViaje(LocalDate of, IBuque buque1, ICircuito circuitoBsAsABrasil);
+	public IViaje crearViaje(LocalDateTime of, IBuque buque1, ICircuito circuitoBsAsABrasil);
 
 	public void iniciarViaje(IViaje primerViaje);
 

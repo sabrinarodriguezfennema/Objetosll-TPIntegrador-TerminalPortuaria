@@ -219,7 +219,7 @@ public class TerminalGestionadaTest {
 		String patente = "XYZ789";
 		String dni = "87654321";
 		String containerId = "C2";
-		LocalDate fechaSalida = LocalDate.now();
+		LocalDateTime fechaSalida = LocalDateTime.now();
 		Duration duracion = Duration.ofDays(5);
 
 		Set<IContainer> contenedores = new HashSet<>();
@@ -257,8 +257,8 @@ public class TerminalGestionadaTest {
 	void testAvisoDeSalida_NotificaShippersYDeshabilitaPagos() throws OperacionNoDisponibleException {
 		String patente = "ABC123";
 		String dni = "12345678";
-		LocalDate salida = LocalDate.now();
-		LocalDate llegada = LocalDate.now().plusDays(10);
+		LocalDateTime salida = LocalDateTime.now();
+		LocalDateTime llegada = LocalDateTime.now().plusDays(10);
 		Terminal terminalDestino = mockTerminalDestino;
 
 		when(mockContainer.getId()).thenReturn("C1");
@@ -286,8 +286,8 @@ public class TerminalGestionadaTest {
 
 		String patente = "ABC123";
 		String dni = "12345678";
-		LocalDate salida = LocalDate.now();
-		LocalDate llegada = LocalDate.now().plusDays(10);
+		LocalDateTime salida = LocalDateTime.now();
+		LocalDateTime llegada = LocalDateTime.now().plusDays(10);
 
 		Set<IContainer> contenedores = new HashSet<>();
 		contenedores.add(mockContainer);
@@ -327,7 +327,7 @@ public class TerminalGestionadaTest {
 		String patente = "XYZ789";
 		String dni = "87654321";
 		String containerId = "C2";
-		LocalDate fechaSalida = LocalDate.now();
+		LocalDateTime fechaSalida = LocalDateTime.now();
 		Duration duracion = Duration.ofDays(5);
 
 		Set<IContainer> contenedores = new HashSet<>();
@@ -386,8 +386,8 @@ public class TerminalGestionadaTest {
 	void testExportar_NoLanzaExcepcion() throws OperacionNoDisponibleException {
 		String patente = "ABC123";
 		String dni = "12345678";
-		LocalDate salida = LocalDate.now();
-		LocalDate llegada = LocalDate.now().plusDays(10);
+		LocalDateTime salida = LocalDateTime.now();
+		LocalDateTime llegada = LocalDateTime.now().plusDays(10);
 
 		Set<IContainer> contenedores = new HashSet<>();
 		contenedores.add(mockContainer);
@@ -432,8 +432,8 @@ public class TerminalGestionadaTest {
 
 		String patente = "ABC123";
 		String dni = "12345678";
-		LocalDate salida = LocalDate.now();
-		LocalDate llegada = LocalDate.now().plusDays(10);
+		LocalDateTime salida = LocalDateTime.now();
+		LocalDateTime llegada = LocalDateTime.now().plusDays(10);
 
 		when(mockContainer.getId()).thenReturn("C1");
 		when(mockEmpresaTransportista.asignarCamionPara(mockContainer)).thenReturn(patente);
@@ -456,7 +456,7 @@ public class TerminalGestionadaTest {
 		String patente = "XYZ789";
 		String dni = "87654321";
 		String containerId = "C2";
-		LocalDate fechaSalida = LocalDate.now();
+		LocalDateTime fechaSalida = LocalDateTime.now();
 		Duration duracion = Duration.ofDays(5);
 
 		Set<IContainer> contenedores = new HashSet<>();
@@ -491,7 +491,7 @@ public class TerminalGestionadaTest {
 		String patente = "XYZ789";
 		String dni = "87654321";
 		String containerId = "C2";
-		LocalDate fechaSalida = LocalDate.now();
+		LocalDateTime fechaSalida = LocalDateTime.now();
 		Duration duracion = Duration.ofDays(5);
 
 		Set<IContainer> contenedores = new HashSet<>();
@@ -597,7 +597,7 @@ public class TerminalGestionadaTest {
 	@Test
 	void testRetiroDeContainer() throws OperacionNoDisponibleException {
 
-		LocalDate fecha = LocalDate.now();
+		LocalDateTime fecha = LocalDateTime.now();
 		LocalDateTime fechaRetiro = LocalDateTime.now();
 		String patente = "ABC123";
 		String dni = "12345678";

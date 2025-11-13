@@ -1,9 +1,9 @@
 package interfaces;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 
-import terminal.Terminal;
+
 
 
 public interface IOrdenDeExportacion extends IOrden{
@@ -14,9 +14,9 @@ public interface IOrdenDeExportacion extends IOrden{
 
 	public LocalDateTime turno();
 
-	public LocalDate getFechaSalida();
+	public LocalDateTime getFechaSalida();
 	
-	public LocalDate getFechaLlegada();
+	public LocalDateTime getFechaLlegada();
 
 	public ITerminal getTerminalDestino();
 

@@ -28,8 +28,8 @@ class OrdenDeExportacionTest {
 	private String dniChofer;
 	private Terminal mockTerminalDestino;
 	private TerminalGestionada mockTerminalGestionada;
-	private LocalDate fechaSalida;
-	private LocalDate fechaLlegada;
+	private LocalDateTime fechaSalida;
+	private LocalDateTime fechaLlegada;
 	private OrdenDeExportacion orden;
 	private IViaje mockViaje;
 	private IServicio mockServicio;
@@ -47,8 +47,8 @@ class OrdenDeExportacionTest {
 		dniChofer = "40555999";
 		mockServicio = mock(IServicio.class);
 
-		fechaSalida = LocalDate.of(2025, 10, 29);
-		fechaLlegada = LocalDate.of(2025, 11, 2);
+		fechaSalida = LocalDateTime.of(2025, 10, 29, 0, 0);
+		fechaLlegada = LocalDateTime.of(2025, 11, 2, 0, 0);
 
 		orden = new OrdenDeExportacion(mockShipper, mockContainer, patenteCamion, dniChofer, fechaSalida, fechaLlegada,
 				mockTerminalDestino);
@@ -100,7 +100,7 @@ class OrdenDeExportacionTest {
 
 	@Test
 	void testGetFechaLlegada() {
-		LocalDate resultado = orden.getFechaLlegada();
+		LocalDateTime resultado = orden.getFechaLlegada();
 
 		assertEquals(fechaLlegada, resultado);
 
@@ -108,7 +108,7 @@ class OrdenDeExportacionTest {
 
 	@Test
 	void testGetFechaSalida() {
-		LocalDate resultado = orden.getFechaSalida();
+		LocalDateTime resultado = orden.getFechaSalida();
 
 		assertEquals(fechaSalida, resultado);
 	}

@@ -1,6 +1,7 @@
 package rutaMaritima;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ public class RutaMaritima implements IRutaMaritima{
 	private ICircuito circuitoDeViaje;
 	private ITerminal terminalOrigen;
 	private ITerminal terminalDestino;
-	private Map<ITerminal, LocalDate> cronograma;
+	private Map<ITerminal, LocalDateTime> cronograma;
 	
 	public RutaMaritima(IViaje viaje, ITerminal terminalOrigen, ITerminal terminalDestino) {
 		this.viaje = viaje;
@@ -36,12 +37,12 @@ public class RutaMaritima implements IRutaMaritima{
 		return terminalDestino;
 	}
 	
-	public LocalDate fechaSalida() {
+	public LocalDateTime fechaSalida() {
 		validarTerminal(terminalOrigen);
 		return cronograma.get(terminalOrigen);
 	}
 	
-	public LocalDate fechaLlegada() {
+	public LocalDateTime fechaLlegada() {
 		validarTerminal(terminalDestino);
 		return cronograma.get(terminalDestino);
 	}

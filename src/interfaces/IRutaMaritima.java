@@ -1,12 +1,12 @@
 package interfaces;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public interface IRutaMaritima {
 
-	public LocalDate fechaSalida();
+	public LocalDateTime fechaSalida();
 
-	public LocalDate fechaLlegada();
+	public LocalDateTime fechaLlegada();
 
 	public ITerminal puertoDestino();
 

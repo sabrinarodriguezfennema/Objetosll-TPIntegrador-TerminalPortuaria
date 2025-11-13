@@ -1,13 +1,13 @@
 package filtro;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import interfaces.IRutaMaritima;
 
 public class FechaLlegadaAntesDe extends FiltroSimpleConFecha {
 
 
-	public FechaLlegadaAntesDe(LocalDate unaFecha) {
+	public FechaLlegadaAntesDe(LocalDateTime unaFecha) {
 		this.fechaFiltro = unaFecha;
 	}
 

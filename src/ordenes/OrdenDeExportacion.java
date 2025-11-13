@@ -1,6 +1,5 @@
 package ordenes;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import facturacion.Factura;
@@ -15,15 +14,15 @@ import terminal.TerminalGestionada;
 
 public class OrdenDeExportacion extends Orden implements IOrdenDeExportacion {
 	
-	private LocalDate fechaSalida;
-	private LocalDate fechaLlegada;
+	private LocalDateTime fechaSalida;
+	private LocalDateTime fechaLlegada;
 	private LocalDateTime turno;
 	private ITerminal terminalDestino;
 
-	public OrdenDeExportacion(IShipper cliente, IContainer datosDeCarga, String patenteCamion, String dniChofer, LocalDate fechaSalida, LocalDate fechaLlegada, ITerminal terminal) {
+	public OrdenDeExportacion(IShipper cliente, IContainer datosDeCarga, String patenteCamion, String dniChofer, LocalDateTime salida, LocalDateTime llegada, ITerminal terminal) {
 		super(datosDeCarga, patenteCamion, dniChofer, cliente);
-		this.fechaSalida = fechaSalida;
-		this.fechaLlegada = fechaLlegada;
+		this.fechaSalida = salida;
+		this.fechaLlegada = llegada;
 		this.terminalDestino = terminal;
 		this.cliente = cliente;
 	}
@@ -34,12 +33,12 @@ public class OrdenDeExportacion extends Orden implements IOrdenDeExportacion {
 		this.turno = turno;
 	}
 
-	public LocalDate getFechaSalida() {
+	public LocalDateTime getFechaSalida() {
 		return fechaSalida;
 	}
 
 
-	public LocalDate getFechaLlegada() {
+	public LocalDateTime getFechaLlegada() {
 		return fechaLlegada;
 	}
 
