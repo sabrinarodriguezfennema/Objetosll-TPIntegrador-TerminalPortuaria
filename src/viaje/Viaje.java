@@ -79,7 +79,7 @@ public class Viaje implements IViaje{
 	@Override
 	public List<IRutaMaritima> rutaMaritimaDesde_Hasta_EnListaSiExiste(ITerminal t1, ITerminal t2) {
 		List<IRutaMaritima> listaConRutaSiExiste = new ArrayList<IRutaMaritima>();
-		List<ITerminal> terminalesDelCircuito = circuito.terminalesDestino();
+		List<ITerminal> terminalesDelCircuito = circuito.getTodasLasTerminales();
 //		ITerminal ultimoDelCircuito = terminalesDelCircuito.get(terminalesDelCircuito.size() - 1);
 //		terminalesDelCircuito.addFirst(ultimoDelCircuito);
 		if(terminalesDelCircuito.contains(t1) && terminalesDelCircuito.contains(t2) && (terminalesDelCircuito.indexOf(t1) < terminalesDelCircuito.indexOf(t2)))  {
