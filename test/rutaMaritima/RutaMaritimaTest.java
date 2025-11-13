@@ -71,5 +71,16 @@ public class RutaMaritimaTest {
 	void obtenerViaje() {
 		assertEquals(viaje, ruta.getViaje());
 	}
+	
+	@Test
+	void unRutaMaritimaSabeSiUnaTerminalPerteneceASuCircuito() {
+		assertTrue(ruta.perteneceARuta(terA));
+	}
+	
+	@Test
+	void siUnRutaMaritimaNoContieneRutaOrigenORutaDestinoLanzaUnError() {
+		ITerminal terD = mock(ITerminal.class);
+		assertThrows(IllegalArgumentException.class, () -> {new RutaMaritima(viaje, terA, terD);});
+	}
 
 }

@@ -24,6 +24,8 @@ public class RutaMaritima implements IRutaMaritima{
 		this.terminalOrigen = terminalOrigen;
 		this.terminalDestino = terminalDestino;
 		this.cronograma = viaje.cronograma();
+		validarTerminal(terminalOrigen);
+		validarTerminal(terminalDestino);
 	} 
 	
 	private void validarTerminal(ITerminal t) {
@@ -33,17 +35,14 @@ public class RutaMaritima implements IRutaMaritima{
 	}
 	
 	public ITerminal puertoDestino() {
-//		validarTerminal(terminalDestino);
 		return terminalDestino;
 	}
 	
 	public LocalDateTime fechaSalida() {
-//		validarTerminal(terminalOrigen);
 		return cronograma.get(terminalOrigen);
 	}
 	
 	public LocalDateTime fechaLlegada() {
-//		validarTerminal(terminalDestino);
 		return cronograma.get(terminalDestino);
 	}
 	
