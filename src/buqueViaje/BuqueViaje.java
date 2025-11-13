@@ -19,6 +19,7 @@ public class BuqueViaje implements IBuqueViaje{
 		this.aNotificar = unNotificable;
 		this.faseBuqueViaje = new Outbound(this);
 		this.coordenadas = unViaje.getCircuito().terminalesDestino().get(0).getCoordenadas();
+
 	}
 
 	@Override

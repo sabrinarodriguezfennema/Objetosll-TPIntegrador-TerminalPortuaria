@@ -14,11 +14,6 @@ public class MotorDeBusqueda {
 	private List<IRutaMaritima> rutasMaritimas;
 	private List<IRutaMaritima> rutasFiltradas;
 
-//	public MotorDeBusqueda(List<IRutaMaritima> rutasMaritimas) {
-//		this.rutasMaritimas = rutasMaritimas;
-//		this.rutasFiltradas = this.rutasMaritimas;
-//	}
-
 	public void aplicarFiltro(Filtro filtro) {
 		List<IRutaMaritima> rutasFiltradas = new ArrayList<IRutaMaritima>();
 		
