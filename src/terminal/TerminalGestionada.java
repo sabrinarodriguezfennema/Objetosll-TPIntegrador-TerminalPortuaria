@@ -194,22 +194,26 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		IViaje viajeDelBuqueViaje = bv.getViaje();
 		IBuque buqueDelBuqueViaje = viajeDelBuqueViaje.getBuque();
 		Set<IContainer> containersDelBuqueViaje = buqueDelBuqueViaje.getContainers();
-
-		for (IContainer container : containersDelBuqueViaje) {
-			if (containersPorViaje.get(container) == viajeDelBuqueViaje) {
-				IOrden orden = ordenPorContainer.get(container.getId());
-				if (ordenesExportacion.contains(orden)) { // Si es de exportación
-					buqueDelBuqueViaje.addContainer(container);
-					orden.generarFactura(LocalDateTime.now(),100.00, 300.00, viajeDelBuqueViaje);
-
-					containers.remove(container);
-					ordenPorContainer.remove(container.getId());
-					containersPorViaje.remove(container);
-				} else { // Donde ya es de importación siosi
+		
+		for (IContainer container : containersDelBuqueViaje) { //Por cada container del buqueViaje
+			if (containersPorViaje.get(container) == viajeDelBuqueViaje) { //Si dicho container está relacionado con este viaje entrante
+				IOrden orden = ordenPorContainer.get(container.getId()); //Agarro la orden de ese container
+//				if (ordenesImportacion.contains(orden)) {
 					buqueDelBuqueViaje.removeContainer(container);
 					containers.add(container);
-					((IConsignee) orden.getCliente()).fechaDeImportacion(viajeDelBuqueViaje.cronograma().get(this));
-				}
+					((IConsignee) orden.getCliente()).fechaDeImportacion(viajeDelBuqueViaje.cronograma().get(this)); //Le paso la fecha al consignee para que venga, lo bajé del buque
+//				}
+			}
+		}
+		for (IOrdenDeExportacion ordenEx : ordenesExportacion) {
+			IContainer container = ordenEx.getDatosDeCarga();
+			if (containersPorViaje.get(container) == viajeDelBuqueViaje) {
+				buqueDelBuqueViaje.addContainer(container);
+				IFactura factura = ordenEx.generarFactura(LocalDateTime.now(),100.00, 300.00, viajeDelBuqueViaje);
+				((IShipper)ordenEx.getCliente()).recibirFactura(factura);
+
+				containers.remove(container);
+				ordenPorContainer.remove(container.getId());
 			}
 		}
 		bv.depart();
@@ -217,10 +221,10 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	}
 
 	// registrarPago(factura) error
-	public void registrarPago(IFactura factura) throws OperacionNoDisponibleException {
-		if (!sePuedenRealizarPagos) {
-			throw new OperacionNoDisponibleException("No se pueden realizar pagos en este momento");
-		}
+	public void registrarPago(IFactura factura) /*throws OperacionNoDisponibleException*/ {
+//		if (!sePuedenRealizarPagos) {
+//			throw new OperacionNoDisponibleException("No se pueden realizar pagos en este momento");
+//		} Intentamos hacerlo pero no tenía sentido
 	}
 
 	@Override
@@ -265,11 +269,11 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 
 	@Override
 	public void datosParaElRetiro(IConsignee importador, IEmpresaTransportista empresa, IContainer c)
-			throws OperacionNoDisponibleException {
-		if (!sePuedenInformarImportacionesYExportaciones) {
-			throw new OperacionNoDisponibleException(
-					"No se pueden informar importaciones o exportaciones en este momento");
-		}
+			/*throws OperacionNoDisponibleException*/ {
+//		if (!sePuedenInformarImportacionesYExportaciones) {
+//			throw new OperacionNoDisponibleException(
+//					"No se pueden informar importaciones o exportaciones en este momento");
+//		} Intentamos hacerlo y no tenía sentido
 
 		IBuque buque = navierasRegistradas.stream().flatMap(naviera -> naviera.getBuques().stream())
 				.filter(b -> b.getContainers().contains(c)).findFirst()
