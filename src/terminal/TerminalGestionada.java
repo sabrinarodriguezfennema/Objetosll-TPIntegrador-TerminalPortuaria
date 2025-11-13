@@ -37,7 +37,7 @@ import interfaces.IOrdenDeImportacion;
 public class TerminalGestionada extends Terminal implements GestionLogistica, GestionEnvio, Notificable {
 
 	private Set<INaviera> navierasRegistradas;
-	private Set<IContainer> containers;
+	protected Set<IContainer> containers;
 	private Set<IEmpresaTransportista> empresasTransportistas;
 	private Set<String> camionesRegistrados;
 	private Set<String> choferesRegistrados;
@@ -45,7 +45,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 	private Set<IOrdenDeImportacion> ordenesImportacion;
 	private Set<IOrdenDeExportacion> ordenesExportacion;
 	private Map<String, IOrdenDeExportacion> ordenesActivasPorPatente;
-	private Map<String, IOrden> ordenPorContainer;
+	protected Map<String, IOrden> ordenPorContainer;
 	private Set<IFactura> facturas;
 	private Map<IContainer, IViaje> containersPorViaje;
 	private boolean sePuedenRealizarPagos;
@@ -77,7 +77,7 @@ public class TerminalGestionada extends Terminal implements GestionLogistica, Ge
 		navierasRegistradas.add(naviera);
 	}
 
-	private void registrarOrden(IOrden orden) {
+	protected void registrarOrden(IOrden orden) {
 		orden.registrarEn(this);
 	}
 

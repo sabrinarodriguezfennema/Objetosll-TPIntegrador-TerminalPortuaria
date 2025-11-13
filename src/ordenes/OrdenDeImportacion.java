@@ -29,7 +29,7 @@ public class OrdenDeImportacion extends Orden implements IOrdenDeImportacion{
 	
 	public boolean verificarAutorizacion(String patenteCamion, String dniChofer) {
 		
-		return this.dniChofer == dniChofer && this.patenteCamion == patenteCamion;
+		return this.dniChofer.equals(dniChofer) && this.patenteCamion.equals(patenteCamion);
 	}
 
 	public IFactura generarFactura(LocalDateTime  fechaDeRetiro, double montoPorDiaExcedente, double precioPorKw, IViaje viaje) {
