@@ -15,7 +15,6 @@ import clientes.Shipper;
 import containers.ContainerDry;
 import containers.ContainerReefer;
 import excepciones.OperacionNoDisponibleException;
-import facturacion.Factura;
 import filtro.Filtro;
 import filtro.FiltroCompuestoAND;
 import bl.BillOfLading;
